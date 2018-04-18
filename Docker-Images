@@ -1,0 +1,28 @@
+# To check to the status of docker service
+ systemctl status docker
+ 
+# Place where actual docker related files go...
+cd /var/lib/docker
+# Inorder to manage it , user has to be part of this docker group ( default group )
+
+=============COMMANDS================================================================
+ 
+ docker images
+ docker ps
+ docker ps -a
+ docker inspect <<IMAGENAME>>
+ docker run -it <<IMAGENAME>>  ## i - interactive , t - terminal
+ docker run -itd <<IMAGENAME>> ## d -demeon run at background.
+ docker run -it <<IMAGENAME>> /bin/bash  ## you can login to container in bash mode
+ 
+=====================================================================================
+ # create a custom container
+ docker run -it <<IMAGENAME>> /bin/bash
+ cd /opt
+ mkdir softwares
+ cd /softwares
+ apt-get update
+ 
+ 
+ Docker doesnt support static Ip's for containers, we need to use dockerswan or kubernetes
+ 
