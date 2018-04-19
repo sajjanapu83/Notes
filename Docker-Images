@@ -13,8 +13,19 @@ cd /var/lib/docker
  docker inspect <<IMAGENAME>>
  docker run -it <<IMAGENAME>>  ## i - interactive , t - terminal
  docker run -itd <<IMAGENAME>> ## d -demeon run at background.
+ docker run -itd --name <<ContainerLogicalName>> <<IMAGENAME>>  ##
  docker run -it <<IMAGENAME>> /bin/bash  ## you can login to container in bash mode
+ docker run -itd --name <<ContainerLogicalName>> <<IMAGENAME>> -p <<hostport>>:<<containerport>>
+ docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /usr/containerVolumedir2
+ docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /apps/opt/hostVoldir:/usr/containerVolumedir
  
+ 
+ docker stop <<CONTAINERNAME>>
+ 
+ docker network ls
+ docker network ls --no-trunc
+ docker network inspect bridge
+ docker network inspect host
 =====================================================================================
  # create a custom container
  docker run -it <<IMAGENAME>> /bin/bash
