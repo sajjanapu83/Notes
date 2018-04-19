@@ -1,0 +1,27 @@
+
+Cassandra is a node based architecture, where each node represents a single cassandra instance.
+It is a No-SQL open source database.
+It has no master & no slave (all nodes are same), which means you can read from & write to any node 
+and all nodes will communicate with in the cluster.
+Cassandra is fully replicated environment.
+Cassandra provides data redundancy & there is no single point of failure.
+Replication factor specifies #of copies in the cluster and it is controlled at keyspace level.
+  a) Simple Replication Strategy: Place the original row data based on partitioner and Replicas placed on the next row node clock wise.
+  b) Netowork Toplogy: Enables  data to be replicated across the racks & Replica group is defined to replicate between data centers.
+Snitches in cassandra plays a key role, decides which node should hold which piece of data and where data is replicated to?
+In cassandra data is transperantly partitioned across the nodes. Data  sent to a node is  hashed and sent to partition based on hash.
+When Cassandra writes data to disk, it does so by creating an immutable file called an SSTable. 
+Data updates are managed by creating new timestamped SSTables.
+Deletes are accomplished by marking data to be removed with “tombstones.”
+To optimize read performance and disk usage, Cassandra periodically runs compaction to consolidate SSTables and remove outdated or tombstoned data.
+
+CAP Theorem. ( Distributed systems can only provide two, not all three.)
+
+C - Consistency - it refers to the data you write and the data were you read.
+A - Availability - Is service available?
+P - Partition Tolerance. - deals with, if there is a network partition, how it behaves.
+
+
+
+
+
