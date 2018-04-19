@@ -26,3 +26,24 @@ cd /var/lib/docker
  
  Docker doesnt support static Ip's for containers, we need to use dockerswan or kubernetes
  
+ 
+###########################################################Dockerfile############################################################### 
+FROM centos:latest 
+MAINTAINER dockerusr@study.com 
+# RUN statements execute at the time of docker build and will be part of image ( e.g. docker build -t <<TAG NAME>> )
+# COMMAND statements execute at the time of container initialization and is not part of image ( e.g: docker run <<IMAGENAME>> ). 
+  this will if you run with /bin/bash option 
+RUN useradd -ms /bin/bash user RUN echo "EXPORT 192.168.0.0/24" » /etc/exports.list 
+RUN yum update -y RUN yum install -y net-tools wget 
+# below statement accepts the license silently without prompt.
+RUN cd && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=httpso3AUF962Fwww.oracle.co m9s2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre -8u60-linux-x64.rpm" 
+RUN yum localinstall -y -/jre-8u60-linux-x64.rpm USER user RUN cd && echo "export JAVA_HOME=/usr/java/jdk1.8.0/jre" » /home/user/.bashrc 
+
+# To set environmental variable at system level use below 
+ENV JAVA_BIN /usr/java/jdk1.8.0_73/bin
+
+CMD "echo" "This is custom container message"
+
+
+
+
