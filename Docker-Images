@@ -6,7 +6,7 @@ cd /var/lib/docker
 # Inorder to manage it , user has to be part of this docker group ( default group )
 
 =============COMMANDS================================================================
- 
+ man docker-network-bridge  -- help page multiple commands with '-'
  docker images
  docker ps
  docker ps -a
@@ -19,13 +19,25 @@ cd /var/lib/docker
  docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /usr/containerVolumedir2
  docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /apps/opt/hostVoldir:/usr/containerVolumedir
  
- 
+ docker run .... istantiates a new container from image
+ docker start <<CONTAINERNAME>>
  docker stop <<CONTAINERNAME>>
+ docker exec <<CONTAINERNAME>> <<LinuxCommand>>
+ example:
+ docker exec <<CONTAINERNAME>> /bin/ps aux | grep bash
+ docker top <<CONTAINERNAME>>
+ 
+ To create a new bash process with in the container without stopping
+ docker exec -it <<CONTAINERNAME>> /bin/bash 
  
  docker network ls
  docker network ls --no-trunc
  docker network inspect bridge
  docker network inspect host
+ docker stats <<CONTAINERNAME>>
+ 
+ # create a new network bridge
+ docker network create --subnet 10.1.0.0/24 --gateway 10.1.0.1 mybridge01
 =====================================================================================
  # create a custom container
  docker run -it <<IMAGENAME>> /bin/bash
