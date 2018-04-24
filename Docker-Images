@@ -18,6 +18,7 @@ cd /var/lib/docker
  docker run -itd --name <<ContainerLogicalName>> <<IMAGENAME>> -p <<hostport>>:<<containerport>>
  docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /usr/containerVolumedir2
  docker run -it --name <<ContainerLogicalName>> <<IMAGENAME>> -v /apps/opt/hostVoldir:/usr/containerVolumedir
+ docker rename <<ContainerName>> <<NEW-ContainerName>>
  
  docker run .... istantiates a new container from image
  docker start <<CONTAINERNAME>>
@@ -27,6 +28,8 @@ cd /var/lib/docker
  docker exec <<CONTAINERNAME>> /bin/ps aux | grep bash
  docker top <<CONTAINERNAME>>
  
+ docker events --since '1h'
+ 
  To create a new bash process with in the container without stopping
  docker exec -it <<CONTAINERNAME>> /bin/bash 
  
@@ -35,7 +38,7 @@ cd /var/lib/docker
  docker network inspect bridge
  docker network inspect host
  docker stats <<CONTAINERNAME>>
- 
+  
  # create a new network bridge
  docker network create --subnet 10.1.0.0/24 --gateway 10.1.0.1 mybridge01
 =====================================================================================
