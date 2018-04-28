@@ -1,0 +1,20 @@
+DataTypes - int, float, None, bool
+Instead of flower braces {} in a block, indentation with 4 spaces is used.
+
+
+if expr:
+    print('expr is True')
+else:
+    print('expr is False')
+
+if expr:
+    print('expr is True')
+elif expr2:
+    print('expr2 is True')
+else:
+    print('others....')
+
+ while True:
+     print('expr is True')
+         break
+ print('Go here on break')
