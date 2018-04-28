@@ -1,0 +1,62 @@
+import this
+
+import sys
+sys.path
+sys.append('package-name')
+import module-name
+
+types - int, float, None, bool
+Instead of flower braces {} in a block, indentation with 4 spaces is used.
+
+if expr:
+    print('expr is True')
+else:
+    print('expr is False')
+  
+if expr:
+    print('expr is True')
+elif expr2:
+    print('expr2 is True')
+else:
+    print('others....')
+    
+ while True:
+     print('expr is True')
+         break
+ print('Go here on break')
+
+====================================
+import math
+math.sqrt(9)
+
+help
+
+help(math)
+help(math.factorial)
+
+math.factorial(5)
+
+2nd way
+
+from math import factorial
+factorial(5)
+
+3rd way
+
+from math import factorial as fac
+fac(5)
+
+====================================
+
+
+------------------------------------
+import sys
+
+def hellofunc(param):
+    print('Hello {}'.format(param))
+    
+hellofunc('kar')
+
+------------------------------------
+
+
