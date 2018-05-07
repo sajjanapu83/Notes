@@ -1,0 +1,9 @@
+
+
+Default file name : docker-compose.yml
+
+Command: 
+docker-compose up -d
+docker-compose up -f docker-compose.yml -d
+## to override with production confguration values.
+docker-compose up -f docker-compose.yml -f production.yml -d 
