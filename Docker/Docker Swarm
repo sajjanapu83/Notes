@@ -1,0 +1,6 @@
+Docker Swarm - Native clustering for Docker
+
+Containers cannot communicate across the hosts in Docker Swarm, but this is possible in kubernetes.
+
+
+etcd - Distributed watchable registry..
