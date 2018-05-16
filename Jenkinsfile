@@ -5,12 +5,12 @@ pipeline {
       parallel {
         stage('Stage1') {
           steps {
-            build(job: 'Stages-01', propagate: true)
+            build(job: 'HelloWorld', propagate: true)
           }
         }
         stage('Stage2') {
           steps {
-            build(job: 'Stages-02', propagate: true, quietPeriod: 5, wait: true)
+            build(job: 'HelloWorld', propagate: true, quietPeriod: 5, wait: true)
           }
         }
         stage('Stage3') {
