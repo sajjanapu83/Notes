@@ -1,3 +1,11 @@
+STEP1: Install cloudwatch agent
+( https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/QuickStartEC2Instance.html )
+
+curl https://s3.amazonaws.com/aws-cloudwatch/downloads/latest/awslogs-agent-setup.py -O 
+python ./awslogs-agent-setup.py --region us-east-1
+
+STEP2: Modify the cloudwatch agent config file
+( https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html#agent-configuration-file )
 vi /var/awslogs/etc/awslogs.conf 
 
 [syslog] 
