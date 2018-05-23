@@ -1,0 +1,38 @@
+vi /var/awslogs/etc/awslogs.conf 
+
+[syslog] 
+
+datetime_format = %b %d %H:%M:%S 
+
+file = /var/log/messages  
+
+buffer_duration = 5000  
+
+log_stream_name = {instance_id}-syslog 
+
+initial_position = start_of_file  
+
+log_group_name = 
+
+
+
+======================
+
+[syslog]
+
+datetime_format = %b %d %H:%M:%S - !! MUST BE CHANGED TO MATCH YOUR LOG FILE DATE FORMAT !!
+
+file = /var/log/messages - This is where you define the location of the logs that you want to capture
+
+buffer_duration = 5000 - This is the time duration for batching of log events in ms.
+
+log_stream_name = {instance_id}-<sourcetype> - If you leave this as {instance_id} it will be dynamically populated. Replace <sourcetype> with the application log type.
+
+initial_position = start_of_file - This gives you a choice between starting at the start_of_file or end_of_file.
+
+log_group_name = <<ANYNAME>>
+
+===================
+
+systemctl daemon-reload 
+systemctl restart awslogs
