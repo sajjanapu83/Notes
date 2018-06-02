@@ -17,6 +17,10 @@ systemctl start httpd.service
 systemctl stop httpd.service
 systemctl cat httpd.service
 systemctl -H 198.0.0.1 status httpd.service
+systemctl daemon-reload
+systemctl list-unit-files
+systemd-delta
+systemctl edit --full <unit>
 
 systemd journal
 
