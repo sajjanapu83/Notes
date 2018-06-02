@@ -1,6 +1,20 @@
-init --> upstart --> systemd
+**************************************** LINUX BOOT PROCESS ***********************************
 
-init/upstart relies on bash shell scripts
+1. Once Computer Starts, the BIOS on the mohter board checks all the input/output devices and the boot process 
+for the computer begins.
+2. The Boot process ( GRUB / other ) looks for a section of a hard drive ( Boot sector ) that contains the data to 
+load operating system. 
+3. This Boot loader then loads the linux Kernel.
+4. Linux Kernel then load the initial RAM disk, which contains a list of device drivers and then it starts to load 
+the computer drives to eventually mount the file system from the hard disk.
+5. After the kernel is all setup and ready to to go, it then starts the initialization system
+
+Various Initialization Systems are...
+init --> upstart --> systemd 
+
+Systemd is the most popular one.
+
+init/upstart relies on bash shell scripts, but systemd replaced all the exisiting fucntionality with pre-compiled 'C' code.
 Advandtages of systemd:
 1) Socket activation
 2) parallel execution
@@ -45,3 +59,17 @@ systemd-analyse
 
 
 systemd-inhibit wget http://example.com/abc.iso   ### prevents system from sleeping until it downloads huge file.
+
+/etc/fstab
+df -Th
+lsblk
+
+
+lsmod # list kernal modules
+lscpu # displays cpu architecture
+lspci
+lsblk
+lsusb
+lsdev
+
+
