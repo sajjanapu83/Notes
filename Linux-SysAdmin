@@ -1,0 +1,40 @@
+init --> upstart --> systemd
+
+init/upstart relies on bash shell scripts
+Advandtages of systemd:
+1) Socket activation
+2) parallel execution
+
+systemd-cgls
+systemd-cgtop
+
+systemctl
+systemctl status httpd.service
+systemctl enable http.service
+systemclt disable http.service
+systemctl help httpd.service
+systemctl start httpd.service
+systemctl stop httpd.service
+systemctl cat httpd.service
+systemctl -H 198.0.0.1 status httpd.service
+
+systemd journal
+
+journalctl 
+journalctl -r
+journalctl -o verbose
+journalctl -o json-pretty
+echo " hello... " | systemd-cat
+journalctl -r
+journalctl -f
+journalctl -n 20
+journalctl -k ### kernal logs
+journalctl --disk-usage
+
+hostnamectl
+timedatectl
+localectl
+systemd-analyse
+
+
+systemd-inhibit wget http://example.com/abc.iso   ### prevents system from sleeping until it downloads huge file.
