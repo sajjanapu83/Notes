@@ -10,12 +10,15 @@ systemd-cgtop
 
 systemctl
 systemctl status httpd.service
-systemctl enable http.service
-systemclt disable http.service
+systemctl enable httpd.service
+systemclt disable httpd.service
+systemctl is-enabled httpd.servoce
 systemctl help httpd.service
 systemctl start httpd.service
 systemctl stop httpd.service
 systemctl cat httpd.service
+systemctl mask httpd.service
+systemctl unmask httpd.service
 systemctl -H 198.0.0.1 status httpd.service
 systemctl daemon-reload
 systemctl list-unit-files
