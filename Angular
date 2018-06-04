@@ -1,0 +1,17 @@
+curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
+
+yum -y install nodejs
+
+yum install -y gcc-c++ make
+
+node --version
+
+npm install -g @angular/cli
+npm install pm2 -g
+npm install http-server -g
+
+npm install
+
+ng build --prod
+
+pm2 start /usr/bin/http-server -- -p 80 -d false
