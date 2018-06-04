@@ -1,0 +1,12 @@
+curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
+yum -y install nodejs
+yum install -y gcc-c++ make
+node --version
+npm i npm@latest -g
+
+•	Install Hyperledger composer tools as a functional user ( hyperledgerusr)
+npm config set prefix /home/hyperledgerusr/
+npm install -g composer-cli
+
+
+ 
