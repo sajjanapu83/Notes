@@ -97,4 +97,65 @@ echo $MYPATH
 history
 
 
+###### Processing texts
+
+sort numbers.txt
+sort -n numbers.txt
+sort -k2 -n numbers.txt ( ### sort second column in the text file )
+cat numbers.txt
+nl numbers.txt ( ### like cat it dispalys contents with line numbers exluding blank lines )
+nl -ba numbers.txt ( ## number blank lines)
+wc -l /etc/passwd ( ### number of lines in a file )
+wc -w /etc/passwd ( ### number of words )
+wc -c /etc/passwd ( ### number of characters )
+expand -t 10 tabs.txt ( ### 10 spaces between each column )
+cut -c 1-5 columns.txt
+cut -d: -f 1,2,4 columns.txt
+cut -d" " -f 1,2 columns.txt  ( ### tab is default delimeter no need to mention )
+paste file1.txt file2.txt
+join file1.txt file2.txt ( ### only has unique values)
+uniq lines.txt
+uniq -d lines.txt  ( ### print only duplicate unique lines )
+uniq -D lines.txt ( ### print only duplicate lines 
+head /var/log/messages ( ### displays first 10 lines )
+head -n 15 /var/log/messages
+tail /var/log/messages
+tail -n 15 /var/log/messages
+tail -f /var/log/messages ( with updates automatically )
+cat tabs.txt
+tac tabs.txt ( ### displays content in reverse )
+split lines.txt
+split -b 512 lines.txt  ( ### 512 bytes in each file)
+split -k 512 lines.txt  ( ### 512 kilobytes in each file)
+split -l 10 lines.txt ( ### 10 lines in each file - xaa.txt)
+split -a 3 -l 10 lines.txt ( ### output file name xaaa.txt)
+od telnet.rpm ( ### displays binary file in octal format, other formats -b , -o, -x, -d, -f)
+pr lines.txt ( ### prints the contents of the file to terminal )
+pr --columns=2 lines.txt ( ### prints in 2 columns )
+
+tr 'a' 'A' < lines.txt ( ### translate command replaces a with A , but we cant use tr to replace entire word)
+tr 'a-e' 'A-E' < lines.txt 
+
+To replace entire word we use SED unility
+sed 's/the/THE/g' sedexamples.txt ( ### substitiutes the with THE globally across the file )
+sed 's/the/THE/' sedexamples.txt ( ###replaces only first instance in each line not globally )
+sed -e 's/the/NOW/g' -e 's/NOW/NEVER/g' sedexamples.txt ( ### multiple commands in a single line )
+vim sedopts.txt
+s/the/THE/g
+s/THE/NOW/g
+s/NOW/NEVER/g
+
+sed -f sedopts.txt sedexamples.txt
+more lines.txt ( displays content page wise using tab space and it allows only forward)
+less lines.txt ( f forward b for backword)
+
+
+Basic File Management
+
+
+
+
+
+
+
 
