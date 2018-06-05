@@ -1,0 +1,4 @@
+---
+- name: Disable SWAP
+  lineinfile:
+    dest: /etc/sys
