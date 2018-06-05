@@ -98,6 +98,7 @@ history
 
 
 ###### Processing texts
+https://github.com/linuxacademy1/textfiles
 
 sort numbers.txt
 sort -n numbers.txt
@@ -151,6 +152,12 @@ less lines.txt ( f forward b for backword)
 
 
 Basic File Management
+ls -l /etc
+ls -al /etc
+ls -d ( lists the directories)
+mkdir -p mydir/dir1/dir2/dir3 ( creates all sub directories)
+file /etc/* ( diplays file types information )
+
 
 
 
