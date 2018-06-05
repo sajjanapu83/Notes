@@ -73,3 +73,28 @@ lsusb
 lsdev
 
 
+#### Special Characters
+
+su root -  ( ### '-' at the end will make sure all the configuration settings applied to switch user root )
+/bin/false && echo 'it wont print'
+/bin/true && echo ' now it prints'
+/bin/true || echo 'it wont print'
+/bin/false || echo 'it prints'
+/bin/false; echo 'prints whatever'
+\\ \$ ( ### escape characters )
+### return codes 0-true, 1 -false
+echo $?
+ls -al | more  ( ### '|' pipe symbol gives pagination)
+ls -al > output.txt ( ### redirects output to a file )
+
+###### Environment Variables
+
+set | more
+env | more
+shopt
+export MYPATH = /home/user
+echo $MYPATH
+history
+
+
+
