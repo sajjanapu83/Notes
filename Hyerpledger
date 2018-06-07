@@ -9,4 +9,8 @@ npm config set prefix /home/hyperledgerusr/
 npm install -g composer-cli
 
 
+https://medium.com/mlg-blockchain-consulting/installing-hyperledger-fabric-v1-0-on-ubuntu-16-04-part-i-18043bde92bb
+https://medium.com/mlg-blockchain-consulting/installing-hyperledger-fabric-v1-0-on-ubuntu-16-04-part-ii-ad64148c38fc
+
+
  
