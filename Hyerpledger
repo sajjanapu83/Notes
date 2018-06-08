@@ -22,6 +22,12 @@ https://golang.org/doc/install
 brew install libtool
 brew install node
 npm install --global grpc
+export GOPATH=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
+export GOROOT=/usr/local/go
+git clone https://github.com/hyperledger/fabric-samples.git
+export PATH=$PATH:/usr/local/go/src/github.com/hyperledger/fabric-samples/bin
+
 http://hyperledger-fabric.readthedocs.io/en/latest/install.html
 
 
