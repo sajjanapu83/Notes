@@ -22,4 +22,7 @@ https://golang.org/doc/install
 brew install libtool
 
 
+start docker-daemon
+open --background -a Docker
+
  
