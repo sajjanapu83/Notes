@@ -28,6 +28,9 @@ cd /var/lib/docker
  docker exec <<CONTAINERNAME>> /bin/ps aux | grep bash
  docker top <<CONTAINERNAME>>
  
+ docker kill $(docker ps -q)
+ docker rm $(docker ps -aq)
+ 
  docker events --since '1h'
  
  To create a new bash process with in the container without stopping
