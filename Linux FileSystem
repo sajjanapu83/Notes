@@ -1,0 +1,58 @@
+/ root directory of FHS 
+/bin binaries for all users in a single user mode
+/boot boot loader files ( kernel, initrd..etc )
+/dev device files
+/etc host specific configuration files no binaries
+   /etc/opt host specific configuration files stored in /opt
+   /etc/sgml configuration files that processes SGML
+   /etc/X11 configuration files for Windows
+   /etc/xml
+/home Users home direcorty
+/root root user home directory
+/lib libraries essential for binaries /bin /sbin
+/media  mount pount for removable media ( CD/DVD's)
+/mnt temporary mounted filesystem
+/opt optional 3rd party softwares
+/proc virtual file system provided by process & kernel information as files
+/run runtime variable data, information about running system since last boot
+/sbin essential system binaries
+/srv site specific data server by the local system
+/sys contains information about the devices connected
+/tmp temporary files not preserved between reboots
+/usr secondary hierarchy for read-only user data
+    /usr/bin non essential command binaries for all users
+    /usr/include standard include files
+    /usr/lib libraries for binaries present in /usr/bin /usr/sbin
+    /usr/local 
+    /usr/sbin
+    /usr/src
+    /usr/share
+/var variable files whose content is expected to change
+    /var/cache  anything with in this can be deleted without loss of data
+    /var/lib state information
+    /var/lock 
+    /var/log
+    /var/mail
+    /var/spool spool for tasks waiting to be processed
+    /var/tmp temporary files preserved between restarts
+    
+=======================================================================================
+
+fdisk -l supports 4 partitions
+fdisk /dev/xvdf
+https://www.thegeekdiary.com/linux-unix-how-to-create-primary-partition-using-fdisk/
+partprobe
+
+gdisk /dev/xvdf
+
+mkfs -t ext4 /dev/xvdf
+mkfs -t xfs /dev/xvdf
+mkefs
+parted /dev/xvdf
+
+
+
+
+
+   
+/usr 
