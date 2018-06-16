@@ -53,6 +53,27 @@ parted /dev/xvdf
 lsblk
 blkid  gets the UUID of the file systems
 
+Special Permission
+
+mkdir shared
+chmod 1755 /shared ## 1 is sticky bit , it will not allow others to delete file in a shared folder ( shows r-t )
+chmod 4755 /shared  ## set user identifier  shows rws instead of rwx
+chmod 2755 /shared  ## set group identifier
+
+LVM Storage
+
+pvcreate /dev/xvdf2 /dev/xvdf3
+vgcreate vgkardata /dev/xvdf2 /dev/xvdf3
+lvcreate --name lvtest --size 1G vgkardata
+lsblk
+vgextend vgkardata /dev/xvdf4
+lvdisplay
+pvdisplay
+pvscan
+
+
+
+
 
 
 
