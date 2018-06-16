@@ -50,6 +50,10 @@ mkfs -t xfs /dev/xvdf
 mkefs
 parted /dev/xvdf
 
+lsblk
+blkid  gets the UUID of the file systems
+
+
 
 
 
