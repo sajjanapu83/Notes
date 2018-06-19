@@ -34,4 +34,176 @@ http://hyperledger-fabric.readthedocs.io/en/latest/install.html
 start docker-daemon
 open --background -a Docker
 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+VzPol-instance-NonProd-GTS-NP-VEPV-comp
+
+DOCKER STEPS
+
+
+cat <<EOF > /etc/yum.repos.d/docker.repo
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+export  http_proxy=http://proxy.ebiz.company.com:80
+export  https_proxy=http://proxy.ebiz.company.com:80
+export NO_PROXY=localhost,127.0.0.0/8,company.com,169.254.169.254
+
+
+DCOKER STEPS
+
+
+cat <<EOF > /etc/yum.repos.d/docker.repo
+[dockerrepo]
+name=Docker Repository
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+EOF
+
+
+mkdir /etc/systemd/system/docker.service.d
+
+
+cat <<EOF > /etc/systemd/system/docker.service.d/http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=http://proxy.ebiz.company.com:80" "HTTPS_PROXY=http://proxy.ebiz.company.com:80" "NO_PROXY=localhost,127.0.0.0/8,company.com"
+EOF
+
+
+yum -y update
+
+
+yum install -y docker-engine
+adduser hylusr
+passwd -d hylusr
+usermod -aG docker hylusr
+
+systemctl daemon-reload;systemctl enable docker.service; systemctl start docker.service; systemctl restart docker; systemctl status docker.service
+
+curl –L  https://github.com/docker/compose/releases/download/1.14.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose -- Not working
+curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+curl -O https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz
+
+curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
+yum -y install nodejs
+yum install -y gcc-c++ make
+node --version
+
+increase space for /home/
+increase space for /var/
+
+To increase space(Run as root)
+
+lsblk
+mkfs -t xfs /dev/xvdf
+vgextend vgroot /dev/xvdf
+lvextend -L +20G /dev/mapper/vgroot-lvhome
+xfs_growfs /dev/mapper/vgroot-lvhome
+
+lvextend -L +20G /dev/mapper/vgroot-lvvar
+xfs_growfs /dev/mapper/vgroot-lvvar
+
+
+su - hylusr
+
+Add the below to bash profile
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export FABRIC_VERSION=hlfv11
+export HL_COMPOSER_CLI=/home/hylusr/bin/composer
+export PATH
+export GOPATH=/usr/local/go
+export PATH=$PATH:$GOPATH/bin
+
+
+
+npm config set prefix /home/hylusr/
+npm i npm@latest -g
+
+npm install -g composer-cli
+npm install -g composer-rest-server
+npm install -g generator-hyperledger-composer
+npm install -g yo
+npm install -g composer-playground
+
+
+mkdir ~/fabric-dev-servers && cd ~/fabric-dev-servers
+
+curl -O https://raw.githubusercontent.com/hyperledger/composer-tools/master/packages/fabric-dev-servers/fabric-dev-servers.tar.gz
+tar -xvf fabric-dev-servers.tar.gz
+
+
+cd ~/fabric-dev-servers
+./downloadFabric.sh
+
+
+cd ~/fabric-dev-servers
+    ./startFabric.sh
+    ./createPeerAdminCard.sh
+	
+	
+create npmconfig.txt at the below location with the below contents
+/home/hylusr/fabric-dev-servers/fabric-scripts/hlfv11/composer
+
+
+registry=http://registry.npmjs.org/
+strict-ssl=false
+unsafe-perm=true
+rejectUnauthorized=false
+prefix=/home/hylusr/
+https-proxy="http://proxy.ebiz.company.com:80"
+proxy="http://proxy.ebiz.company.com:80"
+
+
+
+yo hyperledger-composer
+
+#######Create network archive file
+composer archive create -t dir -n .
+
+unset http_proxy
+unset https_proxy
+
+#######Install business network
+composer network install -a company-network@0.0.1.bna -c PeerAdmin@hlfv1 -o npmrcFile=../npmConfig.txt
+
+#######Start business network
+composer network start -c PeerAdmin@hlfv1 -n company-network -V 0.0.1 -A admin -S adminpw  -f networkadmin.card -o npmrcFile=../npmConfig.txt
+
+#######Import card
+composer card import -f networkadmin.card -c admin@company-network
+
+#######Ping business network card
+composer network ping -c admin@company-network
+
+
+#######Start Rest Server instance
+composer-rest-server -c admin@company-network
+
+
+To Upgrade 
+1. Update the version in the package.json
+2. first create archive file (composer archive create -t dir -n .)
+3. install with new version - (composer network install -a veps-demo-network@0.0.2.bna -c PeerAdmin@hlfv1 -o npmrcFile=../npmConfig.txt)
+4. upgrade (composer network upgrade -c PeerAdmin@hlfv1 -n veps-demo-network -V 0.0.2 -o npmrcFile=../npmConfig.txt)
+
+
+docker kill $(docker ps -q)
+docker rm $(docker ps -aq)
+
+
+
+
+
  
