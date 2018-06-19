@@ -39,12 +39,15 @@ systemctl start kubelet;
 
 # STEP5: Initialize kubeadm
 
-cat <  /etc/sysctl.d/k8s.conf
+cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
 
+docker info | grep -i cgroup
+cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+sed -i "s/cgroup-driver=systemd/cgroup-driver=cgroupfs/g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"
 
