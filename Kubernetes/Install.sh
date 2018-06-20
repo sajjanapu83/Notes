@@ -51,7 +51,13 @@ sed -i "s/cgroup-driver=systemd/cgroup-driver=cgroupfs/g" /etc/systemd/system/ku
 vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"
 
+http://yasassriratnayake.blogspot.com/2017/05/how-to-allow-insecurenon-ssl.html
+
 kubeadm init --pod-network-cidr=10.244.0.0/16
+
+cp /etc/kubernetes/admin.conf $HOME/
+chown $(id -u):$(id -g) $HOME/admin.conf
+export KUBECONFIG=$HOME/admin.conf
 
 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
