@@ -1,0 +1,159 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS Instance Windows - New NonProd VPC",
+
+    "Parameters": {        
+        "SubnetName": {
+            "Description": "Subnet Name",
+            "Type": "String"           
+        },
+        "AppInstanceType": {
+            "Description": "New AWS Instance",
+            "Type": "String"          
+       },      
+        "AppID":  { "Type": "String" },
+        "UserID": { "Type": "String" },
+        "Role":   { "Type": "String" },
+        "Name":   { "Type": "String" },       
+        "Environment": { "Type": "String" },
+        "Environment2": { "Type": "String" },        
+        "AppEnv": { "Type": "String" }, 
+        "ImageType": { "Type": "String" },
+        "PolInstanceProfile": { "Type": "String" },
+         "RootVolume": {
+            "Description": "Enter Root Volume.",
+            "Type": "Number"      
+        },
+        "AdditionalVolume": {
+            "Description": "Enter Additional Volume.",
+            "Type": "Number"     
+        },
+        "PolKMSKeyARN": { "Type": "String" },
+        "AvailabilityZone": { "Type": "String" },        
+        "SecurityGroups": {
+			"Description": "Additional security groups to be added to the EC2 instance besides the default infrastructure",
+			"Type": "List<AWS::EC2::SecurityGroup::Id>"
+		},
+        "CustomAMI": {
+            "Type": "String",
+            "Default": "No",
+            "AllowedValues": ["Yes", "No"]
+        },
+        "S3Directory" : {
+            "Type": "String",
+            "Default": "Installs"            
+        }
+
+    },
+
+    "Conditions": {
+
+        "NewVolumeCnd": {
+            "Fn::Equals": [{ "Ref": "CustomAMI" }, "No"]
+        }
+    },   
+
+    "Resources": {
+
+        "AppVolume": {
+            "Type": "AWS::EC2::Volume",
+            "Condition" : "NewVolumeCnd",
+            "Properties": {
+                "AvailabilityZone": { "Ref":"AvailabilityZone" },
+                "Size": { "Ref": "AdditionalVolume" },
+                "VolumeType": "gp2",               
+                "Encrypted": "true",
+                "KmsKeyId": { "Ref": "PolKMSKeyARN" },
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}"} },                        
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]  
+            }
+        }, 
+
+        "AWSINSTANCE1": {
+            "Type": "AWS::EC2::Instance",           
+            "Properties": {
+                "InstanceType": { "Ref": "AppInstanceType" },
+                "DisableApiTermination" : "false",
+                "ImageId": { "Ref": "ImageType" },                
+                "IamInstanceProfile": { "Ref": "PolInstanceProfile" },
+                "BlockDeviceMappings": [
+                    { "DeviceName": "/dev/sda1", "Ebs": { "VolumeSize": { "Ref": "RootVolume" } } }             
+                 ],    
+                 "Volumes": [
+                    { "Fn::If": [ "NewVolumeCnd", { "Device": "xvdf", "VolumeId": { "Ref": "AppVolume"  }  }  , {"Ref" : "AWS::NoValue"}]  }          
+                ],            
+                "NetworkInterfaces": [
+                 {
+                    "AssociatePublicIpAddress": "false",
+                    "DeviceIndex": "0",
+                    "SubnetId": { "Ref": "SubnetName" },                    
+                    "GroupSet": {
+						"Fn::Split": [",",
+						 {
+							"Fn::Join": [",",
+							   { "Ref": "SecurityGroups"} ]
+						 }]
+					} 
+                 }],
+                 "UserData" : {
+                    "Fn::Base64" : {
+                        "Fn::Join" : [
+                            "",
+                            [  
+                                "<powershell> \n",
+                                { "Fn::If": [ "NewVolumeCnd", {  
+                                    "Fn::Join" : [
+                                        "",
+                                        [   
+                                            "aws s3 cp s3://bucketname/",{ "Ref" : "S3Directory" }, "/ D:\\Installs\\ --recursive --sse-kms-key-id ",{ "Ref" : "PolKMSKeyARN" } , " --sse aws:kms \n"
+                                          
+                                        ]
+                                      ]}  , {"Ref" : "AWS::NoValue"}]  
+                                },
+                                 "</powershell>" 
+                              
+                            ]
+                        ]
+                    }
+               },
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}"} },                         
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+            }
+        }
+           
+    },
+
+     "Outputs": {
+
+       "InstanceId1": {          
+            "Description": "InstanceId of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ "", [ {"Ref": "AWSINSTANCE1"}]]}    
+                  
+        },
+        "AZ1": {           
+            "Description": "Availability Zone of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ ",", [ { "Fn::GetAtt": ["AWSINSTANCE1","AvailabilityZone"]}]]}            
+        },
+         "AppVolumeId": { 
+            "Condition" : "NewVolumeCnd",          
+            "Description": "AppVolumeId of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ "", [ {"Ref": "AppVolume"}]]}    
+                  
+        },
+         "PrivateIP1": {           
+            "Description": "PrivateIP of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ ",", [ { "Fn::GetAtt": ["AWSINSTANCE1","PrivateIp"]}]]}           
+        }      
+
+    }
+}
