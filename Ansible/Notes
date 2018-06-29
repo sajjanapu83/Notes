@@ -1,1 +1,30 @@
 Test
+
+
+Ansible
+  Linux
+    Packages
+    APPACCOUNTID
+        APP1
+          roles
+            COMMON
+              files
+              tasks
+                main.yaml
+              templates
+                abc.j2
+              vars
+                main.yaml
+            DEV
+              
+            SIT
+            
+          AppRUN.yaml
+          
+          
+          
+  
+     
+     
+    
+    
