@@ -1,0 +1,100 @@
+Skip to sidebar navigation
+Skip to content
+Linked Applications
+Bitbucket
+Projects
+Repositories
+People
+Search for code or repositories
+Search for code or repositories...
+Help
+Logged in as Kaluvala, Karthik (kaluvka)
+Ravi, Karthick X
+Clone
+Create branch
+Create pull request
+Fork
+Reports
+Download
+
+
+Source
+Commits
+Graphs
+Branches
+Pull requests
+Tags
+Settings
+Ravi, Karthick X
+Karthick_B2C_CICD
+Source
+BranchmasterBranch actions	
+Karthick_B2C_CICD/Asmbbs12cc.yml
+Ravi
+Ravi
+ committed 
+9db3500b649
+23 Mar 2018
+EditBlameRaw file
+Source viewDiff to previousHistoryContributors
+
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/grid
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+       
+   - name: mount software Backup  logical volume
+     become: true
+     become_user: root
+     become_method: pbrun
+     mount:
+          name: /swbackup
+          src: /dev/xvdk
+          fstype: ext4
+          state: mounted
+             
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+          
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+​
+   - name: install oracleasm-support-2.1.8-3.el7.x8_64.rpm                   
+     become: true
+     become_user: root
+     become_method: pbrun     
+     shell: yum -y install /swbackup/oracleasm-support-2.1.8-3.el7.x86_64.rpm
+     
+   - name: install oracleasmlib-2.0.12-1.el7.x8_64.rpm       
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: yum -y install /swbackup/oracleasmlib-2.0.12-1.el7.x86_64.rpm 
+​
+   - name:  configure asm
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm configure -u oracle -g oinstall
+     
+   - name:  reboot the instance
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/shutdown -r +2
