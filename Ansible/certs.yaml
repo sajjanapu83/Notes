@@ -1,0 +1,231 @@
+- name: create AWS_CERTS Folders
+  win_file: path={{ item }} state=directory  
+  with_items:
+    - '{{ installs_path }}/AWS_CERTS'   
+    - '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs'
+    - '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/BillMartixCertificate'    
+  tags:
+    - cert_APP1_step1    
+
+- name: Copy APP1{{config_env|lower}}aws_certificate.pfx
+  win_copy: src=APP1{{config_env|lower}}aws_certificate.pfx dest={{ installs_path }}/AWS_CERTS/APP1{{config_env|lower}}aws_certificate.pfx
+  when: config_lob == "LOB1"
+  tags:
+   - cert_APP1_step1.1.0
+
+- name: Copy APP1LOB2{{config_env|lower}}aws_certificate.pfx
+  win_copy: src=APP1LOB2{{config_env|lower}}aws_certificate.pfx dest={{ installs_path }}/AWS_CERTS/APP1LOB2{{config_env|lower}}aws_certificate.pfx
+  when: config_lob == "LOB2"
+  tags:
+   - cert_APP1_step1.1.1
+
+- name: Copy APP1_TO_EPS_NONPROD.pfx
+  win_copy: src=APP1_TO_EPS_NONPROD.pfx dest='{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/APP1_TO_EPS_NONPROD.pfx'
+  tags:
+   - cert_APP1_step1.2
+
+- name: Copy APP1sitaws_certificate.pfx
+  win_copy: src=APP1sitaws_certificate.pfx dest={{ installs_path }}/AWS_CERTS/APP1sitaws_certificate.pfx
+  when: config_lob == "LOB1" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+   - cert_APP1_step1.1.3
+
+- name: Copy APP1LOB2sitaws_certificate.pfx
+  win_copy: src=APP1LOB2sitaws_certificate.pfx dest={{ installs_path }}/AWS_CERTS/APP1LOB2sitaws_certificate.pfx
+  when: config_lob == "LOB2" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+   - cert_APP1_step1.1.4
+
+- name: Copy externalssl_exp20160815.pfx
+  win_copy: src=externalssl_exp20160815.pfx dest='{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/externalssl_exp20160815.pfx'
+  when: config_lob == "LOB1"
+  tags:
+   - cert_APP1_step1.3.a
+  
+- name: Copy externalssl_exp20180817.pfx
+  win_copy: src=externalssl_exp20180817.pfx dest='{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/externalssl_exp20180817.pfx'
+  when: config_lob == "LOB2"
+  tags:
+   - cert_APP1_step1.3.b   
+
+- name: Copy GoDaddy_Root_CA.cer
+  win_copy: src=GoDaddy_Root_CA.cer dest='{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/BillMartixCertificate/GoDaddy_Root_CA.cer'
+  tags:
+   - cert_APP1_step1.4
+
+- name: Copy GoDaddy_Intermediate_CA.cer
+  win_copy: src=GoDaddy_Intermediate_CA.cer dest='{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/BillMartixCertificate/GoDaddy_Intermediate_CA.cer'
+  tags:
+   - cert_APP1_step1.5
+
+- name: Import APP1 Cert
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/APP1{{config_env|lower}}aws_certificate.pfx'  
+  when: config_lob == "LOB1"
+  tags:
+    - cert_APP1_step2.1
+
+- name: Import APP1 Cert
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/APP1LOB2{{ config_env|lower }}aws_certificate.pfx'
+  when: config_lob == "LOB2"
+  tags:
+    - cert_APP1_step2.2
+
+- name: Import APP1SIT Cert
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/APP1sitaws_certificate.pfx'  
+  when: config_lob == "LOB1" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+    - cert_APP1_step2.3
+
+- name: Import APP1LOB2SIT Cert
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/APP1LOB2sitaws_certificate.pfx'
+  when: config_lob == "LOB2" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+    - cert_APP1_step2.4
+
+- name: Import EPS Cert for APP1
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/APP1_TO_EPS_NONPROD.pfx'    
+  tags:
+    - cert_APP1_step2.5
+    - cert_APP1_step2.5
+
+- name: Import externalssl_exp20160815
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/externalssl_exp20160815.pfx'
+  when: config_lob == "LOB1"
+  tags:
+    - cert_APP1_step3
+    - cert_APP1_step3.a
+
+- name: Import externalssl_exp20160815
+  win_shell: certutil -f -p 'company1' -importPFX '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/externalssl_exp20180817.pfx'
+  when: config_lob == "LOB2"
+  tags:
+    - cert_APP1_step3
+    - cert_APP1_step3.b
+ 
+- name: Import GoDaddy_Root_CA
+  win_shell: certutil -addstore -enterprise -f -v root '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/BillMartixCertificate/GoDaddy_Root_CA.cer'
+  tags:
+    - cert_APP1_step4
+ 
+- name: Import GoDaddy_Intermediate_CA
+  win_shell: certutil -addstore -enterprise -f -v CA '{{ installs_path }}/AWS_CERTS/External_Vendor_Certs/BillMartixCertificate/GoDaddy_Intermediate_CA.cer'
+  tags:
+    - cert_APP1_step4
+
+- name: Get hash Thumbprint for APP1 Server Cert - LOB1
+  win_shell: (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match 'APP1{{ config_env|lower }}aws.company.com'} | Select-Object -First 1).Thumbprint
+  register: APP1_cert_hash_LOB1
+  when: config_lob == "LOB1"
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Get hash Thumbprint for APP1 Server Cert - LOB2
+  win_shell: (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match 'APP1LOB2{{ config_env|lower }}aws.company.com'} | Select-Object -First 1).Thumbprint
+  register: APP1_cert_hash_LOB2
+  when: config_lob == "LOB2"
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Set APP1 Server Cert
+  set_fact:
+    APP1_cert_hash: "{{ APP1_cert_hash_LOB1 if config_lob == \"LOB1\" else APP1_cert_hash_LOB2 }}"
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Display hash Thumbprint for APP1 Server Cert
+  debug:
+    var: APP1_cert_hash
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Get hash Thumbprint for APP1SIT Server Cert - LOB1
+  win_shell: (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match 'APP1sitaws.company.com'} | Select-Object -First 1).Thumbprint
+  register: APP1_cert_hash_LOB1_sit
+  when: config_lob == "LOB1" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Get hash Thumbprint for APP1SIT Server Cert - LOB2
+  win_shell: (Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match 'APP1LOB2sitaws.company.com'} | Select-Object -First 1).Thumbprint
+  register: APP1_cert_hash_LOB2_sit
+  when: config_lob == "LOB2" and config_env|lower in ["sit1","sit2","sit3","sit4","sit5"]
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Set APP1SIT Server Cert
+  set_fact:
+    APP1_cert_hash_sit: "{{ APP1_cert_hash_LOB1_sit if config_lob == \"LOB1\"  else APP1_cert_hash_LOB2_sit }}"
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+- name: Display hash Thumbprint for APP1SIT Server Cert
+  debug:
+    var: APP1_cert_hash_sit
+  tags:
+    - cert_APP1_step5  
+    - cert_APP1_step5.1
+
+# - name: Bind Cert to IIS https - SIT1
+#   win_iis_webbinding:
+#     name: Default Web Site
+#     protocol: https
+#     port: 443
+#     certificate_hash: D59AB52B081F6E29537649D745271A6E5502BB70
+#     state: present
+#   when:
+#     - config_env == "SIT1"
+#   tags:
+#     - cert_APP1_step5
+#     - cert_APP1_step5.2
+
+- name: Bind Cert to IIS https
+  win_iis_webbinding:
+    name: Default Web Site
+    protocol: https
+    port: 443
+    certificate_hash: "{{ APP1_cert_hash.stdout }}"
+    state: present
+  tags:
+    - cert_APP1_step5
+    - cert_APP1_step5.2
+
+- name: Bind SIT Cert to IIS https
+  win_iis_webbinding:
+    name: Default Web Site
+    protocol: https
+    port: 443
+    certificate_hash: "{{ APP1_cert_hash_sit.stdout }}"
+    state: present
+  when: config_env|lower in ["sit1","sit2","sit3","sit4","sit5","uat1"]
+  tags:
+    - cert_APP1_step5
+    - cert_APP1_step5.2
+
+- name: Add permission Network Service to externalssl
+  win_shell: |
+    $keyname = (((Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match 'externalssl.company.com'} | Select-Object -First 1).PrivateKey).CspKeyContainerInfo).UniqueKeyContainerName
+    $keypath = $env:ProgramData + '/Microsoft/Crypto/RSA/MachineKeys/'
+    $fullpath = $keypath + $keyname
+    Write-Host "`$fullpath=$fullpath"
+    icacls $fullpath /grant NetworkService:RX
+  tags:
+    - cert_APP1_step6
+
+- name: Add permission IIS_IUSRS  to 2WAYSSL_APP1_TO_EPS
+  win_shell: |
+    $keyname = (((Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object {$_.Subject -match '2WAYSSL_APP1_TO_EPS_NONPROD.LOB2CORP.COM'} | Select-Object -First 1).PrivateKey).CspKeyContainerInfo).UniqueKeyContainerName
+    $keypath = $env:ProgramData + '/Microsoft/Crypto/RSA/MachineKeys/'
+    $fullpath = $keypath + $keyname
+    Write-Host "`$fullpath=$fullpath"
+    icacls $fullpath /grant IIS_IUSRS:RX  
+  tags:
+    - cert_APP1_step6
+    - cert_APP1_step6.1
+
