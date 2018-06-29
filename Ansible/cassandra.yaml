@@ -1,0 +1,93 @@
+- name: Create FileSystem
+  filesystem:
+    fstype: xfs
+    dev: /dev/xvdf    
+  become: true
+  become_user: root
+  become_method: pbrun
+  tags:
+  - ebs1.1
+
+- name: Mount cassandralogs logical volume /cassandralogs
+  become: true
+  become_user: root
+  become_method: pbrun
+  mount:
+      name: /cassandralogs
+      src: /dev/xvdf
+      fstype: xfs
+      state: mounted
+  tags:
+  - ebs1.2
+
+#- name: Mount additional drive
+#  shell: |
+#     cd /
+#     mkdir -p cassandralogs        
+#     echo '/dev/xvdf                       /cassandralogs   xfs     defaults        0 0' >> /etc/fstab        
+#     mount -a
+#  become: true
+#  become_user: root
+#  become_method: pbrun
+#  tags:
+#  - ebs1.2
+
+- name: Create FileSystem
+  filesystem:
+    fstype: xfs
+    dev: /dev/xvdb    
+  become: true
+  become_user: root
+  become_method: pbrun
+  tags:
+  - ebs2.1
+
+- name: Mount cassandra data logical volume /cassandra
+  become: true
+  become_user: root
+  become_method: pbrun
+  mount:
+      name: /cassandra
+      src: /dev/xvdb
+      fstype: xfs
+      state: mounted
+  tags:
+  - ebs2.1
+
+#- name: Mount additional drive
+#  shell: |
+#     cd /
+#     mkdir -p cassandra      
+#     echo '/dev/xvdb                       /cassandra   xfs     defaults        0 0' >> /etc/fstab        
+#     mount -a
+#  become: true
+#  become_user: root
+#  become_method: pbrun
+#  tags:
+#  - ebs2.2
+
+- include: ../../Packages/cassandrasetup.yaml
+  tags:
+   - cassandrasetup
+
+- include: ../../Packages/CassandraObjects.yaml
+  tags:
+   - dbsetup
+
+- name: Copy DiskYaml file
+  template: src=disk.yaml.j2 dest=/etc/dd-agent/conf.d/disk.yaml
+  become: true
+  become_user: root
+  become_method: pbrun
+  tags:
+  - DataDogSetup1.1
+
+- name: Restart DataDog Agent
+  shell: |
+     cd /etc/init.d/
+     ./datadog-agent restart     
+  become: true
+  become_user: root
+  become_method: pbrun
+  tags:
+  - DataDogSetup1.2
