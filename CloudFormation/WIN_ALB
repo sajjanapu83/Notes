@@ -1,0 +1,305 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+ 
+    "Description": "Creating ELB",
+ 
+    "Parameters": {
+         "SGStackName": {
+            "Type": "String",
+            "Default": "WIN-SG",
+            "AllowedValues": ["WIN-SG"]
+        },
+         "SubnetName": {
+            "Description": "Subnet Name",
+            "Type": "String",
+            "Default": "VPCSubnet1",
+            "AllowedValues": ["VPCSubnet1", "VPCSubnet2", "VPCSubnet3"]
+        },
+        "VpcId": {
+            "Description": "VPC ID",
+            "Type": "AWS::EC2::VPC::Id"          
+        },  
+        "AppID": {
+            "Type": "String"          
+        },
+        "UserID": {
+            "Type": "String"           
+        },
+        "Role": {
+            "Type": "String",
+            "Default": "Web",
+            "AllowedValues": ["App", "DB", "Web"]
+        },           
+        "Director": {
+            "Type": "String"          
+        },
+        "Environment": {
+            "Type": "String"
+           
+        },
+        "Environment2": {
+            "Type": "String"           
+        },
+        
+        "AppEnv": {
+            "Type": "String"           
+        },
+
+        "ApplicationType": {
+            "Type": "String"          
+        }     
+
+
+    },
+ 
+    "Mappings": {
+       
+        "AvailabilityZoneMap": {
+            "us-east-1": { "VPCSubnet1": "us-east-1a", "VPCSubnet2": "us-east-1b" },
+            "us-west-2": { "VPCSubnet1": "us-west-2a", "VPCSubnet2": "us-west-2b" }
+        },
+        "SubnetMap": {
+            "us-east-1": { "VPCSubnet1": "subnet-1a", "VPCSubnet2": "subnet-1b"},
+            "us-west-2": { "VPCSubnet1": "subnet-2a", "VPCSubnet2": "subnet-2b"}
+        },
+         "SSLCerts": {
+            "APP1": { "UAT": "arn:aws:acm:us-west-2:ACCOUNTID:certificate/123-abc"                       
+                       },
+            "APP2": { "UAT": "arn:aws:acm:us-west-2:ACCOUNTID:certificate/456-pqr"                        
+                       },
+            "APP3": { "UAT": "arn:aws:acm:us-west-2:ACCOUNTID:certificate/789-xyz"
+                       }
+        }       
+       
+    },
+
+    "Resources": {  
+      
+        "APP3TargetGroup": {
+        "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",       
+        "Properties": {
+            "HealthCheckIntervalSeconds" : "30",
+            "HealthCheckPath" : "/iisstart.htm",
+            "HealthCheckPort" : "traffic-port",
+            "HealthCheckProtocol" : "HTTPS",
+            "HealthCheckTimeoutSeconds" : "5",
+            "HealthyThresholdCount" : "5",
+            "Name": {"Fn::Sub": "APP3-TG"},
+            "Port": 443,
+            "Protocol": "HTTPS",
+            "VpcId": { "Ref": "VpcId" },
+            "TargetGroupAttributes" : [
+                { "Key" : "deregistration_delay.timeout_seconds", "Value" : "300" },
+                { "Key" : "stickiness.enabled", "Value" : "true" }                
+            ],
+            "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-APP3"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+         }
+        },
+
+        "APP2TargetGroup": {
+        "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",        
+        "Properties": {
+            "HealthCheckIntervalSeconds" : "30",
+            "HealthCheckPath" : "/iisstart.htm",
+            "HealthCheckPort" : "traffic-port",
+            "HealthCheckProtocol" : "HTTPS",
+            "HealthCheckTimeoutSeconds" : "5",
+            "HealthyThresholdCount" : "5",
+            "Name": {"Fn::Sub": "APP2-TG"},
+            "Port": 443,
+            "Protocol": "HTTPS",
+            "VpcId": { "Ref": "VpcId" },
+            "TargetGroupAttributes" : [
+                { "Key" : "deregistration_delay.timeout_seconds", "Value" : "300" },
+                { "Key" : "stickiness.enabled", "Value" : "true" }                
+            ],
+            "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-APP2"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+         }
+        },
+
+        "APP1TargetGroup": {
+        "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",        
+        "Properties": {
+            "HealthCheckIntervalSeconds" : "30",
+            "HealthCheckPath" : "/iisstart.htm",
+            "HealthCheckPort" : "traffic-port",
+            "HealthCheckProtocol" : "HTTPS",
+            "HealthCheckTimeoutSeconds" : "5",
+            "HealthyThresholdCount" : "5",
+            "Name": {"Fn::Sub": "APP1-TG"},
+            "Port": 443,
+            "Protocol": "HTTPS",
+            "VpcId": { "Ref": "VpcId" },
+            "TargetGroupAttributes" : [
+                { "Key" : "deregistration_delay.timeout_seconds", "Value" : "300" },
+                { "Key" : "stickiness.enabled", "Value" : "true" }                
+            ],
+            "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-APP1"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+         }
+        },
+
+        "EcsElasticLoadBalancer" : {
+        "Type" : "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "Properties" : {
+            "Name" : { "Ref": "AWS::StackName" },
+            "Scheme" : "internal",
+            "Subnets" : ["subnet-10dabb77","subnet-50358e19"],
+            "SecurityGroups": [
+            {"Fn::ImportValue": {"Fn::Sub": "${SGStackName}-ELB"}}
+            ],
+            "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+         }
+        },
+
+        "LoadBalancerListener443": {
+        "Type": "AWS::ElasticLoadBalancingV2::Listener",
+        "Properties": {
+            "DefaultActions": [{
+            "Type": "forward",
+            "TargetGroupArn": { "Ref": "APP2TargetGroup" }
+            }],
+            "LoadBalancerArn": { "Ref": "EcsElasticLoadBalancer" },
+            "Port": 443,
+            "Protocol": "HTTPS",
+            "SslPolicy": "ELBSecurityPolicy-TLS-1-2-Ext-2018-06",
+            "Certificates" : [
+                {
+                 "CertificateArn" : { "Fn::FindInMap": ["SSLCerts", "APP2", { "Ref": "AppEnv" }] }
+                }
+            ]
+               
+         }
+        },        
+
+        "APP3SSLCert": {
+            "Type": "AWS::ElasticLoadBalancingV2::ListenerCertificate",
+            "Properties": {
+                "Certificates" : [
+                    {
+                    "CertificateArn" : { "Fn::FindInMap": ["SSLCerts", "APP3", { "Ref": "AppEnv" }] }
+                    }
+                 ],
+                "ListenerArn" : { "Ref": "LoadBalancerListener443" }
+            }
+        },
+       
+        "APP1SSLCert": {
+            "Type": "AWS::ElasticLoadBalancingV2::ListenerCertificate",
+            "Properties": {
+                "Certificates" : [
+                    {
+                    "CertificateArn" : { "Fn::FindInMap": ["SSLCerts", "APP1", { "Ref": "AppEnv" }] }
+                    }
+                 ],
+                "ListenerArn" : { "Ref": "LoadBalancerListener443" }
+            }
+        },            
+
+        "APP3ListenerRule": {
+        "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+        "Properties": {
+            "Actions": [{
+            "Type": "forward",
+            "TargetGroupArn": { "Ref": "APP3TargetGroup" }
+            }],
+            "Conditions": [{
+            "Field": "host-header",
+            "Values": [ {"Fn::Sub": "APP3${AppEnv}aws.companyname.com"} ]
+            }],
+            "ListenerArn": { "Ref": "LoadBalancerListener443" },
+            "Priority": 1
+           }
+        }, 
+        
+        "APP2ListenerRule": {
+        "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+        "Properties": {
+            "Actions": [{
+            "Type": "forward",
+            "TargetGroupArn": { "Ref": "APP2TargetGroup" }
+            }],
+            "Conditions": [{
+            "Field": "host-header",
+            "Values": [ {"Fn::Sub": "APP2${AppEnv}aws.companyname.com"} ]
+            }],
+            "ListenerArn": { "Ref": "LoadBalancerListener443" },
+            "Priority": 2
+           }
+        },
+
+        "APP1ListenerRule": {
+        "Type": "AWS::ElasticLoadBalancingV2::ListenerRule",
+        "Properties": {
+            "Actions": [{
+            "Type": "forward",
+            "TargetGroupArn": { "Ref": "APP1TargetGroup" }
+            }],
+            "Conditions": [{
+            "Field": "host-header",
+            "Values":  [ {"Fn::Sub": "APP1${AppEnv}aws.companyname.com"} ]
+            }],
+            "ListenerArn": { "Ref": "LoadBalancerListener443" },
+            "Priority": 3
+           }
+        }
+
+       
+    },
+ 
+    "Outputs": {       
+         "EcsElasticLoadBalancerId": {
+            "Value": {
+                "Ref": "EcsElasticLoadBalancer"
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}"} }
+         },
+          "APP3TargetGroupId": {
+            "Value": {
+                "Ref": "APP3TargetGroup"
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-APP3"} }
+         },
+          "APP2TargetGroupId": {
+            "Value": {
+                "Ref": "APP2TargetGroup"
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-APP2"} }
+         },
+          "APP1TargetGroupId": {
+            "Value": {
+                "Ref": "APP1TargetGroup"
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-APP1"} }
+         }
+          
+        }
+     
+    }
