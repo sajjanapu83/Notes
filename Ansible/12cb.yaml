@@ -1,0 +1,211 @@
+- hosts: all
+  gather_facts: no 
+  tasks:
+     
+   - name:  init asm
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm init
+
+   - name: create DATA ASM Disk(s)
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm createdisk DATADG /dev/xvdf1
+ 
+   - name: create FLASHDG ASM Disk(s)
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm createdisk FLASHDG /dev/xvdh1
+
+   - name: Change ownership of /dev/xvdf1 file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /dev/xvdf1
+        owner: oracle
+        group: oinstall
+        mode: 0600
+
+   - name: Change ownership of /dev/xvdh1 file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /dev/xvdh1
+        owner: oracle
+        group: oinstall
+        mode: 0600
+
+   - name: Passwd delete oracle
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: passwd --delete oracle
+
+
+   - name: create directory /apps/opt/oraInventory
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/oraInventory
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+      
+   - name: unzip linuxamd64_12102_grid_1of2.zip
+     shell: cd /swbackup; unzip -o linuxamd64_12102_grid_1of2.zip
+     become: true
+     become_user: oracle
+     become_method: su
+
+   - name: unzip linuxamd64_12102_grid_2of2.zip
+     shell: cd /swbackup; unzip -o linuxamd64_12102_grid_2of2.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: unzip linuxamd64_12102_database_1of2.zip
+     shell: cd /swbackup; unzip -o linuxamd64_12102_database_1of2.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: unzip linuxamd64_12102_database_2of2.zip
+     shell: cd /swbackup; unzip -o linuxamd64_12102_database_2of2.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc 16384" >> /etc/security/limits.conf
+
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nofile 65536" >> /etc/security/limits.conf 
+
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc unlimited"  >> /etc/security/limits.conf 
+
+   - name: set soft nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle soft nproc unlimited" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmax = 1852932096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmax = 1852932096" >> /etc/security/limits.conf  
+
+   - name: set kernel.sem = 250 32000 100 128
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.sem = 250 32000 100 128" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmni = 4096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmni = 4096" >> /etc/security/limits.conf
+
+   - name: set kernel.shmall = 361900
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmall = 361900" >> /etc/security/limits.conf
+
+   - name: set fs.file-max = 6815744"
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.file-max = 6815744" >> /etc/security/limits.conf
+
+   - name: set net.ipv4.ip_local_port_range = 9000 65535
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.ipv4.ip_local_port_range = 9000 65535" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_default = 262144
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_default = 262144" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_max = 4194304
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_max = 4194304" >> /etc/security/limits.conf
+
+   - name: set net.core.wmem_default = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.wmem_default = 1048576" >> /etc/security/limits.conf
+
+   - name: set fs.aio-max-nr = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.aio-max-nr = 1048576" >> /etc/security/limits.conf 
+
+   - name: install asm binaries
+     become: true
+     become_user: oracle
+     become_method: su
+     shell: /swbackup/grid/runInstaller -silent -ignorePrereq -ignoreSysPrereqs -showProgress -waitforcompletion  -responseFile /swbackup/grid.rsp > /swbackup/install_grid.txt
+
+
+   - name: Run orainstRoot.sh
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: /apps/opt/oraInventory/orainstRoot.sh >> /swbackup/orainstRoot.log
+
+   - name: Run root.sh
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: /apps/opt/grid/product/12.1.0/root.sh > /swbackup/Root.log
+
+   - name: create ASM instance
+     become: true
+     become_user: oracle
+     become_method: su
+     command: /apps/opt/grid/product/12.1.0/bin/asmca -silent  -configureASM  -diskString '/dev/xvd*1' -sysAsmPassword oracle123 -asmsnmpPassword oracle123 -diskGroupName DATADG -diskList '/dev/xvdf1' -redundancy EXTERNAL 
+
+   - name: create disk group FLASHDG
+     become: true
+     become_user: oracle
+     become_method: su
+     command: /apps/opt/grid/product/12.1.0/bin/asmca -silent -createDiskGroup  -diskString '/dev/xvd*1' -diskGroupName FLASHDG -diskList '/dev/xvdh1' -redundancy EXTERNAL
+
+
+   - name: install oracle binaries
+     become: true
+     become_user: oracle
+     become_method: su
+     shell: /swbackup/database/runInstaller -silent -noconfig -ignorePrereq -ignoreSysPrereqs -showProgress -waitforcompletion -responseFile /swbackup/db1.rsp > /swbackup/install_oracle.txt
+
+   - name: Run root.sh
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell:  /apps/opt/oracle/product/12.1.0/dbhome_1/root.sh > /swbackup/db_Root.log
