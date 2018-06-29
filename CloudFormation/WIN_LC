@@ -1,0 +1,67 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "New AWS Launch Configuration - New NonProd VPC",
+
+    "Parameters": {       
+        "SecurityGroups": {
+			"Description": "Additional security groups to be added to the EC2 instance besides the default infrastructure",
+			"Type": "List<AWS::EC2::SecurityGroup::Id>"
+		},    
+        "AppInstanceType": {
+            "Description": "New AWS Instance",
+            "Type": "String"
+        },      
+        "AppID":  { "Type": "String" },
+        "UserID": { "Type": "String" },
+        "Role":   { "Type": "String" },
+        "Name":   { "Type": "String" },    
+        "ImageType": { "Type": "String" },
+        "PolInstanceProfile": { "Type": "String" }
+    },     
+
+    "Resources": {
+
+     "LaunchConfig" : {
+            "Type" : "AWS::AutoScaling::LaunchConfiguration",
+            "Properties" : {
+                "ImageId" : { "Ref": "ImageType" },
+                "InstanceType" : { "Ref": "AppInstanceType" },				                                   
+                "IamInstanceProfile" :  { "Ref": "PolInstanceProfile" },  
+                "SecurityGroups": {
+						"Fn::Split": [",",
+						 {
+							"Fn::Join": [",",
+							   { "Ref": "SecurityGroups"} ]
+						 }]
+					},
+                 "UserData" : {
+                    "Fn::Base64" : {
+                        "Fn::Join" : [
+                            "",
+                            [                            
+                               "<powershell> \n",                               
+                               "</powershell>"
+                            ]
+                        ]
+                    }
+               }
+                                     
+            }
+        }         
+    },
+
+      "Outputs": {
+
+        "AWSStackName": {           
+            "Description": "InstanceId of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ "", [  {"Fn::Sub": "${AWS::StackName}"}]]}          
+        },
+        "LaunchConfigId": {           
+            "Description": "InstanceId of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ "", [  {"Ref": "LaunchConfig"}]]},
+             "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}"} }   
+                  
+        }
+     
+    }
+}
