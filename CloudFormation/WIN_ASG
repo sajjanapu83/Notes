@@ -1,0 +1,56 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "New AWS Auto Scaling Group - New NonProd VPC",
+
+    "Parameters": {    
+        "AppID":  { "Type": "String" },
+        "UserID": { "Type": "String" },
+        "Role":   { "Type": "String" },
+        "Name":   { "Type": "String" },       
+        "Environment": { "Type": "String" },
+        "Environment2": { "Type": "String" },        
+        "AppEnv": { "Type": "String" },  
+        "Subnets" : { "Type": "List<AWS::EC2::Subnet::Id>", "Default": "subnet-e8fdfab3,subnet-a72c6ec2",
+                       "Description": "A list of VPC subnets to use in the Auto Scaling group."},       
+        "LaunchConfigName" : { "Type": "String"},
+        "MinSize" : { "Type": "Number", "Default": 1 },
+        "DesiredCapacity" : { "Type": "Number", "Default": 1 },
+        "MaxSize" : { "Type": "Number", "Default": 1 },
+        "TargetGroupStack" : { "Type": "String" }
+    },  
+
+    "Resources": {
+
+         "ASG" : {
+            "Type" : "AWS::AutoScaling::AutoScalingGroup",
+            "Properties" : {               
+                "LaunchConfigurationName" :  {"Fn::ImportValue": {"Ref" : "LaunchConfigName"} },
+                "MinSize" :  { "Ref": "MinSize" },
+                "DesiredCapacity" : { "Ref": "DesiredCapacity" },
+                "MaxSize" : { "Ref": "MaxSize" },
+                "HealthCheckGracePeriod":3000,
+                "Cooldown" : 300,     
+                "TargetGroupARNs" :  [ {"Fn::ImportValue":  {"Ref" : "TargetGroupStack"} }],          
+                "VPCZoneIdentifier" : {"Ref" : "Subnets"},
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" },"PropagateAtLaunch" : "true" }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" },"PropagateAtLaunch" : "true" }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" },"PropagateAtLaunch" : "true" }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}"},"PropagateAtLaunch" : "true" },                        
+                          { "Key": "Environment", "Value": { "Ref": "Environment" },"PropagateAtLaunch" : "true" }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" },"PropagateAtLaunch" : "true" },
+                          { "Key": "nostop", "Value": "yes" ,"PropagateAtLaunch" : "true"},
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" },"PropagateAtLaunch" : "true"}]                          
+            }
+	}         
+    },
+
+      "Outputs": {
+
+        "ASGId1": {           
+            "Description": "InstanceId of the newly created EC2 instance",
+            "Value": { "Fn::Join": [ "", [ {"Ref": "ASG"}]]}    
+                  
+        }
+     
+    }
+}
