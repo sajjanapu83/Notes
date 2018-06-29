@@ -1,0 +1,211 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+ 
+    "Description": "Creating ELB,Web,APP Security Groups",
+ 
+    "Parameters": {
+        "VpcId": {
+            "Description": "VPC ID",
+            "Type": "AWS::EC2::VPC::Id"           
+        },  
+        "AppID": {
+            "Type": "String"           
+        },
+        "UserID": {
+            "Type": "String"           
+        },
+        "Role": {
+            "Type": "String",
+            "Default": "Web",
+            "AllowedValues": ["App", "DB", "Web"]
+        },          
+        "Director": {
+            "Type": "String"           
+        },
+        "Environment": {
+            "Type": "String"           
+        },
+        "Environment2": {
+            "Type": "String"           
+        },        
+        "AppEnv": {
+            "Type": "String"          
+        }
+    },
+
+     "Mappings": {
+
+        "InfraSGMap": {
+            "us-east-1": { "InfraSG": "sg-east" },
+            "us-west-2": { "InfraSG": "sg-west" }
+        }            
+       
+    },
+
+ 
+    "Resources": {
+         "sgELB": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : {"Fn::Sub": "${AWS::StackName}-ELB"} ,
+                "GroupDescription": {"Fn::Sub": "${AWS::StackName}-ELB"} ,
+                "VpcId": {
+                    "Ref": "VpcId"
+                },
+                "SecurityGroupIngress": [
+                {"IpProtocol": "tcp","FromPort": "443","ToPort": "443","CidrIp": "10.0.0.0/8"}
+                ],  
+                
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-ELB"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]   
+              
+            }
+        },
+      
+        "sgJenkins": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : {"Fn::Sub": "${AWS::StackName}-JENKINS"},
+                "GroupDescription": {"Fn::Sub": "${AWS::StackName}-JENKINS"},
+                "VpcId": {
+                    "Ref": "VpcId"
+                },
+                "SecurityGroupIngress": [
+                {"IpProtocol": "tcp","FromPort": "443","ToPort": "443","CidrIp": "10.0.0.0/8"}                                         
+                ], 
+
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-JENKINS"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]                    
+              
+            }
+        },
+          "sgJenkinsIngress": {
+          "Type": "AWS::EC2::SecurityGroupIngress",
+          "DependsOn": "sgJenkins",
+           "Properties": {
+                "GroupId" : { "Ref": "sgJenkins" },
+                "IpProtocol": "tcp",
+                "FromPort": "445",
+                "ToPort": "445",
+                "SourceSecurityGroupId": { "Ref": "sgJenkins" }    
+           }
+        },
+
+         "sgWeb": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : {"Fn::Sub": "${AWS::StackName}-WEB"} ,
+                "GroupDescription": {"Fn::Sub": "${AWS::StackName}-WEB"} ,
+                "VpcId": {
+                    "Ref": "VpcId"
+                },
+                "SecurityGroupIngress": [                   
+                {"IpProtocol": "tcp","FromPort": "80","ToPort": "80","SourceSecurityGroupId": { "Ref": "sgELB" }  },  
+                {"IpProtocol": "tcp","FromPort": "443","ToPort": "443","SourceSecurityGroupId": { "Ref": "sgELB" }  },           
+                {"IpProtocol": "tcp","FromPort": "445","ToPort": "445","SourceSecurityGroupId": { "Ref": "sgJenkins" }  }],
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-WEB"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]                
+           
+             }
+        },
+        "sgWebIngress": {
+          "Type": "AWS::EC2::SecurityGroupIngress",
+          "DependsOn": "sgWeb",
+           "Properties": {
+                "GroupId" : { "Ref": "sgWeb" },
+                "IpProtocol": "tcp",
+                "FromPort": "445",
+                "ToPort": "445",
+                "SourceSecurityGroupId": { "Ref": "sgWeb" }    
+           }
+        },
+
+         "sgApp": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupName" : {"Fn::Sub": "${AWS::StackName}-APP"} ,
+                "GroupDescription": {"Fn::Sub": "${AWS::StackName}-APP"} ,
+                "VpcId": {
+                    "Ref": "VpcId"
+                },
+                "SecurityGroupIngress": [ 
+                {"IpProtocol": "tcp","FromPort": "443","ToPort": "443","SourceSecurityGroupId": { "Ref": "sgWeb" }  }, 
+                {"IpProtocol": "tcp","FromPort": "445","ToPort": "445","SourceSecurityGroupId": { "Ref": "sgJenkins" }  }],               
+                "Tags":  [{ "Key": "Vsad", "Value": { "Ref": "AppID" } }, 
+                          { "Key": "Userid", "Value": { "Ref": "UserID" } }, 
+                          { "Key": "Role", "Value": { "Ref": "Role" } }, 
+                          { "Key": "Name", "Value": {"Fn::Sub": "${AWS::StackName}-APP"} }, 
+                          { "Key": "Director", "Value": { "Ref": "Director" } }, 
+                          { "Key": "Environment", "Value": { "Ref": "Environment" } }, 
+                          { "Key": "Environment2", "Value": { "Ref": "Environment2" } },
+                          { "Key": "AppEnv", "Value": { "Ref": "AppEnv" }}]
+            }
+        },
+        "sgAppIngress": {
+          "Type": "AWS::EC2::SecurityGroupIngress",
+          "DependsOn": "sgApp",
+           "Properties": {
+                "GroupId" : { "Ref": "sgApp" },
+                "IpProtocol": "tcp",
+                "FromPort": "445",
+                "ToPort": "445",
+                "SourceSecurityGroupId": { "Ref": "sgApp" }    
+           }
+        }
+
+        
+    },
+ 
+    "Outputs": {
+        "sgJenkinsId": {
+            "Value": {
+                "Ref": "sgJenkins"
+            },
+            "Export": { "Name" : {"Fn::Sub": "${AWS::StackName}-JENKINS"} }
+        },
+          "sgWebId": {
+            "Value": {
+                "Ref": "sgWeb"
+            },
+             "Export": { "Name" : {"Fn::Sub": "${AWS::StackName}-WEB"} }
+        },
+          "sgAppId": {
+            "Value": {
+                "Ref": "sgApp"
+            },
+             "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-APP"} }
+        },
+          "sgELBId": {
+            "Value": {
+                "Ref": "sgELB"
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-ELB"} }
+        },
+          "sgInfraId": {
+            "Value":{ 
+                "Fn::FindInMap": ["InfraSGMap", { "Ref": "AWS::Region" }, "InfraSG"] 
+            },
+            "Export": { "Name" :  {"Fn::Sub": "${AWS::StackName}-INFRA"} }
+        }
+          
+     
+    }
+}
