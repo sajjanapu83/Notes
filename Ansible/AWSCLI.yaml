@@ -1,0 +1,31 @@
+#----------------------------------------------------------------------------   
+ #AWS CLI Installation and Configuration   
+#----------------------------------------------------------------------------
+   - name: download pip
+     become: true
+     become_user: root
+     become_method: pbrun
+     environment:
+        http_proxy: http://company.com:80
+        https_proxy: http://company.com:80
+     get_url:
+       url: https://bootstrap.pypa.io/get-pip.py
+       dest: /tmp
+
+   - name:  install pip
+     environment:
+         http_proxy: http://company.com:80
+         https_proxy: http://company.com:80
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/bin/python /tmp/get-pip.py     
+
+   - name:  install awscli
+     environment:
+         http_proxy: http://company.com:80
+         https_proxy: http://company.com:80
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/bin/pip install awscli
