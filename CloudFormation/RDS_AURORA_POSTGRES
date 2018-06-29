@@ -1,0 +1,199 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Aurora PostGresDb Stack",
+    "Parameters": {
+        "AppID" : {      
+            "Type" : "String"
+          },
+          "UserID" : {
+            "Type" : "String"
+          },
+          "Role" : {
+            "Type" : "String",
+            "Default": "DB"
+          },
+        "Environment2": {
+            "Description": "The string that will be prefixed to each instance name",
+            "Type": "String"
+        },
+        "MasterUsername": {
+            "Description": "App Db Username",
+            "Type": "String"
+	    },
+        "MasterUserPassword": {
+            "Description": "App Db Password",
+            "Type": "String"	    
+        },
+		"DBName": {
+            "Description": "The database name",
+			"MaxLength": "20",
+			"MinLength": "1",
+			"NoEcho": false,
+			"Type": "String"
+        },
+        "DBInstanceClass": {
+            "Description": "App Db server RDS instance type",
+            "Type": "String"
+            },
+        "DBIdentifierNameMaster": {
+            "Description": "The string that will be prefixed to each instance name",
+            "Type": "String",
+            "MinLength": "3"
+        },
+        "DBIdentifierNameReplica": {
+            "Description": "The string that will be prefixed to each instance name",
+            "Type": "String"
+        },
+        "VPCSecurityGroups": {
+            "Type":"CommaDelimitedList",
+            "Description": "Security Group id"
+        },
+        "DBSubnetGroupName": {
+            "Type": "String",
+            "Description": "Security Group id"
+        },
+        "KmsKey": {
+            "Type": "String",
+            "Description": "Security Group id"
+        },
+		"Engine" : {
+			"Description" : "Engine",
+			"Type" : "String"
+		}
+    },
+    "Resources": {
+        "DBCluster": {
+            "Type": "AWS::RDS::DBCluster",
+            "Properties": {
+                "Engine": { "Ref": "Engine" },
+				"DatabaseName": { "Ref" : "DBName" },
+				"DBClusterParameterGroupName": "default.aurora-postgresql9.6",
+				"Port": 5432,
+                "MasterUsername": { "Ref": "MasterUsername" },
+                "MasterUserPassword": { "Ref": "MasterUserPassword" },
+				"DBSubnetGroupName": { "Ref": "DBSubnetGroupName" },
+				"KmsKeyId": { "Ref": "KmsKey" },
+				"VpcSecurityGroupIds": { "Ref": "VPCSecurityGroups" },
+				"StorageEncrypted": "true"
+            }
+        },
+        "RDSinstance": {
+            "Type": "AWS::RDS::DBInstance",
+            "Properties": {
+                "DBClusterIdentifier": {
+                    "Ref": "DBCluster"
+                },
+                "DBInstanceIdentifier": {
+                    "Ref": "DBIdentifierNameMaster"
+                },
+                "DBInstanceClass": {
+                    "Ref": "DBInstanceClass"
+                },
+                "Engine": { "Ref": "Engine" },
+                "DBSubnetGroupName": {
+                    "Ref": "DBSubnetGroupName"
+                },
+		"MultiAZ": "false",
+                "PubliclyAccessible": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    "Master Database-",
+                                    {
+                                        "Ref": "Environment2"
+                                    },
+                                    "-app-db"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Vsad",
+                        "Value": { "Ref": "AppID" }
+                    },
+                    {
+                        "Key": "Userid",
+                        "Value": { "Ref": "UserID" }
+                    },
+                    {
+                        "Key": "Role",
+                        "Value": "DB"
+                    },                  
+                    {
+                        "Key": "Automation",
+                        "Value": "CDCI"
+                    }
+                ]
+            }
+        },
+        "RDSinstance2": {
+            "Type": "AWS::RDS::DBInstance",
+            "Properties": {
+                "DBClusterIdentifier": {
+                    "Ref": "DBCluster"
+                },
+                "DBInstanceIdentifier": {
+                    "Ref": "DBIdentifierNameReplica"
+                },
+                "DBInstanceClass": {
+                    "Ref": "DBInstanceClass"
+                },
+                "Engine": { "Ref": "Engine" },
+                "DBSubnetGroupName": {
+                    "Ref": "DBSubnetGroupName"
+                },
+                "PubliclyAccessible": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    "Read Replica Database-",
+                                    {
+                                        "Ref": "Environment2"
+                                    },
+                                    "-app-db"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        "Key": "Vsad",
+                        "Value": { "Ref": "AppID" }
+                    },
+                    {
+                        "Key": "Userid",
+                        "Value": { "Ref": "UserID" }
+                    },
+                    {
+                        "Key": "Role",
+                        "Value": "DB"
+                    },                   
+                    {
+                        "Key": "Automation",
+                        "Value": "CDCI"
+                    }
+                ]
+            }
+        }
+    },
+	"Outputs": {
+        "JDBCConnectionString": {
+            "Description": "JDBC connection string for the database",
+            "Value": {
+                "Fn::Join": [ "", [ "jdbc:mysql://", { "Fn::GetAtt": [ "RDSinstance", "Endpoint.Address" ] }, ":", { "Fn::GetAtt": [ "RDSinstance", "Endpoint.Port" ] }, "/", { "Ref": "DBName" } ] ]
+            }
+        },
+
+        "JDBCConnectionString2": {
+            "Description": "JDBC connection string for the database",
+            "Value": { "Fn::Join": [ "", [ "jdbc:mysql://", { "Fn::GetAtt": [ "RDSinstance2", "Endpoint.Address" ] }, ":", { "Fn::GetAtt": [ "RDSinstance2", "Endpoint.Port" ] }, "/", { "Ref": "DBName" } ] ] }
+        }
+    }
+}
