@@ -1,0 +1,296 @@
+- hosts: all
+  gather_facts: no 
+  tasks:
+
+   - name: create the oinstall Group
+     group: name=oinstall
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: create the dba Group
+     group: name=dba
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Creating oracle user
+     user: name=oracle group=oinstall
+     become: true
+     become_user: root
+     become_method: pbrun
+     tags: oracle_user
+
+   - name: update oracle user
+     user: name=oracle groups=dba append=yes
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install gcc-c++ 
+     yum: name=gcc-c++ state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install compat-libcap1 
+     yum: name=compat-libcap1 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install compat-libstdc++-33 
+     yum: name=compat-libstdc++-33 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install clibstdc++.so.5 
+     yum: name=libstdc++.so.5 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install libncurses.so.5  
+     yum: name=libncurses.so.5 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name: Install libaio-devel-0.3.109 
+     yum: name=libaio-devel-0.3.109 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-xauth 
+     yum: name=xorg-x11-xauth state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xterm
+     yum: name=xterm state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install ncompress
+     yum: name=ncompress state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name: Install libXtst 
+     yum: name=libXtst state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-utils
+     yum: name=xorg-x11-utils state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xclock 
+     yum: name=xclock state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install unzip 
+     yum: name=unzip state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-fonts* 
+     yum: name=xorg-x11-fonts* state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install tigervnc-server 
+     yum: name=tigervnc-server state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install sudo 
+     yum: name=sudo state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name : Install oracleasm
+     yum: name=kmod-oracleasm state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name : mklabel msdos
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/parted /dev/xvdf mklabel msdos
+      - /sbin/parted /dev/xvdg mklabel msdos
+      - /sbin/parted /dev/xvdh mklabel msdos
+      - /sbin/parted /dev/xvdi mklabel msdos
+       
+   - name : mkpart primary
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/parted /dev/xvdf mkpart primary 2048s 100%
+      - /sbin/parted /dev/xvdg mkpart primary 2048s 100%
+      - /sbin/parted /dev/xvdh mkpart primary 2048s 100%
+      - /sbin/parted /dev/xvdi mkpart primary 2048s 100%
+            
+   - name : update 90-oracle_asm.rules rules
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - echo 'OWNER="oracle", GROUP="oinstall", MODE="0660", SUBSYSTEM=="block", KERNEL=="xvdf1"' >> /etc/udev/rules.d/90-oracle_asm.rules
+      - echo 'OWNER="oracle", GROUP="oinstall", MODE="0660", SUBSYSTEM=="block", KERNEL=="xvdh1"' >> /etc/udev/rules.d/90-oracle_asm.rules
+      - echo 'OWNER="oracle", GROUP="oinstall", MODE="0660", SUBSYSTEM=="block", KERNEL=="xvdi1"' >> /etc/udev/rules.d/90-oracle_asm.rules
+       
+   - name : update /sbin/partprobe
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/partprobe /dev/xvdf1
+      - /sbin/partprobe /dev/xvdh1
+      - /sbin/partprobe /dev/xvdi1      
+
+   - name : /usr/bin/udevadm control --reload
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: /usr/bin/udevadm control --reload
+
+   - name: Create Oracle Volume Group
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/lvm vgcreate vg_oracle /dev/xvdg1
+
+
+   - name: create oracle logical volume
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/lvm lvcreate -l 100%VG -n lv_oracle vg_oracle
+
+ 
+   - name: create oracle file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     filesystem:
+           fstype: ext4
+           dev: /dev/vg_oracle/lv_oracle
+
+   - name: mount oracle logical volume /apps/opt
+     become: true
+     become_user: root
+     become_method: pbrun
+     mount:
+          name: /apps/opt
+          src: /dev/vg_oracle/lv_oracle
+          fstype: ext4
+          state: mounted
+
+             
+   - name: Change ownership of /apps/opt file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /apps/opt
+        owner: oracle
+        group: oinstall
+        mode: 0777
+
+           
+   - name: create directory /apps/opt/oracle
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/oracle
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+
+   - name: create directory /apps/opt/grid
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/grid
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+       
+   - name: mount software Backup  logical volume
+     become: true
+     become_user: root
+     become_method: pbrun
+     mount:
+          name: /swbackup
+          src: /dev/xvdk
+          fstype: ext4
+          state: mounted
+             
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+          
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+
+   - name: install oracleasm-support-2.1.8-3.el7.x8_64.rpm                   
+     become: true
+     become_user: root
+     become_method: pbrun     
+     shell: yum -y install /swbackup/oracleasm-support-2.1.8-3.el7.x86_64.rpm
+     
+   - name: install oracleasmlib-2.0.12-1.el7.x8_64.rpm       
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: yum -y install /swbackup/oracleasmlib-2.0.12-1.el7.x86_64.rpm 
+
+   - name:  configure asm
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm configure -u oracle -g oinstall
+     
+   - name:  reboot the instance
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/shutdown -r +2
