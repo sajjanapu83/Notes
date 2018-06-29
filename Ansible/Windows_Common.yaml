@@ -130,6 +130,10 @@
     state: present  
   tags:
    - CrystalReports_step1
+   
+  - name: Install Visual Studio on slave node
+  raw: "{{DevOpsSoftware_path}}/en_visual_studio_2010_premium_x86_dvd_509357/Setup/setup.exe  /q /full"      
+    
     
    
 
