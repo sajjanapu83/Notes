@@ -1,0 +1,82 @@
+ #----------------------------------------------------------------------------   
+# Group Creation   
+#----------------------------------------------------------------------------
+- name: create the ansible Group
+  group: name=ansible gid=29940
+  become: true
+  become_user: root
+  become_method: pbrun
+#----------------------------------------------------------------------------   
+# Directory Creation   
+#----------------------------------------------------------------------------
+- name : Create ansibleusr Directory
+  become: true
+  become_method: pbrun
+  become_user: root
+  file: 
+    mode: 0755
+    path: /home/ansibleusr
+    state: directory
+#----------------------------------------------------------------------------   
+# User Creation & Group Mapping
+#----------------------------------------------------------------------------
+- name: Add ansibleusr user
+  user: name=ansibleusr group=ansible home='/home/ansibleusr' uid=29940
+  become: true
+  become_user: root
+  become_method: pbrun
+ 
+ #----------------------------------------------------------------------------   
+ #Ansible Installation and Configuration   
+ #----------------------------------------------------------------------------
+   - name: Creating File under /home/ansibleuser directory for preparing control server
+     become: true
+     become_method: pbrun
+     become_user: root
+     file: 
+       path: /home/ansibleuser/Ansible.sh 
+       state: touch
+       mode: 0755    
+
+   - name: Prepare Control Server
+     become: true
+     become_method: pbrun
+     become_user: root
+     blockinfile: 
+       dest: /home/ansibleuser/Ansible.sh
+       block: |
+           #!/bin/bash   
+           export http_proxy=http://company.com:80
+           export https_proxy=http://company.com:80
+           export NO_PROXY=169.254.169.254        
+           yum install gcc -y
+           yum install python-devel libffi-devel openssl-devel -y
+           cd /usr/bin/python           
+           pip install paramiko  PyYAML  Jinja2 httplib2 six  markupsafe  docker-py  ansible boto -q
+           pip install --upgrade setuptools -q
+           easy_install ansible
+           pip install pywinrm -q          
+                  
+   - name: Executing Shell Script 
+     shell: /home/ansibleuser/Ansible.sh >> /home/ansibleuser/Ansible.txt
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+
+- name: 'Add users and user groups to allow access'
+  lineinfile: 
+    dest: /etc/security/access-sshd.conf
+    regexp: '^\+\:{{ item.name }}'
+    line: '{{ item.access }}'
+    state: present
+    insertbefore: '^\-\:ALL\:ALL'
+  with_items:
+    - { name: '@NETGROUP:ALL', access: '+:@NETGROUP:ALL' }
+  ignore_errors: true
+  become: true
+  become_user: root
+  become_method: pbrun
+  
+  
+ 
