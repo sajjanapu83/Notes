@@ -1,0 +1,472 @@
+- hosts: all
+  gather_facts: no 
+  tasks:
+
+   - name: create the oinstall Group
+     group: name=oinstall
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: create the dba Group
+     group: name=dba
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Creating oracle user
+     user: name=oracle group=oinstall
+     become: true
+     become_user: root
+     become_method: pbrun
+     tags: oracle_user
+
+   - name: update oracle user
+     user: name=oracle groups=dba append=yes
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install gcc-c++ 
+     yum: name=gcc-c++ state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install compat-libcap1 
+     yum: name=compat-libcap1 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install compat-libstdc++-33 
+     yum: name=compat-libstdc++-33 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install clibstdc++.so.5 
+     yum: name=libstdc++.so.5 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install libncurses.so.5  
+     yum: name=libncurses.so.5 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name: Install libaio-devel-0.3.109 
+     yum: name=libaio-devel-0.3.109 state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-xauth 
+     yum: name=xorg-x11-xauth state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xterm
+     yum: name=xterm state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install ncompress
+     yum: name=ncompress state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name: Install libXtst 
+     yum: name=libXtst state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-utils
+     yum: name=xorg-x11-utils state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xclock 
+     yum: name=xclock state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install unzip 
+     yum: name=unzip state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install xorg-x11-fonts* 
+     yum: name=xorg-x11-fonts* state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install tigervnc-server 
+     yum: name=tigervnc-server state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name: Install sudo 
+     yum: name=sudo state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name: Install perl-Env 
+     yum: name=perl-Env state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+     
+   - name : Install oracleasm
+     yum: name=kmod-oracleasm state=latest
+     become: true
+     become_user: root
+     become_method: pbrun
+
+   - name : mklabel msdos
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/parted /dev/xvdf mklabel msdos
+      - /sbin/parted /dev/xvdg mklabel msdos
+      - /sbin/parted /dev/xvdh mklabel msdos
+       
+   - name : mkpart primary
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/parted /dev/xvdf mkpart primary 2048s 100%
+      - /sbin/parted /dev/xvdg mkpart primary 2048s 100%
+      - /sbin/parted /dev/xvdh mkpart primary 2048s 100%
+            
+   - name : update 90-oracle_asm.rules rules
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - echo 'OWNER="oracle", GROUP="oinstall", MODE="0660", SUBSYSTEM=="block", KERNEL=="xvdf1"' >> /etc/udev/rules.d/90-oracle_asm.rules
+      - echo 'OWNER="oracle", GROUP="oinstall", MODE="0660", SUBSYSTEM=="block", KERNEL=="xvdh1"' >> /etc/udev/rules.d/90-oracle_asm.rules
+       
+   - name : update /sbin/partprobe
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: "{{item}}"
+     with_items:
+      - /sbin/partprobe /dev/xvdf1
+      - /sbin/partprobe /dev/xvdh1   
+
+   - name : /usr/bin/udevadm control --reload
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: /usr/bin/udevadm control --reload
+
+   - name: Create Oracle Volume Group
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/lvm vgcreate vg_oracle /dev/xvdg1
+
+
+   - name: create oracle logical volume
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/lvm lvcreate -l 100%VG -n lv_oracle vg_oracle
+
+ 
+   - name: create oracle file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     filesystem:
+           fstype: ext4
+           dev: /dev/vg_oracle/lv_oracle
+
+   - name: mount oracle logical volume /apps/opt
+     become: true
+     become_user: root
+     become_method: pbrun
+     mount:
+          name: /apps/opt
+          src: /dev/vg_oracle/lv_oracle
+          fstype: ext4
+          state: mounted
+
+             
+   - name: Change ownership of /apps/opt file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /apps/opt
+        owner: oracle
+        group: oinstall
+        mode: 0777
+
+           
+   - name: create directory /apps/opt/oracle
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/oracle
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+
+   - name: create directory /apps/opt/grid
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/grid
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+       
+   - name: mount software Backup  logical volume
+     become: true
+     become_user: root
+     become_method: pbrun
+     mount:
+          name: /swbackup
+          src: /dev/xvdk
+          fstype: ext4
+          state: mounted
+             
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+          
+   - name: Change ownership of /swbackup file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /swbackup
+        owner: oracle
+        group: oinstall
+
+   - name: install oracleasm-support-2.1.8-3.el7.x8_64.rpm                   
+     become: true
+     become_user: root
+     become_method: pbrun     
+     yum: name=/swbackup/oracleasm-support-2.1.8-3.el7.x86_64.rpm state=latest
+     
+   - name: install oracleasmlib-2.0.12-1.el7.x8_64.rpm       
+     become: true
+     become_user: root
+     become_method: pbrun
+     yum: name=/swbackup/oracleasmlib-2.0.12-1.el7.x86_64.rpm state=latest
+
+   - name:  configure asm
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm configure -u oracle -g oinstall
+
+   - name:  init asm
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /etc/init.d/oracleasm start
+
+   - name: create DATA ASM Disk(s)
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm createdisk DATADG /dev/xvdf1
+ 
+   - name: create FLASHDG ASM Disk(s)
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: /usr/sbin/oracleasm createdisk FLASHDG /dev/xvdh1
+
+   - name: Change ownership of /dev/xvdf1 file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /dev/xvdf1
+        owner: oracle
+        group: oinstall
+        mode: 0600
+
+   - name: Change ownership of /dev/xvdh1 file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /dev/xvdh1
+        owner: oracle
+        group: oinstall
+        mode: 0600
+
+   - name: Passwd delete oracle
+     become: true
+     become_user: root
+     become_method: pbrun
+     command: passwd --delete oracle
+
+
+   - name: create directory /apps/opt/oraInventory
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/oraInventory
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777
+      
+   - name: unzip p13390677_112040_Linux-x86-64_1of7.zip
+     shell: cd /swbackup; unzip -o p13390677_112040_Linux-x86-64_1of7.zip
+     become: true
+     become_user: oracle
+     become_method: su
+
+   - name: unzip p13390677_112040_Linux-x86-64_2of7.zip
+     shell: cd /swbackup; unzip -o p13390677_112040_Linux-x86-64_2of7.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: unzip p13390677_112040_Linux-x86-64_3of7.zip
+     shell: cd /swbackup; unzip -o p13390677_112040_Linux-x86-64_3of7.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: p13390677_112040_Linux-x86-64_4of7.zip
+     shell: cd /swbackup; unzip -o p13390677_112040_Linux-x86-64_4of7.zip
+     become: true
+     become_user: oracle
+     become_method: su
+     
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc 16384" >> /etc/security/limits.conf
+
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nofile 65536" >> /etc/security/limits.conf 
+
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc unlimited"  >> /etc/security/limits.conf 
+
+   - name: set soft nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle soft nproc unlimited" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmax = 1852932096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmax = 1852932096" >> /etc/security/limits.conf  
+
+   - name: set kernel.sem = 250 32000 100 128
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.sem = 250 32000 100 128" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmni = 4096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmni = 4096" >> /etc/security/limits.conf
+
+   - name: set kernel.shmall = 361900
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmall = 361900" >> /etc/security/limits.conf
+
+   - name: set fs.file-max = 6815744"
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.file-max = 6815744" >> /etc/security/limits.conf
+
+   - name: set net.ipv4.ip_local_port_range = 9000 65535
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.ipv4.ip_local_port_range = 9000 65535" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_default = 262144
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_default = 262144" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_max = 4194304
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_max = 4194304" >> /etc/security/limits.conf
+
+   - name: set net.core.wmem_default = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.wmem_default = 1048576" >> /etc/security/limits.conf
+
+   - name: set fs.aio-max-nr = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.aio-max-nr = 1048576" >> /etc/security/limits.conf 
+     
+   - name: Change ownership of /var/tmp/.oracle/npohasd file system
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+        path: /var/tmp/.oracle/npohasd
+        owner: root
+        group: oinstall
+          
+   - name: install asm binaries
+     become: true
+     become_user: oracle
+     become_method: su
+     shell: /swbackup/grid/runInstaller -silent -ignorePrereq -ignoreSysPrereqs -showProgress -waitforcompletion -responseFile /swbackup/grid.rsp > /swbackup/install_grid.txt
+
