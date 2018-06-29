@@ -237,11 +237,22 @@
      become_user: root
      become_method: pbrun
      file:
-       path: /apps/opt/grid
+       path: /apps/opt/grid/product/12.2.0
        state: directory
        owner: oracle
        group: oinstall
        mode: 0777
+       
+   - name: create directory /apps/opt/grid/wallet
+     become: true
+     become_user: root
+     become_method: pbrun
+     file:
+       path: /apps/opt/grid/wallet
+       state: directory
+       owner: oracle
+       group: oinstall
+       mode: 0777    
        
    - name: mount software Backup  logical volume
      become: true
@@ -261,15 +272,138 @@
         path: /swbackup
         owner: oracle
         group: oinstall
-          
-   - name: Change ownership of /swbackup file system
+    
+   - name: set AddressFamily
      become: true
      become_user: root
      become_method: pbrun
-     file:
-        path: /swbackup
-        owner: oracle
-        group: oinstall
+     shell: echo "AddressFamily inet" >> /etc/ssh/sshd_config
+    
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc 16384" >> /etc/security/limits.conf
+     
+   - name: set soft stack 10240
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle soft stack 10240" >> /etc/security/limits.conf 
+
+   - name: set hard nofile 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nofile 65536" >> /etc/security/limits.conf 
+
+   - name: set hard nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle hard nproc unlimited"  >> /etc/security/limits.conf 
+
+   - name: set soft nproc 16384
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "oracle soft nproc unlimited" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmax = 1852932096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmax = 1852932096" >> /etc/security/limits.conf  
+
+   - name: set kernel.sem = 250 32000 100 128
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.sem = 250 32000 100 128" >> /etc/security/limits.conf 
+
+   - name: set kernel.shmmni = 4096
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmmni = 4096" >> /etc/security/limits.conf
+
+   - name: set kernel.shmall = 361900
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "kernel.shmall = 361900" >> /etc/security/limits.conf
+
+   - name: set fs.file-max = 6815744"
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.file-max = 6815744" >> /etc/security/limits.conf
+
+   - name: set net.ipv4.ip_local_port_range = 9000 65535
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.ipv4.ip_local_port_range = 9000 65535" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_default = 262144
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_default = 262144" >> /etc/security/limits.conf
+
+   - name: set net.core.rmem_max = 4194304
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.rmem_max = 4194304" >> /etc/security/limits.conf
+
+   - name: set net.core.wmem_default = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "net.core.wmem_default = 1048576" >> /etc/security/limits.conf
+
+   - name: set fs.aio-max-nr = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "fs.aio-max-nr = 1048576" >> /etc/security/limits.conf 
+     
+   - name: set fs.aio-max-nr = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "semopm = 100" >> /etc/security/limits.conf 
+    
+   - name: set semopm = 100
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "semopm = 100" >> /etc/security/limits.conf
+
+   - name: set rmem_default = 4194304
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "rmem_default = 4194304" >> /etc/security/limits.conf
+
+   - name: set wmem_default = 262144
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "wmem_default = 262144" >> /etc/security/limits.conf     
+
+   - name: set wmem_max = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "wmem_max = 1048576" >> /etc/security/limits.conf
+   
+   - name: set aio-max-nr = 1048576
+     become: true
+     become_user: root
+     become_method: pbrun
+     shell: echo "aio-max-nr = 1048576" >> /etc/security/limits.conf    
 
    - name: install oracleasm-support-2.1.8-3.el7.x8_64.rpm                   
      become: true
