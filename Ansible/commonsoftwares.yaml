@@ -1,0 +1,75 @@
+- name: Install list of packages
+  yum: name={{item}} state=installed
+  with_items:
+    - dos2unix
+    - git
+   #- java-1.8.0-openjdk.x86_64
+   #- nmap
+   #- mc
+    - yum-utils
+    - bind-utils
+    - curl
+    - wget
+   #- ftp
+  become: true
+  become_user: root
+  become_method: pbrun
+  
+  - name: Install JDK
+  shell: |
+     mkdir -p /apps/opt/software/java
+     cd /apps/opt/software
+     tar -xvf jdk-8u73-linux-x64.tar -C /apps/opt/  
+     # curl -u SERVICEACCOUNTNAME:{{ ArtifactoryPassword }} -O https://artifactorypath/apache-cassandra-3.11.1-bin.tar.gz
+     # tar -xvf apache-cassandra-3.11.1-bin.tar.gz -C /cassandra/
+  become: true
+  become_user: root
+  become_method: pbrun 
+
+- name: Set ClassPath 
+  shell: |
+     cd /home/odiusr
+     echo 'export JAVA_HOME=/apps/opt/jdk1.8.0_73' >> /etc/bashrc
+     echo 'export PATH=$JAVA_HOME/bin:$PATH' >> /etc/bashrc    
+  become: true
+  become_user: root
+  become_method: pbrun
+  
+  - name: Install Maven
+  shell: |
+     cd /apps/opt/software
+     curl -u SERVICEACCOUNTNAME:{{ ArtifactoryPassword }} -O https://artifactorypath/apache-maven-3.3.9-bin.tar.gz
+     tar -zxvf apache-maven-3.3.9-bin.tar.gz -C /apps/opt/  
+  become: true
+  become_user: root
+  become_method: pbrun 
+
+- name: Copy settings.xml file
+  win_copy: src=settings.xml dest="{{ MavenPath }}/conf/settings.xml"
+  become: true
+  become_user: root
+  become_method: pbrun
+
+- name: Set ClassPath 
+  shell: |    
+     echo 'export M3_HOME=/apps/opt/apache-maven-3.3.9' >> /etc/bashrc
+     echo 'export PATH=$M3_HOME/bin:$PATH' >> /etc/bashrc
+  become: true
+  become_user: root
+  become_method: pbrun 
+  
+  - name: Encrypt Datavalue
+  shell: |    
+     sh agent.sh encode {{Datavalue}}
+  register: passval
+  become: true
+  become_user: root
+  become_method: pbrun
+  tags:
+  - TESTVAL
+  
+- name: Display passval
+  debug:
+    var: passval
+  tags:
+    - TESTVAL
