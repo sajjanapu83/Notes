@@ -1,0 +1,16 @@
+- name: 7z Installation
+  win_shell: "& '{{ installs_path }}/7z1602-x64.exe' /S"
+  tags:
+    - 7z_step1
+ 
+ - name: Bring EBS volume online
+  win_shell: Set-Disk -Number 1 -IsOffline $False 
+  tags:
+   - EBSOnline_step1
+  
+- name: Bring EBS volume writable
+  win_shell: Set-Disk -Number 1 -IsReadonly $False
+  tags:
+   - EBSOnline_step2
+   
+   
