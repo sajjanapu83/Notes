@@ -11,6 +11,126 @@
 - name: Bring EBS volume writable
   win_shell: Set-Disk -Number 1 -IsReadonly $False
   tags:
-   - EBSOnline_step2
+   - EBSOnline_step2   
    
+ - name: Unzipping the App files
+  win_unzip: 
+   src: "{{Software_path}}/curl-7.49.1-win64-mingw.7z"  
+   dest: "C:/Program Files/"
+   recurse: yes    
    
+  - name: "GIT Installation"
+  raw: "{{DevOpsSoftware_path}}/Git-2.7.0-64-bit.exe /SILENT /COMPONENTS=\"icons,ext\\reg\\shellhere,assoc,assoc_sh\""
+  
+  - name: Installing app1_winservice
+  win_shell: "& 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319/installutil' '{{app_folder_path}}/app1_winservice.exe'"
+  tags:
+    - app1_winservice_step2
+
+- name: get info on app1_winservice
+  win_service:
+    name: app1_winservice
+  register: app1_winservice_service
+  tags:
+   - app1_winservice1.1
+- name: Install app1_winservice
+  win_service:
+    name: app1_winservice
+    path: D:/App/Web/app1_winservice.exe
+    username: abc
+    password: xyz
+    state: started    
+  when: app1_winservice_service.exists == false
+  tags:
+   - app1_winservice1.2
+
+- name: start app1_winservice service
+  win_service:
+    name: app1_winservice
+    state: started    
+  when: app1_winservice_service.exists and app1_winservice_service.state == "stopped"
+  tags:
+   - app1_winservice1.3
+    
+ - name: Install IIS
+  win_feature:
+    name: "Web-Server,Web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Static-Content,Web-Http-Redirect,Web-Http-Logging,Web-Custom-Logging,Web-Log-Libraries,Web-ODBC-Logging,Web-Request-Monitor,Web-Http-Tracing,Web-Stat-Compression,Web-Dyn-Compression,Web-Filtering,Web-Basic-Auth,Web-Client-Auth,Web-Digest-Auth,Web-Cert-Auth,Web-IP-Security,Web-Url-Auth,Web-Windows-Auth,Web-Net-Ext,Web-Net-Ext45,Web-Asp-Net45,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Mgmt-Console,Web-Scripting-Tools,Web-Mgmt-Service,NET-Framework-Core,NET-HTTP-Activation,NET-Framework-45-Core,NET-Framework-45-ASPNET,NET-WCF-HTTP-Activation45,NET-WCF-MSMQ-Activation45,NET-WCF-Pipe-Activation45,NET-WCF-TCP-Activation45,NET-WCF-TCP-PortSharing45,MSMQ-Server"
+    state: present
+    restart: no
+    include_sub_features: yes
+    include_management_tools: yes
+  tags:
+    - IIS_step1
+
+- name: Remove the HTTP binding on port 80
+  win_iis_webbinding:
+    name: Default Web Site
+    port: 80
+    state: absent
+  tags:
+    - IIS_step2
+
+- name: Add a HTTP binding on port 81
+  win_iis_webbinding:
+    name: Default Web Site
+    port: 81
+    state: present
+  tags:
+    - IIS_step3
+  
+ - name: Default Web Site Stopped
+  win_iis_website:
+   name: "Default Web Site"
+   state: started
+   port: 81
+   ip: "*"
+   hostname:
+   application_pool: "DefaultAppPool"
+   physical_path: 'C:\inetpub\wwwroot'
+   parameters: 'logfile.directory:C:\inetpub\logs\FailedReqLogFiles'
+  tags:
+    - IISDefaultWebSite_step1
+
+
+ - name: JDK 8u91 Installation
+   win_shell: "& '{{ installs_path }}/jdk-8u91-windows-x64.exe' /s /L '{{ installs_path }}/jdk-8u91-windows-x64-install.log'"
+   tags:
+    - Java_step1
+    
+  - name: Install MQ
+  win_package:
+    path: "{{ installs_path_backslash }}\\IBMMQ\\IBM MQ 7.01\\07IBM MQ 7.01\\Windows\\MSI\\IBM WebSphere MQ.msi"
+    product_id: '{123-abc-456}'
+    arguments: /qn /L*v "{{ installs_path_backslash }}\IBMMQ\mq_install.log" AGREETOLICENSE="yes" USEINI="{{ installs_path_backslash }}\IBMMQ\mq_response.ini"
+    state: present
+  tags:
+    - MQ_step2
+    
+  - name: Install Oracle (ODAC1120320_x64)
+  win_shell: "& '{{ installs_path }}/Oracle/setup.exe' -silent -debug -force -waitforcompletion -nowait ` 
+    -responseFile '{{ installs_path }}/Oracle/responsefile.rsp' `
+    FROM_LOCATION='{{ installs_path }}/Oracle/stage/products.xml' oracle.install.client.installType=Administrator `
+    INVENTORY_LOCATION='C:/PROGRA~1/Oracle/Inventory' `
+    ORACLE_HOME='{{ Oracle_Client_path }}' `
+    ORACLE_HOME_NAME=Oracle ORACLE_BASE='C:/app/Oracle' DECLINE_SECURITY_UPDATES=true"
+  tags:
+   - Oracle_step2
+        
+- name: Copy tnsnames.ora file
+  win_copy: src=tnsnames.ora dest={{ Oracle_Client_path }}/network/admin/tnsnames.ora
+  tags:
+   - Oracle_step3
+   
+  - name: Install Crystal Reports...
+  #product_id: '{123-abc-xyz}' - CRRuntime_64bit_13_0_13
+  win_package:
+    path: "{{ installs_path_backslash }}\\CRRuntime_64bit_13_0_13.msi"
+    product_id: '{123-abc-xyz}'
+    arguments: /qn /L*v "{{ installs_path_backslash }}\CRRuntime_64bit_13_0_13.log"
+    state: present  
+  tags:
+   - CrystalReports_step1
+    
+   
+
+
