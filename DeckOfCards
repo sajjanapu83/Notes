@@ -1,30 +1,63 @@
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 
-public class DeckOfCards2 {
+class Card {
+   String suit;
+   String rank;
+  Card(String suit, String rank) {
+    this.suit = suit;
+    this.rank = rank;
+  }
+}
+
+class DeckOfCards {
+    static final int DECK_SIZE = 52;
+    static final String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+    static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    public Card[] deck;
+    public DeckOfCards()
+    {   
+        int index = 0;
+        deck = new Card[DECK_SIZE];
+        for (int i=0; i<suits.length; i++) {
+            for(int j=0; j<ranks.length; j++){
+                deck[index++]=new Card(suits[i],ranks[j]);
+            }
+        }
+        shuffle();
+        
+    }
+    
+    public void DisplayAll(){
+        
+        for(int i=0;i<DECK_SIZE;i++){
+            
+           System.out.println( "deck["+i+"] = " + deck[i].rank + " of " + deck[i].suit);
+        }
+    }
+    
+    public void shuffle(){
+       
+        int a = 53; // (a-1) should be divisible by all prime factors of n and (a-1)mod4=0
+        int c = 3; // c & n should not have no common factors
+        Calendar cal = Calendar.getInstance();
+        int r = cal.get(Calendar.SECOND);
+        for (int i = 0; i < DECK_SIZE; i++) {
+          r = (a * r + c) % DECK_SIZE;    //  Linear Congruential Sequences
+          String suit = suits[r / 13];
+          String rank = ranks[r % 13];
+          Card temp = deck[i];
+          deck[i]=deck[r]; 
+          deck[r]=temp;
+        }
+    }
+}
+
+public class CardsGame {
   public static void main(String[] args) {
-    int[] deck = new int[52];
-    String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
-    String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    int n = 52;
-    int a = 53; // (a-1) should be divisible by all prime factors of n and (a-1)mod4=0
-    int c = 3; // c & n should not have no common factors
-    Calendar cal = Calendar.getInstance();
-    int r = cal.get(Calendar.SECOND);
-  
-    // Initialize cards
-    for (int i = 0; i < deck.length; i++) {
-      deck[i] = i;
-    }
-    
-    // Display the all the cards
-    for (int i = 0; i < n; i++) {
-      r = (a * r + c) % n;    //  Linear Congruential Sequences
-      String suit = suits[deck[r] / 13];
-      String rank = ranks[deck[r] % 13];
-      System.out.println( r + " -> " + deck[r] + " = " + rank + " of " + suit);
-    }
-    
+    DeckOfCards _deck = new DeckOfCards();
+    _deck.DisplayAll();
   }
 }
