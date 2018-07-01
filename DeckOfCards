@@ -6,24 +6,26 @@ import java.util.Calendar;
 class Card {
    String suit;
    String rank;
-  Card(String suit, String rank) {
+   int id;
+  Card(String suit, String rank, int id) {
     this.suit = suit;
     this.rank = rank;
+    this.id = id;
   }
 }
 
-class DeckOfCards {
+class Deck {
     static final int DECK_SIZE = 52;
-    static final String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+    static final String[] suits = {"DIAMONDS", "CLUBS", "HEARTS", "SPADES" };
     static final String[] ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    public Card[] deck;
-    public DeckOfCards()
+    public Card[] cards;
+    public Deck()
     {   
         int index = 0;
-        deck = new Card[DECK_SIZE];
+        cards = new Card[DECK_SIZE];
         for (int i=0; i<suits.length; i++) {
             for(int j=0; j<ranks.length; j++){
-                deck[index++]=new Card(suits[i],ranks[j]);
+                cards[index++]=new Card(suits[i],ranks[j], index);
             }
         }
         shuffle();
@@ -34,10 +36,48 @@ class DeckOfCards {
         
         for(int i=0;i<DECK_SIZE;i++){
             
-           System.out.println( "deck["+i+"] = " + deck[i].rank + " of " + deck[i].suit);
+           System.out.println( "cards["+i+"] = " + cards[i].rank + " of " + cards[i].suit + " --> " + cards[i].id);
         }
     }
     
+    void swap(Card[] cards, int a, int b)
+    {
+        Card temp;
+        temp = cards[a];
+        cards[a] = cards[b];
+        cards[b] = temp;
+    }
+    
+    void MaxHeapify(Card[] heap, int index, int size)
+    {
+        int left = 2*index + 1, right=2*index+2, greatest=index;
+        greatest = (left<size && heap[left].id>heap[index].id)? left: index;
+        if (right < size && heap[right].id>heap[greatest].id)
+        greatest = right;
+        if (greatest != index)
+        {
+        swap(heap, index, greatest);
+        MaxHeapify(heap, greatest, size);
+        }
+    }
+    
+    void convertToMaxHeap()
+    {
+        for(int i=(DECK_SIZE/2)-1; i >= 0; i--)
+        MaxHeapify(cards, i, DECK_SIZE);
+       
+    }
+    
+    void heapSort() {
+      // Build our max heap.
+      convertToMaxHeap();
+      
+        for(int i=DECK_SIZE - 1; i>0; i-- )
+        {
+           swap(cards,0,i);
+           MaxHeapify(cards, 0, i);
+        }
+    }
     public void shuffle(){
        
         int a = 53; // (a-1) should be divisible by all prime factors of n and (a-1)mod4=0
@@ -46,18 +86,21 @@ class DeckOfCards {
         int r = cal.get(Calendar.SECOND);
         for (int i = 0; i < DECK_SIZE; i++) {
           r = (a * r + c) % DECK_SIZE;    //  Linear Congruential Sequences
-          String suit = suits[r / 13];
-          String rank = ranks[r % 13];
-          Card temp = deck[i];
-          deck[i]=deck[r]; 
-          deck[r]=temp;
+          swap(cards,i,r);
         }
+        System.out.println("****************CARDS SHUFFLED******************");
+        DisplayAll();
     }
 }
 
 public class CardsGame {
   public static void main(String[] args) {
-    DeckOfCards _deck = new DeckOfCards();
+    Deck _deck = new Deck();
+    //_deck.DisplayAll();
+    _deck.heapSort();
+     System.out.println("=================================================");
+     System.out.println("****************SORTED******************");
     _deck.DisplayAll();
+    System.out.println("=================================================");
   }
 }
