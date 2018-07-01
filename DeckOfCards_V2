@@ -1,0 +1,142 @@
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+class Card {
+   String suit;
+   String rank;
+   int id;
+   Card(String suit, String rank, int id) {
+    this.suit = suit;
+    this.rank = rank;
+    this.id = id;
+   }
+}
+
+interface IDeck {
+    static final int DECK_SIZE = 52;
+    enum SUITS { 
+        DIAMONDS(1), CLUBS(2), HEARTS(3), SPADES(4); 
+        SUITS (int val) {
+            this.val=val;
+        }
+        private int val;
+        public int getVal(){
+           return val;
+        }
+       
+    }
+
+enum RANKS { 
+        ACE("A"), TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), SEVEN("7"), 
+        EIGHT("8"), NINE("9"), TEN("10"), JACK("J"), QUEEN("Q"), KING("K");
+        RANKS (String val) {
+            this.val=val;
+        }
+        private String val;
+        public String getVal(){
+           return val;
+        }
+       
+    }
+    void shuffle();
+    void DisplayCards();
+   
+}
+
+
+
+class Deck implements IDeck { 
+    
+    public Card[] cards;
+    public Deck()
+    {   
+        int index = 0;
+        cards = new Card[DECK_SIZE];
+        for ( SUITS s : SUITS.values()) {
+            for ( RANKS r : RANKS.values()) {
+                cards[index++]=new Card(s.toString(),r.getVal().toString(), index);
+            }
+        }
+        
+        shuffle();
+        
+    }
+    
+    public void DisplayCards(){
+        
+        for(int i=0;i<DECK_SIZE;i++){
+            
+           System.out.println( "cards["+i+"] = " + cards[i].rank + " of " + cards[i].suit + " --> " + cards[i].id);
+        }
+    }
+    
+    void swap(Card[] cards, int a, int b)
+    {
+        Card temp;
+        temp = cards[a];
+        cards[a] = cards[b];
+        cards[b] = temp;
+    }
+    
+    void MaxHeapify(Card[] heap, int index, int size)
+    {
+        int left = 2*index + 1, right=2*index+2, greatest=index;
+        greatest = (left<size && heap[left].id>heap[index].id)? left: index;
+        if (right < size && heap[right].id>heap[greatest].id)
+        greatest = right;
+        if (greatest != index)
+        {
+        swap(heap, index, greatest);
+        MaxHeapify(heap, greatest, size);
+        }
+    }
+    
+    void convertToMaxHeap()
+    {
+        for(int i=(DECK_SIZE/2)-1; i >= 0; i--)
+        MaxHeapify(cards, i, DECK_SIZE);
+       
+    }
+    
+    void heapSort() {
+      // Build our max heap.
+      convertToMaxHeap();
+      
+        for(int i=DECK_SIZE - 1; i>0; i-- )
+        {
+           swap(cards,0,i);
+           MaxHeapify(cards, 0, i);
+        }
+    }
+    public void shuffle(){
+       
+        int a = 53; // (a-1) should be divisible by all prime factors of n and (a-1)mod4=0
+        int c = 3; // c & n should not have no common factors
+        Calendar cal = Calendar.getInstance();
+        int r = cal.get(Calendar.SECOND);
+        for (int i = 0; i < DECK_SIZE; i++) {
+          r = (a * r + c) % DECK_SIZE;    //  Linear Congruential Sequences
+          swap(cards,i,r);
+        }
+        System.out.println("****************CARDS SHUFFLED******************");
+        DisplayCards();
+    }
+}
+
+public class CardsGame {
+    
+    
+  public static void main(String[] args) {
+    
+    
+    Deck _deck = new Deck();
+    //_deck.DisplayAll();
+    _deck.heapSort();
+     System.out.println("=================================================");
+     System.out.println("****************SORTED******************");
+    _deck.DisplayCards();
+    System.out.println("=================================================");
+  }
+}
