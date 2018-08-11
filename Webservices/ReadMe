@@ -1,0 +1,17 @@
+Webservice is an application or API on the internet which someone has written to others 
+in the world to use, they allow us to hook into it generally via HTTP/HTTPS
+example: Amazon Web Service, Paypal for billing system
+
+harvard-Link: https://www.youtube.com/watch?v=YcL93L2zKbI
+Quick Computer Tutorials: https://www.youtube.com/watch?v=HcXhzbb8_yA&list=PLPdA9zLPgLvEJ7wJvsA-RGmvB6e983Xny
+
+Like HTTP, TCP,.. SOAP is just a protcol which is XML based, that allows us to convey procedures/method requests
+across the wire with/without arguments and get back return values. 
+The underlying transport mechanism standarizes how you are sending int/float/strings/datastructures across the wire
+and get some response back.
+
+Beauty of webservices is Tools & libraries will automatically generate SOAP structure code ( STUBS in local box 
+& SKELETON in remote box) and does serialization.
+
+SOAP envelope is just a wrapper that holds requests & repsonses of what goes across the wire.
+

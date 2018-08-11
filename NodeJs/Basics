@@ -1,0 +1,16 @@
+npm is a packet manager comes with the Node installation.
+
+Facebook released its own package manager Yarn which is much faster then npm.
+
+you can get the github repos using npm
+
+npm i expressjs/express  (gets the latest release code with last commit)
+npm i expressjs/express#4.14.0  ( gets specific version )
+npm ls express
+npm i express --dry-run ( this dry-run command wont install, instead it will list 
+what will be installed)
+
+
+Event Loop Model:
+
+EventLoop Processes its quequed events only when the CALL STACK is empty
