@@ -1,0 +1,48 @@
+
+ISO/OSI Layers
+
+1. Physical Layer:
+   Responsibilities: 
+   a) It deals with Electrical, Mechanical, Functional & Procedural characteristics of physical links (Copper wire, 
+      Optical Fibre, Wireless network)
+      - The messages sent over Copper wire are converted into Electrical Signals
+      - The messages sent over Optical Fibre are converted into Light
+      - The messages sent over Wireless network are converted into EMV ( Electro Magnetic Waves )
+   b) Deals with Transmission Modes: Wires/ph can be in any of the below tranmission modes
+      - Simplex : Data Flows in one way between sender & receiver.
+        e.g: Data flow from Antena to Televison is one way
+      - Half Duplex Links: Data Flows from both sides between sender & receiver but not simultaneously
+        e.g: Walkie-Takies used by Police...
+      - Full Duplex Links: Both sender and receiver can send the data at the same time.
+   c) Topologies: Means, how the various computers are connected to each other. 
+      BUS, STAR, RING, MESH, HYBRID
+   b) Encoding: Physical layer is responsible for converting Bits to Waves.
+      a) Machester Encoding
+      b) Differential Manchester Encoding
+      Usually a bit is sent with 2 Voltages ( high - low ) across the link.
+      
+2. DataLink Layer ( HOP - HOP ): It is divided into two parts 
+   i)  LLC ( Logical Link Layer ) :
+       Responsibilities:
+       a) Error Control ( CRC , CheckSum ) : CRC is used here & CheckSum is used at TCP level
+       b) Flow Control ( STOP & WAIT , GO-BACKN , SR ) : GO-BACKN is most commonly used.
+   ii) MAC ( Medium Access Control )
+       Responsibilities:
+       a) Error Control
+       b) Framing
+       c) Access Control ( CSMA/CD used by Ethernet, Token Passing used by TokenRing )
+       d) Physical Addressing
+   Concept-wise there 2 kinds of addressing Physical & Logical & practically we have IP address & MAC address
+   Physical Address: It is is unique with in the network and should be fixed/constant. We use MAC address as physical address,
+   because, it is a Hardware Number printed on the ROM, inside NIC.
+   Logical Address: It is globally unique across the globe. we usually use IP address as logical address, since it is
+   divided into Network & Host, which is easy for routing the packet.
+   
+   ** Note: MAC address can also be used as logical address but it consists of 3 parts ( VendorID/ManufactureID, Date, 
+            SerialNumber ), which is not easy for routing the packet 
+   
+   
+
+
+
+
