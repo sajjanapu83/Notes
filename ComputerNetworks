@@ -1,21 +1,36 @@
 Scenario 1: Two Processes(client , Server) present with in the same host communicate's with each other using a concept called IPC ( Inter Process Communication )
-Scenario 2: Two Processes present in the different host. Computer Networks is responsible to provide entire Hardware/Software
-the message goes from client & server
+Scenario 2: Two Processes present in the different host present in different locations:  
+Computer Network should provide Hardware/Software to these 2 proccesses present in different hosts in a such a manner, they think they are actually communicating with each other in the same host.
 
-Depending upon various functionalities and grouping there are several referenece models. Few of then are
+
+Nearly 70+ mandatory functionalities are present.
+Functionalities that are closely related are grouped together in the form of Layers.
+Advantages of Layering
+- Divide & Conquer
+- Encapsulation
+- Abstraction
+- Testing made easy 
+
+Depending upon various Hardware/Software functionalities and groupings, there are several referenece models. Few of them are
 - ISO-OSI Model
 - TCP/IP
 - ATM
 - X.25
 - IEEE ( mainly deals with LAN technologies )
 
-Application Layer - Computer Science students
-Presentation Layer - Computer Science students
-Session Layer - Computer Science students
-Transport Layer - Computer Science students
+Application Layer - Computer Science students - User Interface
+Presentation Layer - Computer Science students - User Interface
+Session Layer - Computer Science students - User Interface
+Transport Layer - Computer Science students - Thick Layer ( lot of functionalities .... eg: TCP)
 Network Layer - Computer Science students - Complex Routing algorithms
 Data Link Layer  - Electrical & Communation students   - Deals with both Hardware & software
 Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
+
+**Note:
+ISP providers can steal the history of our data and can sell to any one. So thats the reason we should always use secured HTTP protocol ( HTTPS ) while requesting information from the server.
+Secured HTTP protocol is responsible to entry the data transferred over the network between sender and receiver, but some meta data link which url is accessed all the information is not encrypted and that can cause issues too when we connect to Internet at coffee shops & Internet cafe's. 
+VPN ( Virtual Private Network ): This solves the problem by creating secured tunnel between your Host computer and the VPN server, that helps in securing data END to END btw sender & receiver. Here entire meta data of our transactions is not exposed to ISP providers, but all are stored at VPN server.
+e.g: Mozilla Firefox comes with a free VPN setup.
 
 ISO/OSI Layers
 
@@ -41,7 +56,7 @@ ISO/OSI Layers
       Bit rate - number of bits transferred per second
       Baud rate - number of voltages transferred per second.
       Baudrate = 2 * Bitrate
-2. DataLink Layer ( HOP - HOP ): It is divided into two parts 
+2. DataLink Layer ( HOP - HOP connectivity ): It is divided into two parts 
    i)  LLC ( Logical Link Layer ) :
        Responsibilities:
        a) Error Control ( CRC , CheckSum ) : CRC is used here & CheckSum is used at TCP level
@@ -60,8 +75,51 @@ ISO/OSI Layers
    
    ** Note: MAC address can also be used as logical address but it consists of 3 parts ( VendorID/ManufactureID, Date, 
             SerialNumber ), which is not easy for routing the packet 
+  3. Network Layer: IP Packet at network Layer is un-reliable
+     **Note: if we use virtual circuits then IP Packets here at network layer are reliable and there is no need of transport layer
+     Responsibilities:
+     a) Host - Host connectivity
+     b) Logical Addressing
+     c) Routing - The process of building the routing table is called routing and using the routing table is called switching
+     d) Switching - Deciding to which network the packet has to send.
+     e) Congestion Control
+     f) Fragmentation: Technique used to divide the packet inorder to send across different LAN Technologies with in a             network e.g: TokenRing connected to Ethernet
+     
+  4. Transport Layer: Using TCP IP packet is made reliable.
+     Responsiblities:
+     a) End - End connectivity ( uses Service Point Addressing/port numbers - SPA )
+     b) Flow Control - SR protocal is used
+     c) Error Control - CheckSum
+     d) Segmentation
+     e) Multiplexing & De-Multiplexing : 
+     f) Congestion Control
+     
+   5. Application Layer: Encryption/Decyption
    
-   
+     
+     Entire Flow - Host connect to google.com
+     
+     AL  [ Message-M ]
+     TL  [ M + SourcePort x - random + DestinationPort 80 - wellknown port]
+     NL  [ M + x + 80 + SourceIP + DestinationIP ]
+         - Using DNS we get the Destination IP
+     DLL [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router ]
+          - ISP providers provide IP address of a router, 
+          but using ARP protocol we get MAC address of the router                     
+          and that is used in the packet.
+     PL   [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router + Start of the Frame Address SFA]
+     
+     EXAMPLE:
+     IPg is ip address of google.
+     IPa is the source IP address
+     
+     AL  [M]
+     TL           [M+x+80]
+     NL(hop-HOP)  [M+x+80+IPa+IPg]                                    [M+x+80+IPa+IPg]
+          ***Note: Router has 3 layers PL,DLL & NL and using routing table it either forwards to default router or 
+                   another router in different network or detination IP
+     DLL [M+x+80+IPa+IPg+MACa+ ***ARPSignal ***]             [M+x+80+IPa+IPg+MACa+MACr1]            [M+x+80+IPa+IPg+MACa+MACg]
+     PL  [M+x+80+IPa+IPg+MACa+MACr1+SFA]   
 
 
 
