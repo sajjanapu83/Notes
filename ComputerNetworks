@@ -1,3 +1,21 @@
+Scenario 1: Two Processes(client , Server) present with in the same host communicate's with each other using a concept called IPC ( Inter Process Communication )
+Scenario 2: Two Processes present in the different host. Computer Networks is responsible to provide entire Hardware/Software
+the message goes from client & server
+
+Depending upon various functionalities and grouping there are several referenece models. Few of then are
+- ISO-OSI Model
+- TCP/IP
+- ATM
+- X.25
+- IEEE ( mainly deals with LAN technologies )
+
+Application Layer - Computer Science students
+Presentation Layer - Computer Science students
+Session Layer - Computer Science students
+Transport Layer - Computer Science students
+Network Layer - Computer Science students - Complex Routing algorithms
+Data Link Layer  - Electrical & Communation students   - Deals with both Hardware & software
+Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
 
 ISO/OSI Layers
 
@@ -20,7 +38,9 @@ ISO/OSI Layers
       a) Machester Encoding
       b) Differential Manchester Encoding
       Usually a bit is sent with 2 Voltages ( high - low ) across the link.
-      
+      Bit rate - number of bits transferred per second
+      Baud rate - number of voltages transferred per second.
+      Baudrate = 2 * Bitrate
 2. DataLink Layer ( HOP - HOP ): It is divided into two parts 
    i)  LLC ( Logical Link Layer ) :
        Responsibilities:
