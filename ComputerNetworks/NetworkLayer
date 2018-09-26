@@ -39,11 +39,23 @@ Each Router in the network maintains a routing table ( NetworkID,SubentMask, Int
                       / \
              ___  R1 /___\ R2
              
-TTL ( Time To Live ): this field restricts the no: of hops the datagram has to travel before it reaches the destination, else it should be discarded. This avoids deadloack
+- TTL ( Time To Live ): this field restricts the no: of hops the datagram has to travel before it reaches the destination, else it should be discarded. This avoids deadloack
 Example: TTL =3  & we have 3 router in middle
          
          Sender(TTL=3) ------------R1(TTL=2)-----------R2(TTL=1)-----------R3(TTL=0)----------Destination
          
          At R3 datagram reached maximum HOPS ( TTL=0). hence Router 3 discards the packet
          
-Protocol: 
+- PROTOCOL: This field tells what kind of packet this datagram is holding. Usually IP datagram will have either ICMP/IGMP/UDP/TCP packets.
+Scenario: If the buffer allocated at the router is full ( congestion ) & it cant accept any packets, then in such cases router has to intellegently decide which packet to discard.
+example: 
+ a) Incoming packet is ICMP, then Router can discard it immediately since its buffer is full.
+ b) Incoming packet is TCP, then router has to check the buffer whether it has any packets other than TCP ( using this protocol field), then it will replace that with the incoming packet. 
+
+Order in which packets get discarded
+ICMP --> IGMP --> UDP --> TCP
+
+- HEADER CHECKSUM: It is used for error detection. Checksum is calculation on IP Header not on data at every router.
+  Fields that change is Time To Live & When fragmentation is done: MF, DF, Total Length also get changed.
+
+
