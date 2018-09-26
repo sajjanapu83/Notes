@@ -3,6 +3,8 @@
   Buffer allocated for the communication are identified using [ IP + PORT# ] => SOCKET
 - TCP is Byte stream protocol. Every Byte is identified by assigning a sequence number to it.
 
+**Note: HDLC protocol is used at DLL and here every bit is counted.
+
                         TCP Header Format
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -37,8 +39,40 @@ SNMP - 25
 Type nestat to check all source and destination ports present in the computer
 
 ################################### ROW2 ###################################################################
-Sequence Number - 32 bit
+Sequence Number - 32 bit : This field holds the sequence number of first byte present in the segment.
 TCP is a byte stream protocol, which means what ever byte that comes from Application layer to Transport Layer that is counted by assigning it with sequence number.
+
+################################### ROW3 ###################################################################
+Acknowledgement Number: This fields holds the last byte sequence number + 1
+
+How to calculate last byte sequence number ? or How will the receiver calclate Acknowledgement Number?
+
+Every TCP Header travels in a IP datagram, where IP datagram has Header Len, Total Length
+IP DataGram TotalLength - IP Datagram Header Length = TCP Segment Length
+TCP Segment Length - TCP Header Length = TCP Data Length.
+
+example:  
+            (IPs:PortX)                    (IPr:Port80)                                 
+              |<============================>| TCP CONNECTION ESTABLISHED
+              |                              |
+              |       (0-99) seq = 0         |
+              |----------------------------->| SUCCESS
+              |                              | 
+              |      (199-100) seq = 100     |                     **** DONT ALWAYS START SEQUENCE NUMBER WITH FIXED NUMBER 
+              |----------------------------->| PACKET LOST              ALWAYS START WITH RANDOM NUMBER, because the packet
+              |                              |                          with seq=100 due to some reason got delayed and may
+              |       (299-200) seq = 200    |                          suddenly appear when a new connection is established
+              |----------------------------->| SUCCESS                  incase source operating system uses the same port x
+              |                              |                          which is used in earlier connection.
+              |                              |
+              |*****************************>| CONNECTION LOST
+             (IPs:PortX)                    (IPr:Port80) 
+              |<============================>| NEW TCP CONNECTION ESTABLISHED
+              |                              |
+              |       (0-99) seq = 0         |
+              |----------------------------->| SUCCESS - lost packet from previous connection
+              |----------------------------->| SUCCESS - packet from New connection
+
 
 
                             
