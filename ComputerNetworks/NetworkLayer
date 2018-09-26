@@ -1,6 +1,6 @@
                          Network Layer - Host to Host Connectivity
 =============================================================================================
-
+- IP is a Packet Stream protocol, which means every packet that is sent over network is counted by assigning with a number called Indentification Number.
 
                        Internet Header Format
 
