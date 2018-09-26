@@ -1,24 +1,45 @@
-This Layer uses TCP / UDP Header
+- TCP is the protocol used at Transport Layer and is responsible for END - END delivery
+- TCP is a connection oriented protocol : When ever two parties communicate with messages, some resources (buffer, bandwidth,   cpu ) are reserved at both ends. 
+  Buffer allocated for the communication are identified using [ IP + PORT# ] => SOCKET
+- TCP is Byte stream protocol. Every Byte is identified by assigning a sequence number to it.
 
                         TCP Header Format
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |          Source Port          |       Destination Port        |
+   |          Source Port          |       Destination Port        |  ROW 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                        Sequence Number                        |
+   |                        Sequence Number                        |  ROW 2
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                    Acknowledgment Number                      |
+   |                    Acknowledgment Number                      |  ROW 3
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |  Data |           |U|A|P|R|S|F|                               |
-   | Offset| Reserved  |R|C|S|S|Y|I|            Window             |
+   | Offset| Reserved  |R|C|S|S|Y|I|            Window             |  ROW 4
    |       |           |G|K|H|T|N|N|                               |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |           Checksum            |         Urgent Pointer        |
+   |           Checksum            |         Urgent Pointer        |  ROW 5
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                    Options                    |    Padding    |
+   |                    Options                    |    Padding    |  ROW 6
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |                             data                              |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   
+################################### ROW1 ###################################################################
+source & destination ports are 16 bit each. so maximum ports possible are power(2,16)-1 i.e (0 - 65535)
+These Port numbers help in Multiplexing and De-Multiplexing
+HTTP - 80
+FTP -  21
+Telnet - 23
+SNMP - 25
+(0 - 1023) - All wellknown services run at port numbers. IANA is repsonsible for all these numbers
+(1024 - 49151) - Reserved
+(49152 - 65535) used by general public. By default OS gives some source port number when you connect to google.
+
+Type nestat to check all source and destination ports present in the computer
+
+################################### ROW2 ###################################################################
+Sequence Number - 32 bit
+TCP is a byte stream protocol, which means what ever byte that comes from Application layer to Transport Layer that is counted by assigning it with sequence number.
+
 
                             
                    TCP Connection State Diagram
