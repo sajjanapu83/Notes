@@ -1,4 +1,6 @@
-This Layer uses IP Header
+                         Network Layer - Host to Host Connectivity
+=============================================================================================
+
 
                        Internet Header Format
 
@@ -122,9 +124,7 @@ EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
 |                                             |   those fragments using Offset#   |    to identify sequennce during assembling
 |                                             |                                   |    the fragments.
 |
-|
-|
-|
-|
-|
-|
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Actually HeaderLength has a scaling factor 4 and Offset# has scaling factor of 8 inorder to fit these values in the fragment header. Offset# should always be multiple of 8 so if needed remove few bytes and fir it accordingly.
+
