@@ -85,16 +85,49 @@ TCP ACK# = ?
  
  ################################### ROW4 ###################################################################
  
- TCP is a connection oriented protocol
+ TCP is a connection oriented protocol & Full duplex connection
   a) Connection Establishment
   b) Data Transfer
   c) Connection Termination
   
+**NOTE: We dont have MSS- Maximum segment size field, it is kept under options
+Transport Layer wisely choses MSS, to avoid fragmentation at Network Layer
 
+Example: Sender Host is present in a LAN, and the Ethernet Frame size in fixed to 1500 bytes, which means DataLink layer can transfer not more than 1500 bytes.
 
+TL  = 1460(Data) + 20(Header)
+NL  = 1480(Data) + 20(Header)
+DLL = Header + 1500 Bytes + Trailer
 
+Window Size: Indicates the capacity of the Host as a receiver
 
+a) Connection Establishment (3-WAY Handshake ) :
+   - REQUEST PACKET: Client tells server in its request packet header, that its Random Initial Sequence# is 521, window size        is 14600 ( means it has allocated buffer size of 14600 bytes for receiving data from the server ) & Maximum Segment            Size is 1460 ( sets in options field), hence i can hold 14600/1460 = 10 segments in one GO / Window.  
+   - REPLY PACKET: Server Sends a Reply packet with ACK=1,RISEQ#=2000 and its WindowSize=10000Bytes,MSS=500 and it is              expecting next packet with sequence number 522 ( previous seq# + 1 ).
+   - ACKNOWLEDGEMENT PACKET: Client sends a packet with SEQ#=522,ACK=1 and tells server that the next packet it is expeting is      of seq# 2001 in ACK# field.
+   After exchanging these 3 packets, TCP connection gets established.
+   
 
+ sender (IPs:PortX)                receiver (IPr:Port80)                                 
+              |                              | 
+              |                              |
+              | RIseq=521,SYN = 1,MSS=1460   |
+REQUEST PACKET|----------------------------->|            Which means client tells sever that it has window size ( receiving                 |     Window Size = 14600      |            buffer ) of 14600, and hence it can hold 10 Segments each of size                 |                              |            1460 in one go/window.
+              |RIseq=2000,SYN=1,MSS=500,ACK=1|
+              |<-----------------------------| REPLY PACKET                                            
+              | ACK#=522,Window Size=10000   |
+              |                              | 
+              | Seq=522,ACK#=2001,ACK=1      |
+ACK PACKET    |----------------------------->|        
+              | TCP CONNECTION ESTABLISHED   |
+              
+
+              
+
+SYN =1 packet will take one sequence Number
+ACK =1 pure ack packet will take zero sequence number
+FIN =1 packet will take one sequence Number
+Data packet will take one sequence Number
 
 
                             
