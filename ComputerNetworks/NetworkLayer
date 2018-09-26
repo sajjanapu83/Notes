@@ -60,7 +60,7 @@ ICMP --> IGMP --> UDP --> TCP
 
 ###################################### ROW 4 & 5 ################################################## 
 Network Layer uses Logical addresses i.e IP address
-All 0's & 1's are not allowed in IP addresses.
+
              +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
              |   NTWID  | HOSTID  |                                       |  COMMENT                                         |
              +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
@@ -76,4 +76,30 @@ All 0's & 1's are not allowed in IP addresses.
              |   127    | Valid|     Loop Back Address                    |    No SIP, YES DIP                               |
              ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
               
-              
+  ###################################### ROW 6 ##################################################    
+- Options Field: This field can be used for the below scenarios
+  a) Record Route: This filed records all the routers IP addresses that the packet has travelled to reach destination. This field is used by the ISP & network administrators.   
+      Example:      Sender ---R1 ----(R1,R2)------(R,R2,Destination)
+  b) Source Routing: This field is used to set routers path in the packet, so that it travels in the same path specified.
+  
+      Example:      Sender[D,R4,R2,R1] ----- Router[D,R4,R2] ---- Router[D,R4] ----- D
+      
+  c) Padding: Used to make sure header length is always multiple of 4.
+  
+ 
+ *************************************************************************************************************************
+  FRAGMENTATION
+ *************************************************************************************************************************
+
+MTU: Maximum amount of data that could sit in any datalink layer frame.
+
+AL                                    [ Message/Data     ] ----------------> MESSAGE
+TL                       [ TCP Header + Message/Data     ] ----------------> SEGMENT                           
+NL          [  IP Header + ( TCP Segment came from TL )  ] ----------------> IP DATAGRAM                      
+DL [ Header +  ( IP Datagram came from NL )              + TRAILER ] ------> FRAME
+
+
+AL  - MESSAGE
+TL  - MESSAGE + TCP HEADER => SEGMENT
+NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
+DLL - HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER => FRAME
