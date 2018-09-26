@@ -1,10 +1,9 @@
-Scenario 1: Two Processes(client , Server) present with in the same host communicate's with each other using a concept called IPC ( Inter Process Communication )
-Scenario 2: Two Processes present in the different host present in different locations:  
-Computer Network should provide Hardware/Software to these 2 proccesses present in different hosts in a such a manner, they think they are actually communicating with each other in the same host.
-
-
-Nearly 70+ mandatory functionalities are present.
-Functionalities that are closely related are grouped together in the form of Layers.
+Scenario 1: Two Processes(client , Server) present with in the same host:
+   Sender & Receiver communicate with each other using a concept called IPC ( Inter Process Communication )
+Scenario 2: Two Processes present in the different host present in different locations: 
+   Sender ( Client ) & Receiver ( Server) communicate with each other with the help of Hardware/Software functionalities          provided by the Computer Networks, in such a manner that they think they are actually talking to each other with in the        same host & same network.
+   
+Nearly 70+ mandatory functionalities are present. The closely related one's are grouped together & formed layers.
 Advantages of Layering
 - Divide & Conquer
 - Encapsulation
@@ -94,9 +93,25 @@ ISO/OSI Layers
      e) Multiplexing & De-Multiplexing : 
      f) Congestion Control
      
-   5. Application Layer: Encryption/Decyption
-   
+  5. Session Layer:
+     Responsibilities:
+     a) Authentication / Authorization using digital signatures
+     b) Checkpointing: e.g: Downloading movie from Torrent.
+     c) Synchronization: e.g: Video & audio comes in seperate files & lip sync needs to me taken care.
+     d) Dialog Control: e.g: Web Conference - only one person ins allowed to speak even though links are full duplex, we have to restrict few links as half duplex.
+     e) Logical Grouping of operations: e.g: Databases Atomicity - Either all commands should execute or none should execute.
      
+     Since these functionalities are not mandatory, Computer network operating system wont provide these functionalities, if needed user has to implement at application side.
+  6. Presentation Layer:
+     Responsibilties:
+     a) Character Translation: e.g: one computer supports ASCII code & other Host with different, then this layers takes care of translation part.
+     b) Encryption / Decyption : e.g: Message - Cipher text - Message
+     c) Compression: e.g: Zip the data & un-zip the data
+     
+     These functionalities are not required by all applications, so these are taken care by the user when ever it isrequired.
+  
+  7. Application Layer: e.g: User's Application Code.
+   
      Entire Flow - Host connect to google.com
      
      AL  [ Message-M ]
