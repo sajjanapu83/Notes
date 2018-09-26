@@ -58,4 +58,22 @@ ICMP --> IGMP --> UDP --> TCP
 - HEADER CHECKSUM: It is used for error detection. Checksum is calculation on IP Header not on data at every router.
   Fields that change is Time To Live & When fragmentation is done: MF, DF, Total Length also get changed.
 
-
+###################################### ROW 4 & 5 ################################################## 
+Network Layer uses Logical addresses i.e IP address
+All 0's & 1's are not allowed in IP addresses.
+             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+             |   NTWID  | HOSTID  |                                       |  COMMENT                                         |
+             +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+             |   Valid  | Valid   |  Valid IP Address                     |   Can be used as both source Ip & Destination IP |
+             |   Valid  | All 0's |  NID                                  |   No SIP, NO DIP                                 |
+             |   Valid  | All 1's |  DBA ( Directed Broad cast address )  |   No SIP, YES DIP                                |
+             |   1      | All 1's |  LBA ( Limited Broad cast address     |                                                  |
+             |          |         |   means broadcast with in a network)  |   No SIP, YES DIP                                |
+             |   1      | All 0's |  NM/SM ( Network Mask or Subnet Mask )|   No SIP, YES DIP                                |
+             |   0      | 1       |  Host with in a network               |   YES SIP, YES DIP                               |
+             |   0      | 0 .     |  I dont have IP(when sender           |                                                  |
+             |          |         |   doesnt know its address)            |    YES SIP, NO DIP                               |
+             |   127    | Valid|     Loop Back Address                    |    No SIP, YES DIP                               |
+             ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+              
+              
