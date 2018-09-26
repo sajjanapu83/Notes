@@ -73,7 +73,7 @@ Network Layer uses Logical addresses i.e IP address
              |   0      | 1       |  Host with in a network               |   YES SIP, YES DIP                               |
              |   0      | 0 .     |  I dont have IP(when sender           |                                                  |
              |          |         |   doesnt know its address)            |    YES SIP, NO DIP                               |
-             |   127    | Valid|     Loop Back Address                    |    No SIP, YES DIP                               |
+             |   127    | Valid   |   Loop Back Address                   |    No SIP, YES DIP                               |
              ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
               
   ###################################### ROW 6 ##################################################    
@@ -91,7 +91,7 @@ Network Layer uses Logical addresses i.e IP address
   FRAGMENTATION
  *************************************************************************************************************************
 
-MTU: Maximum amount of data that could sit in any datalink layer frame.
+MTU: Maximum amount of data that could sit in any datalink layer frame, that could be sent across the network
 
 AL                                    [ Message/Data     ] ----------------> MESSAGE
 TL                       [ TCP Header + Message/Data     ] ----------------> SEGMENT                           
@@ -100,6 +100,31 @@ DL [ Header +  ( IP Datagram came from NL )              + TRAILER ] ------> FRA
 
 
 AL  - MESSAGE
-TL  - MESSAGE + TCP HEADER => SEGMENT
-NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
+TL  - MESSAGE + TCP HEADER => SEGMENT => { Segmentation [ SEGMENT1,SEGMENT2,SEGMENT3....] } ==> { [ MSS, MSS, MSS ....] }
+NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM { FRAGMENTATION [ FRAGMENT1,FRAGMENT2...]} => { [ MTU, MTU, MTU ... ] }
 DLL - HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER => FRAME
+
+Divide the Network layer datagram into parts so that every part/fragment can be sit into Datalink Layer MTU is called fragmentation
+
+EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|      NETWORK1 ( Sender) MTU-520             |  ROUTER1                          |    NETWORK2 ( Destination ) 
+|                                             |                                   |        MTU - 200
+|++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| a)  [ Data(500) + Header(20) ]              | Fragment1 = [Data(180)+Header(20)]| 
+| Since other side of the network has MTU 200 | Fragment2 = [Data(180)+Header(20)]|  [140+20]==>[180+20]=>[180+20]
+| means it cant take datagram of size         | Fragment3 = [Data(140)+Header(20)]|    100        100       100    ID#
+| more than 200, this has to be divided into  | Note: Receiver has to know all 3  |    0          1         1       MF
+| fragments of size 200 each inorder to       | belong to same Datagram, thats the|    360        180       0       OffSet#
+| transfer it to destination                  | each fragment is identified using |    5          5      20/4=5     HeaderLen
+|                                             | Identification Number             |    MF - Tells More Fragments following
+|                                             | - Receiver knows the sequence of  |    Offset - No: of Bytes Ahead of it used
+|                                             |   those fragments using Offset#   |    to identify sequennce during assembling
+|                                             |                                   |    the fragments.
+|
+|
+|
+|
+|
+|
+|
