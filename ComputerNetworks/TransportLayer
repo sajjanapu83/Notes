@@ -42,17 +42,8 @@ Type nestat to check all source and destination ports present in the computer
 Sequence Number - 32 bit : This field holds the sequence number of first byte present in the segment.
 TCP is a byte stream protocol, which means what ever byte that comes from Application layer to Transport Layer that is counted by assigning it with sequence number.
 
-################################### ROW3 ###################################################################
-Acknowledgement Number: This fields holds the last byte sequence number + 1
-
-How to calculate last byte sequence number ? or How will the receiver calclate Acknowledgement Number?
-
-Every TCP Header travels in a IP datagram, where IP datagram has Header Len, Total Length
-IP DataGram TotalLength - IP Datagram Header Length = TCP Segment Length
-TCP Segment Length - TCP Header Length = TCP Data Length.
-
 example:  
-            (IPs:PortX)                    (IPr:Port80)                                 
+       sender (IPs:PortX)                receiver (IPr:Port80)                                 
               |<============================>| TCP CONNECTION ESTABLISHED
               |                              |
               |       (0-99) seq = 0         |
@@ -72,6 +63,37 @@ example:
               |       (0-99) seq = 0         |
               |----------------------------->| SUCCESS - lost packet from previous connection
               |----------------------------->| SUCCESS - packet from New connection
+
+
+################################### ROW3 ###################################################################
+Acknowledgement Number: This fields holds the last byte sequence number + 1
+
+How to calculate last byte sequence number ? or How will the receiver calclate Acknowledgement Number?
+
+Every TCP Header travels in a IP datagram, where IP datagram has Header Len, Total Length
+IP DataGram TotalLength - IP Datagram Header Length = TCP Segment Length
+TCP Segment Length - TCP Header Length = TCP Data Length.
+
+IP DataGram TotalLength = 1000
+IP HeaderLength = 5
+TCP Segment HeaderLength = 5
+TCP squence# = 100
+TCP ACK# = ?
+ Solution: When ever header length is less than 20 ( min length ), then multiply by 4.
+ DataGram = [ TCP SEGMENT[960+5*4] + 5*4 ]
+ TCP ACK# = 100 + 960 - 1 = 1059
+ 
+ ################################### ROW4 ###################################################################
+ 
+ TCP is a connection oriented protocol
+  a) Connection Establishment
+  b) Data Transfer
+  c) Connection Termination
+  
+
+
+
+
 
 
 
