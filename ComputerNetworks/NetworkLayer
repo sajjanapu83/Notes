@@ -126,5 +126,6 @@ EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
 |
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Actually HeaderLength has a scaling factor 4 and Offset# has scaling factor of 8 inorder to fit these values in the fragment header. Offset# should always be multiple of 8 so if needed remove few bytes and fir it accordingly.
+Actually Header Length Size is 20 - 60 bytes, but IHL is given 4 bits means anything more than power(2,4)-1=15 cannot be represented in header. So we should use a scaling factor of 60/15 = 4. Similarly for Offset# the saling factor is 8.
+Offset# should always be multiple of 8 so if needed remove few bytes and send them in another packet accordingly.
 
