@@ -74,13 +74,67 @@ c) Bridges: It is used to connect 2 different LANS
      - Costly, most frequently used in Ethernet LAN.
    e) Router: It is a device which is used to connect two networks
      - Works at Physical Layer, DataLink layer & Network layer
-     - 
+     - It does fragmentation, if the other end of the LAN has different MTU
+     - Filterng: Limited braodcasting packets are filtered ( ARP, BOOTP...are filtered )
+     ** Computer networks thumbrule: No broadcasitng done at DLL should ever cross the router
      
                                          _______________
                                         |      NL      |  
                    =====================|______________|====================
-                          Ethernet      | DLL  | DLL   |   TokenRing
+         Ethernet IP address is used    | DLL  | DLL   |   TokenRing network IP adress is used at this end.
                                         | PL   | PL    |
                    =====================----------------====================
                                              ROUTER
                                         ----------------
+                                        
+                               TCP/IP NTW -------ROUTER-------- TCP/IP NTW     
+                                  ATM NTW -------ROUTER-------- ATM NTW   
+                                  
+        Disadvantage: Cannot connect two networks using different protocols, that is acheived using Gateways.                          
+                                        
+     f) Gateway: It connects to different networks using different protocols.
+       - It has all layers.
+       - It act as protocol converter
+       - It can be used as proxy, which monitors everything & caches
+       - It has a capable of running NAT server : to conserve ip's with in the the network we use private addresses & NAT will convert private to public IP address.
+       - Firewall: Monitor all packets and set some rules.( e.g: Telnet,ssh...etc are blocked )
+       - DPI: It can do Deep packet inspection since it can see message at application
+     
+           
+                           TCP/IP NTW -------ROUTER-------- ATM NTW 
+                           
+      **Note: Mobile phone is just used to display, doesn't have all layers it connects to Gateway and gets all the information.
+                        512 kbps                  1mbps
+           MobilePhone--------------GATEWAY---------------------YOUTUBE
+                                  ( buffers )
+
+
+      g) Firewall: Firewalls are used to protect te organization from external network.
+         3 Types:
+          - Layer 3 FW or Packet filter firewall - can access packets till network layer (PL,DLL,NL): 
+             a. Looks IP address & it can block hosts
+             b. looks protocol field in the header & can block protocol ICMP/IGMP/UDP/TCP
+          - Layer 4 FW ( PL,DLL,NL,TL): it does all Layer 3 stuff plus the below ones
+             a. it can look ports at TL & block the service ( http,smptp,ftp...etc)
+             b. using ip & port, it can block particular service of a particular host.
+          - Layer 5 FW or Proxy FW : Access all layers till application Layer. This one is more widely used.
+             a. It can see AL message, so it can see username/pwd. so it can block a specific user to connect organization ntw.
+          
+          Example: This is Layer 5 FW.
+            ************ Firewall maintain a table like below with blocking rules**********
+             ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+             |SourceIP | DestinationIP | SourcePort | DestinationPort | Interface | User|
+             ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+             |CodeServer     -              21            -             OrganizNTW   -  |  Block file sent outside organiztion
+             |   -           IPcs           -             23            ExternNTW  nonemp  block telnet from external
+             |   -           -              -             80            OrginazNTW   -  |  webpages are blocked    
+             |___________________________________________________________________________
+        
+        
+        ** Note: We are referring TCP/IP reference model 5 layers not ISO/OSI 7 layes model
+         
+          Organization NTW-----------FIREWALL_____________________________________________ISP===========INTERNET
+                                     (End Mile)  ISP provides 100mbps internet bandwidth
+                                                  connection
+                                                  
+        The point at which ISP will end their connection is called End Mile.
