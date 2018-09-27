@@ -4,7 +4,7 @@ Using Routing tables switches forwards packets to different interfaces.
 Flooding: Take incoming packet and put on all outgoing links/interfaces
 
 Mostly commonly used shortest path routing algorithms used by routers
-1. DVR - Distance Vector Routing
+1. DVR - Distance Vector Routing - DisAdvantage : Count to Infinity Problem
 2. LSR - Link State Routing
 
 DVR: 
@@ -40,4 +40,53 @@ Example:
     |  C     X     C  |            |  C      3    C   |
     |  D     1     D  |            |  D      7    D   |
     -------------------             -------------------
+    
+  STEP#1: APPLY DVR ALGORTITHM & CALCULATE SHORTEST PATH ROUTING FOR ATMOST 1 EDGE.
+    - First exchange DVR table info
+    - Calculate new routing tables
+    
+    @A: Router A gets DVR table info from B & D
+    @B: Router B gets DVR table info from A,C & D
+    @C: Router C gets DVR table info from B & D
+    @D: Router D gets DVR table info from A,B & C
+    
+   
+    @A: 
+    DVR-B ( 2, 0, 3, 7 )
+    DVR-D ( 1, 7, 11, 0 )
+    
+    CALCULATES New Routing table @A ( Shortest path atmost 1 edges ):
+    
+     A -> A  = 0
+     A -> B = MIN { (A->D + D->B), 
+                    (A->B + B->B ) 
+                  }  
+            = MIN { (1+7),(2+0) } = 2
+     A -> C = MIN { (A->D + D->C),
+                    (A->B + B->C)
+                  }
+            = MIN { (1+11),(2+3) } = 5
+    
+    ------TABLE@A------             
+    ===================                      
+    | DEST   DIS   NH |                        
+    ===================                         
+    |  A     0     A  |            
+    |  B     2     B  |            
+    |  C     5     C  |            
+    |  D     1     D  |            
+    -------------------             
+    
+    STEP Similarly calculate shortest path routing tables are created at B,C & D
+  
+   STEP#2: APPLY DVR ALGORTITHM & CALCULATE SHORTEST PATH ROUTING FOR ATMOST 2 EDGE.
+   STEP#3: APPLY DVR ALGORTITHM & CALCULATE SHORTEST PATH ROUTING FOR ATMOST 3 EDGE.
+   
+   **Note: For a N node graph, we have to rerun the algorithm N-1 times, the final round gives the shortest path.
+    
+    
+    
+    
+    
+    
 
