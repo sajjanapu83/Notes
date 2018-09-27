@@ -1,0 +1,4 @@
+The process of preparing routing tables at every router is called Routing
+Using Routing tables switches forwards packets to different interfaces.
+
+Flooding: Take incoming packet and put on all outgoing links/interfaces
