@@ -57,6 +57,9 @@ example:
 Order in which packets get discarded
 ICMP --> IGMP --> UDP --> TCP
 
+**Note: If we have AUTHENTICATION HEADER then this protocol field will have value 51, which tells after IP Header , we have Authentication Header ( with in here it hold whether next section is TCP/UDP/IGMP/ICMP )
+
+
 - HEADER CHECKSUM: It is used for error detection. Checksum is calculation on IP Header not on data at every router.
   Fields that change is Time To Live & When fragmentation is done: MF, DF, Total Length also get changed.
 
