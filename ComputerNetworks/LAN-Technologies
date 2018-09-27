@@ -5,7 +5,7 @@
 ETHERNET ( defined by IEEE 802.3 ) : This is used in late 90's not now.
 
 - Topology used earlier is BUS, now Switch
-- Access Control used ins CSMA/CD
+- Access Control used ins CSMA/CD ( Carrier Sensing Multiple Access - Collison Detection )
 - No Acknowledgements
 - Earlier Bandwidh 10 mbps, 100 mbps, now  1 gbps
 - Encoding technique used is Manchester     
