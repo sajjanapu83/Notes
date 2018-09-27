@@ -14,10 +14,31 @@ c) 10 Base 5 : ( 10 mbps is bandwidth, No multiplexing, 500 meters )
 d) 100 Base T :( 100 mbps is bandwidth, No multiplexing, 100 meters )
 
 Computers are connected to eachother using ethernet cables and this is how LAN setup is done.
-Since the length of the LAN segment is limited, if we want to extended its size then we have connect more than one LAN segment together using the below devices
+The length of the LAN segment is limited, so, if we want to extend its size then we have to connect, more than one LAN segment together using the below devices
 a) Repeaters : Takes the signal at one end of the LAN segment and it regenerates the same signal & passes to other LAN segment which is of same type. This device is used very long back.
 
                    10 BASE 5                         10 BASE 5
-            -------------------------REPEATER--------------------------
+            ----|------|------|-----|----REPEATER----|-----|------|------|-----
+                1A     1B     1C    1D               2A    2B     2C     2D
+            
 b) Hub: It is a multi port repeater.
+
+
+               
+            1A__\                 /__2A
+             1B__\               /__2B
+              1C__\             /__2C
+                   \___________/
+                   |    Hub    |
+                   |___________|
+              4A__/             \__3A
+             4B__/               \__3B
+            4C__/                 \__3C
+               /                   \
+                                     
+
+                              
+                              
+                              
+                              
 c)
