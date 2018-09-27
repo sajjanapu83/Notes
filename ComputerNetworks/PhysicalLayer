@@ -1,1 +1,23 @@
+Network of Computers is called Computer Networks.
 
+Physical Layer completely deals with Hardware.
+
+First LAN setup is done using ETHERNET, they used cables to connect physical computers
+* Note: There are 2 kinds of wire
+- BASE BAND: Only one station should send signal at the same time across the wire & all other stations should receive it and   there is no multiplexing. If more than one station sends the data there will be collision.
+- BROAD BAND: Any station can send the signal at the same time or anytime across the wire without any collisions
+Different types of Ethernet Cables used are
+a) 10 Base T : This wire capable of speed 10 mbps, BASE - Entire wire at a sametime only one station should send the signal.
+T means this wire can run the signal for only 100 meters. If we send a signal over this wire, signal gradually loses its energy and finally it is gets lost.
+b) 10 Base 2 : ( 10 mbps is bandwidth, No multiplexing, 200 meters )
+c) 10 Base 5 : ( 10 mbps is bandwidth, No multiplexing, 500 meters )
+d) 100 Base T :( 100 mbps is bandwidth, No multiplexing, 100 meters )
+
+Computers are connected to eachother using ethernet cables and this is how LAN setup is done.
+Since the length of the LAN segment is limited, if we want to extended its size then we have connect more than one LAN segment together using the below devices
+a) Repeaters : Takes the signal at one end of the LAN segment and it regenerates the same signal & passes to other LAN segment which is of same type. This device is used very long back.
+
+                   10 BASE 5                         10 BASE 5
+            -------------------------REPEATER--------------------------
+b) Hub: It is a multi port repeater.
+c)
