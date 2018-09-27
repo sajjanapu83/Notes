@@ -16,29 +16,71 @@ d) 100 Base T :( 100 mbps is bandwidth, No multiplexing, 100 meters )
 Computers are connected to eachother using ethernet cables and this is how LAN setup is done.
 The length of the LAN segment is limited, so, if we want to extend its size then we have to connect, more than one LAN segment together using the below devices
 a) Repeaters : Takes the signal at one end of the LAN segment and it regenerates the same signal & passes to other LAN segment which is of same type. This device is used very long back.
+ - Used at Physical layer only
+ - Collisions are possible
+ - Range of the LAN is increased
 
                    10 BASE 5                         10 BASE 5
             ----|------|------|-----|----REPEATER----|-----|------|------|-----
                 1A     1B     1C    1D               2A    2B     2C     2D
             
 b) Hub: It is a multi port repeater.
-
+   - Used at Physical layer only
+   - Traffic is very high
+   - Collisions are possible
 
                
-            1A__\                 /__2A
-             1B__\               /__2B
-              1C__\             /__2C
-                   \___________/
-                   |    Hub    |
-                   |___________|
-              4A__/             \__3A
-             4B__/               \__3B
-            4C__/                 \__3C
-               /                   \
+                                1A__\                 /__2A
+                                 1B__\               /__2B
+                                  1C__\             /__2C
+                                       \___________/
+                                       |    Hub    |
+                                       |___________|
+                                  4A__/             \__3A
+                                 4B__/               \__3B
+                                4C__/                 \__3C
+                                   /                   \
                                      
-
-                              
-                              
-                              
-                              
-c)
+                                                          
+c) Bridges: It is used to connect 2 different LANS
+ Example: one end Ethernet, & other end TokenRing
+ - Used at Physical & Data Link layer: Here it can see MAC address of a station & can route the packet accordingly.
+   Bridge maintains a forward/mapping table like below.
+ - Filtering: since it works at DLL, using MAC address it can filter the stations & send packet to right station.
+ - Forwarding:
+ - Flooding:
+ - No collisions inside a bridge
+ - Store & forward a packet
+ - To avoid loops spanning tree algorithm is used.
+ 
+              10 BASE 5                         10 BASE 5
+            ----|------|------|-----|----BRIDGE----|-----|------|------|-----
+                1A     1B     1C    1D               2A    2B     2C     2D
+       
+                                     ==================
+                                     |  MAC  |  Port  |
+                                     ==================
+                                     |  1A   |   a    |
+                                     |  1B   |   a    |
+                                     |  1C   |   b    |
+                                     |  2A   |   a    |
+                                     |  2B   |   b    |
+                                     |  2C   |   b    |
+                                     -----------------
+   d) Switch: It is extension to bridge, where it mas more ports to connect stations.
+     - Works at physical layer & DataLink Layer, hence it can send packet to the target looking at the MAC address.
+     - More than one communcation can happen at the same time ( full duplex wire are connected to stations ).
+     - No Collisions
+     - Costly, most frequently used in Ethernet LAN.
+   e) Router: It is a device which is used to connect two networks
+     - Works at Physical Layer, DataLink layer & Network layer
+     - 
+     
+                                         _______________
+                                        |      NL      |  
+                   =====================|______________|====================
+                          Ethernet      | DLL  | DLL   |   TokenRing
+                                        | PL   | PL    |
+                   =====================----------------====================
+                                             ROUTER
+                                        ----------------
