@@ -2,7 +2,7 @@
 2. TOKENRING
 
 
-ETHERNET ( IEEE 802.3 ) : This is used in late 90's not now.
+ETHERNET ( defined by IEEE 802.3 ) : This is used in late 90's not now.
 
 - Topology used earlier is BUS, now Switch
 - Access Control used ins CSMA/CD
@@ -20,5 +20,20 @@ ETHERNET ( IEEE 802.3 ) : This is used in late 90's not now.
   -------------------------------------------------------------------
   | PREAMBLE | SFD | DA | SA | LENGTH | DATA |         CRC          |
   -----------------|------------------|------|-----------------------
-    PL HEADER         DDL HEADER                 DLL TRAILER       
+    PL HEADER         DDL HEADER                 DLL TRAILER    
+    
+    Preamble is 7 bytes of 10's = 10101010.....
+    SFD is 1 byte
+    
+    Physical layer header (Preamble+SFD) is used, 
+    - Inorder to alert all station about start of the frame.
+    - used for synchronization ( clock signal )
+    
+    DA = (Destination MAC Address)
+    SA = (Source MAC Address) : software reads the MAC address from ROM present in NIC 
+    
+    Types of MAC address
+    (i) UNICAST : LSB of first byte is 0
+    (ii) MUlTICAST
+    (ii) BROADCAST
                    
