@@ -32,8 +32,8 @@ ETHERNET ( defined by IEEE 802.3 ) : This is used in late 90's not now.
     DA = (Destination MAC Address)
     SA = (Source MAC Address) : software reads the MAC address from ROM present in NIC 
     
-    Types of MAC address
+    Types of MAC address (48 bit)
     (i) UNICAST : LSB of first byte is 0
-    (ii) MUlTICAST
-    (ii) BROADCAST
+    (ii) MUlTICAST: If the Least significant bit of first byte is 1
+    (ii) BROADCAST: If all the bits in MAC are 1's : FF:FF:FF:FF:FF:FF
                    
