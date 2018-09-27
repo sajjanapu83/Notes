@@ -6,6 +6,11 @@ First LAN setup is done using ETHERNET, they used cables to connect physical com
 * Note: There are 2 kinds of wire
 - BASE BAND: Only one station should send signal at the same time across the wire & all other stations should receive it and   there is no multiplexing. If more than one station sends the data there will be collision.
 - BROAD BAND: Any station can send the signal at the same time or anytime across the wire without any collisions
+
+Links are of two types
+- Point to Point links: Channel/link is connected by only 2 stations at either end.
+- BroadCast links: Multiple stations are connected to the link.
+
 Different types of Ethernet Cables used are
 a) 10 Base T : This wire capable of speed 10 mbps, BASE - Entire wire at a sametime only one station should send the signal.
 T means this wire can run the signal for only 100 meters. If we send a signal over this wire, signal gradually loses its energy and finally it is gets lost.
