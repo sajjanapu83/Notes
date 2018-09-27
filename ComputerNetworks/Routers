@@ -84,7 +84,21 @@ Example:
    
    **Note: For a N node graph, we have to rerun the algorithm N-1 times, the final round gives the shortest path.
     
+ 
+ COUNT TO INFINITY PROBLEM
+ - Bad news spread slow
+ - Good news spread fast
     
+a) Good News Spread Fast:
+    
+        1       1        1   
+    A-------B-------C--------D
+            X       X        X
+     <----> 1 <---> X <----> X
+     <----> 1 <---> 2 <----> X
+     <----> 1 <---> 2 <----> 3
+
+     
     
     
     
