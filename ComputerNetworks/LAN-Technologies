@@ -1,0 +1,24 @@
+1. ETHERNET
+2. TOKENRING
+
+
+ETHERNET ( IEEE 802.3 ) : This is used in late 90's not now.
+
+- Topology used earlier is BUS, now Switch
+- Access Control used ins CSMA/CD
+- No Acknowledgements
+- Earlier Bandwidh 10 mbps, 100 mbps, now  1 gbps
+- Encoding technique used is Manchester     
+         __                     __  
+    1 =    |         0 =       |
+           |__               __|      
+           
+           
+   ETHERNET FRAME FORMAT ( 802.3 )   
+   
+   
+  -------------------------------------------------------------------
+  | PREAMBLE | SFD | DA | SA | LENGTH | DATA |         CRC          |
+  -----------------|------------------|------|-----------------------
+    PL HEADER         DDL HEADER                 DLL TRAILER       
+                   
