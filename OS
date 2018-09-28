@@ -32,7 +32,9 @@ loading into memory.
 
 PROGRAM ==> ( COMPILER + ASSEMBLER ) ==> PROGRAM WITH RELOCATBLE ADDRESS 
 
-After compiling, it doesnt know where it will loaded in main memory, so it assume some temporary base address and will number
-the instructions accoringly (i.e called relocatable address ).
+when compiling the problem, it doesnt know where it will loaded in main memory, so it will assume that it will start loading 
+instructions starting from Address ZERO & will number all instructions accordingly.
 
-RELOCATION: Using Relocation Info, every rellocatable address is converted to Absolute address
+
+RELOCATION: Using Relocation Info, every rellocatable address is converted to Absolute address before it loading the program.
+
