@@ -71,14 +71,28 @@ INSTRUCTION SET:
     AC <-- AC + (400)
     AC <-- AC + 500
     Here 2 memory access is required inorder get the operand 
- h) Relative Address Mode: EA is computer PC + ADDRESS PAR
+ h) Relative Address Mode: EA is computer PC + ADDRESS Provided by Branch Instruction
     Using Program counter it will decide how many words has to go Up or decendant inorder to get next instruction.
     Example: Program loaded in memory with set of instructions.
     
- i) Indexed Address Mode:
+ i) Indexed Address Mode: Array Implementation
+     ADD 300
+     EA = 300 + Index Register
  
- j) Base Register Mode:
-               
+ j) Base Register/ Base Offset Mode: 
+ 
+ 
+ TYPES OF INSTRUCTIONS
+ 
+ a) Data Transfer Instructions: e.g: LOAD,STORE,EXCHANGE,INPUT,OUTPUT,PUSH,POP
+ b) Data Manipulation Instructions: Arithmetic, Logical operations & Shift 
+    - Arthmetic: INCREMENT,DECREMENT,ADD,SUBTRACT,MULTIPLY,DIVIDE,ADD WITH CARRY, SUBTRACT WITH BORROW, NEGATE...
+    - Logical: Manipulating the bits- CLEAR,COMPLEMENT,AND,OR,EXCLUSIVE OR, CLEAR CARRY, SET CARRY, COMPLEMENT CARRY, 
+      ENABLE INTERRUPT, DISABLE INTERRUPT.
+    - Shift Operations: Logical Shift Right, Logical Shift Left, Arthmetic Shift Right, Arthmetc Shift Left, Rotate Right, 
+      Rotate Left, Rotate Right Through Carry, Rotate Right Through Carry.
+ c) Program Control Instructions : IF / WHILE / FOR - Decision Making
+      - BRANCH,JUMP,SKIP,CALL RETURN,COMPARE,TEST        
       
       
       
