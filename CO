@@ -1,0 +1,33 @@
+The set of people who design the computer are called Computer Architects / Computer Designers.
+The people who use this computer to do some tasks are called Computer Programers
+Various types of computers
+- General Purpose Computers: Laptop,desktops...etc uses stored memory concept.
+- Computers specific to some task: Washing Machine, calculators...etc. these are are called Embedded systems.
+
+** The core of computers (laptops/washing machine...) is Microprocessors.
+
+General Purpose computers consists of:
+- Memory
+- Registers
+- ALU ( Arthemetic & Logic Unit )
+
+Data has to move from Memory -> Registers -> ALU -> Registers -> Memory, to make all these happen we have to apply certain 
+signals at certain timing, so we need a special unit called Control Unit to give signals to all these components at a particular
+time.
+
+The purpose of the designer is to select all these components ( Hardware) based on the cost & connect them.
+
+How to generate signals by looking at the instructions is called Instruction Decoder & that is done by CPU.
+
+Before designing the computers, first Instruction Set ( Machine Instructions ) has to be decided depending on what programmers 
+wants to perform. Based on Instruction Set, they choose the Hardware & design the computer.
+
+
+INSTRUCTION SET:
+- It is a sequence of bits, stored in the sepcial register called IR ( Instruction Register ).
+- CPU has to understand how to generate timinig and control signals inorder to execute this Instruction, that is reason it is
+  divide in to various parts
+  
+      --------------------------
+     | Mode | Opcode | Operands |
+      --------------------------
