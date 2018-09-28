@@ -134,11 +134,12 @@ ISO/OSI Layers
           ***Note: Router has 3 layers PL,DLL & NL and using routing table it either forwards to default router or 
                    another router in different network or detination IP
      DLL [M+x+80+IPa+IPg+MACa+ ***ARPSignal ***]             [M+x+80+IPa+IPg+MACa+MACr1]            [M+x+80+IPa+IPg+MACa+MACg]
-     PL  [M+x+80+IPa+IPg+MACa+MACr1+SFA]   
+     PL  [M+x+80+IPa+IPg+MACa+MACr1+ PREAMBLE+SOA]   
 
 
 AL  - MESSAGE
 TL  - MESSAGE + TCP HEADER => SEGMENT
 NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
 DLL - HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER => FRAME
+PL -  HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER + PREAMBLE + SOA => 1PDU
 
