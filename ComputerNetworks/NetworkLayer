@@ -1,6 +1,7 @@
                          Network Layer - Host to Host Connectivity
 =============================================================================================
-- IP is a Packet Stream protocol, which means every packet that is sent over network is counted by assigning with a number called Indentification Number.
+- IP is a Packet Stream protocol, which means every packet that is sent over network is counted by assigning with a number 
+called Indentification Number.
 
                        Internet Header Format
 
@@ -23,9 +24,11 @@
 - Every datagram is identified using Indentification Number
 - Fragment Offset: The number of Data Bytes ahead of this fragment 
 - Flags:
-  a) DF - Do Not Fragment Flag:  If the datagram doesn't want to get fragmented then it is set to 1 ( which means it tells router, please dont fragment this datagram ).
+  a) DF - Do Not Fragment Flag:  If the datagram doesn't want to get fragmented then it is set to 1 ( which means it tells 
+  router, please dont fragment this datagram ).
 
-    Example: In the below example, 2 networks has different MTU & the router has to fragment the datagram 1000 to 500, but                  since DF is set to 1, it will simply discards the packet by sending an ICMP packet in return.
+    Example: In the below example, 2 networks has different MTU & the router has to fragment the datagram 1000 to 500, but
+    since DF is set to 1, it will simply discards the packet by sending an ICMP packet in return.
 
                                      DF=1           ____________
       Sender-MTU-1000       ---------------------> |   Router1  |  ----      Destination-MTU-500
@@ -35,21 +38,25 @@
   
 ###################################### ROW3 ################################################## 
 
-Each Router in the network maintains a routing table ( NetworkID,SubentMask, Interface) and each router in mapped to a default router if networkID doesnt gets matched, due to this sometimes it might lead to deadlock
+Each Router in the network maintains a routing table ( NetworkID,SubentMask, Interface) and each router in mapped to a default
+router if networkID doesnt gets matched, due to this sometimes it might lead to deadlock
 
                        R3
                       / \
              ___  R1 /___\ R2
              
-- TTL ( Time To Live ): this field restricts the no: of hops the datagram has to travel before it reaches the destination, else it should be discarded. This avoids deadloack
+- TTL ( Time To Live ): this field restricts the no: of hops the datagram has to travel before it reaches the destination, 
+else it should be discarded. This avoids deadloack
 Example: TTL =3  & we have 3 router in middle
          
          Sender(TTL=3) ------------R1(TTL=2)-----------R2(TTL=1)-----------R3(TTL=0)----------Destination
          
          At R3 datagram reached maximum HOPS ( TTL=0). hence Router 3 discards the packet
          
-- PROTOCOL: This field tells what kind of packet this datagram is holding. Usually IP datagram will have either ICMP/IGMP/UDP/TCP packets.
-Scenario: If the buffer allocated at the router is full ( congestion ) & it cant accept any packets, then in such cases router has to intellegently decide which packet to discard.
+- PROTOCOL: This field tells what kind of packet this datagram is holding. Usually IP datagram will have either 
+ICMP/IGMP/UDP/TCP packets.
+Scenario: If the buffer allocated at the router is full ( congestion ) & it cant accept any packets, then in such cases router 
+has to intellegently decide which packet to discard.
 example: 
  a) Incoming packet is ICMP, then Router can discard it immediately since its buffer is full.
  b) Incoming packet is TCP, then router has to check the buffer whether it has any packets other than TCP ( using this protocol field), then it will replace that with the incoming packet. 
@@ -83,7 +90,8 @@ Network Layer uses Logical addresses i.e IP address
               
   ###################################### ROW 6 ##################################################    
 - Options Field: This field can be used for the below scenarios
-  a) Record Route: This filed records all the routers IP addresses that the packet has travelled to reach destination. This field is used by the ISP & network administrators.   
+  a) Record Route: This filed records all the routers IP addresses that the packet has travelled to reach destination. 
+  This field is used by the ISP & network administrators.   
       Example:      Sender ---R1 ----(R1,R2)------(R,R2,Destination)
   b) Source Routing: This field is used to set routers path in the packet, so that it travels in the same path specified.
   
@@ -109,7 +117,8 @@ TL  - MESSAGE + TCP HEADER => SEGMENT => { Segmentation [ SEGMENT1,SEGMENT2,SEGM
 NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM { FRAGMENTATION [ FRAGMENT1,FRAGMENT2...]} => { [ MTU, MTU, MTU ... ] }
 DLL - HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER => FRAME
 
-Divide the Network layer datagram into parts so that every part/fragment can be sit into Datalink Layer MTU is called fragmentation
+Divide the Network layer datagram into parts so that every part/fragment can be sit into Datalink Layer MTU is called 
+fragmentation
 
 EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -129,6 +138,7 @@ EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
 |
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Actually Header Length Size is 20 - 60 bytes, but IHL is given 4 bits means anything more than power(2,4)-1=15 cannot be represented in header. So we should use a scaling factor of 60/15 = 4. Similarly for Offset# the saling factor is 8.
+Actually Header Length Size is 20 - 60 bytes, but IHL is given 4 bits means anything more than power(2,4)-1=15 cannot be 
+represented in header. So we should use a scaling factor of 60/15 = 4. Similarly for Offset# the saling factor is 8.
 Offset# should always be multiple of 8 so if needed remove few bytes and send them in another packet accordingly.
 
