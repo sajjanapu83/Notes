@@ -1,8 +1,8 @@
 The set of people who design the computer are called Computer Architects / Computer Designers.
 The people who use this computer to do some tasks are called Computer Programers
 Various types of computers
-- General Purpose Computers: Laptop,desktops...etc uses stored memory concept.
-- Computers specific to some task: Washing Machine, calculators...etc. these are are called Embedded systems.
+- General Purpose Computers: Laptop,desktops...etc uses stored memory architecture.
+- Computers specific to some task: Washing Machine, calculators, TV, Refrigirators ...etc. these are are called Embedded systems.
 
 ** The core of computers (laptops/washing machine...) is Microprocessors.
 
@@ -94,5 +94,9 @@ INSTRUCTION SET:
  c) Program Control Instructions : IF / WHILE / FOR - Decision Making
       - BRANCH,JUMP,SKIP,CALL RETURN,COMPARE,TEST        
       
+ ==============================================================================================================================
+ How to implement instruction, what components are required
+ - Memory : Take a programs one by one & executes
+ - 
       
       
