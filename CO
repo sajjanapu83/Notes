@@ -12,8 +12,8 @@ General Purpose computers consists of:
 - ALU ( Arthemetic & Logic Unit )
 
 Data has to move from Memory -> Registers -> ALU -> Registers -> Memory, to make all these happen we have to apply certain 
-signals at certain timing, so we need a special unit called Control Unit to give signals to all these components at a particular
-time.
+signals at certain timing, so we need a special unit called Control Unit to give signals to all these components at a 
+particular time.
 
 The purpose of the designer is to select all these components ( Hardware) based on the cost & connect them.
 
@@ -22,12 +22,63 @@ How to generate signals by looking at the instructions is called Instruction Dec
 Before designing the computers, first Instruction Set ( Machine Instructions ) has to be decided depending on what programmers 
 wants to perform. Based on Instruction Set, they choose the Hardware & design the computer.
 
+===============================================================================================================================
 
 INSTRUCTION SET:
-- It is a sequence of bits, stored in the sepcial register called IR ( Instruction Register ).
+- It is a sequence of bits, stored in the special register called IR ( Instruction Register ).
 - CPU has to understand how to generate timinig and control signals inorder to execute this Instruction, that is reason it is
   divide in to various parts
   
-      --------------------------
-     | Mode | Opcode | Operands |
-      --------------------------
+      -------------------------------------
+     | Addressing Mode | Opcode | Operands |
+      -------------------------------------
+ Addressing Mode: Tells where the operands are located in the memory
+ a) Implied Mode: Address is implied in the Opcode, no need to specify address e.g: Increment Accumulator.
+ b) Immediate Mode: Used when we use Constants: e.g: pie = 3.14
+               LD 5  means AC <-- 5
+ c) Register Mode:  
+ 
+      ADD R1 
+     
+      Register R1 holds the effective address of the operand.
+      
+   R1 |_____| 
+      | 300 |          AC <-- AC + (R1)
+      |_____|          AC <-- AC + (300)  
+      |.....|          AC <-- AC + 400
+      |.....|
+  300 | 400 |
+      |_____|
+    
+ d) Register Indirect Mode:
+     ADD M[R1]
+     
+     AC <-- AC + M[R1]
+     AC <-- AC + (R1)
+     AC <-- AC + (300)
+     AC <-- AC + 400
+ e) Auto Increment / Auto Decrement: This is register indirect mode.
+ f) Direct / Absolute Address Mode: Generally used by variables.
+     ADD X
+     AC <-- AC + M[X]
+     go to memory and access the value present at address X
+     Here only one memory access is required inorder get the operand
+     
+ g) Indirect Address Mode: We can implement pointers using this address mode...
+    ADD X
+    
+    AC <-- AC + M[X]
+    AC <-- AC + (400)
+    AC <-- AC + 500
+    Here 2 memory access is required inorder get the operand 
+ h) Relative Address Mode: EA is computer PC + ADDRESS PAR
+    Using Program counter it will decide how many words has to go Up or decendant inorder to get next instruction.
+    Example: Program loaded in memory with set of instructions.
+    
+ i) Indexed Address Mode:
+ 
+ j) Base Register Mode:
+               
+      
+      
+      
