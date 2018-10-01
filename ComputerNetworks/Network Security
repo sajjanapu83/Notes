@@ -50,12 +50,25 @@ Earier to kerberos, rlogin commands were used which a bad plan, because they use
 Kerberos server also called as KDC ( Key Distribution Center ).
 - KDC shares a keys between users & kerberos server or Services & kerberos
 - KDC maps users with the keys & we get users from Groups/Access Control Lists 
+- KDC server should be online ALLTIME
 - Kerberos uses symmetric encryption/decryption mechanism
      Ekey(PlainText) = CipherText
      Dkey(CipherText) = PlainText
 - Kerberos authentication is not used by the web.
 - Just like KDC mapping table, Certifcate Authority (CA) in WEB maintians mapping between Principal & public Keys. In web world 
 Asymmetric keys are used ( public/private keys )
+
+   Epublickey(PlainText) = CipherText
+   Dsecretkey(CipherText) = Plaintext
+   
+   Signsecretkey(message) = s    , Verifypublickey(m,s) = ok?
+
+Web Security 
+- Data over Network - Protected by SSL/TLS ( using signed certificates )
+- Code/Data in Browser ( java script files, cookies...etc ) - Protected by new URL scheme - https://
+  Hostname in the URL has to be the name in Certifcate 
+  Cookies - if it has secure flag then it get send to only https request, if not then it applies to both http & https requests.
+- User Interface ( UI ) - Lock Icon followed by URL
 
   USER1             USER2
        \           / 
