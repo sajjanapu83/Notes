@@ -46,3 +46,6 @@ port numbers ( 16 bit ) at the client end.
 Kerberos: Crytographucally secure protocol, authenticating computers & applications over the network.
 Earier to kerberos, rlogin commands were used which a bad plan, because they use IP address for authentication 
 
+Kerberos server also called as KDC ( Key Distribution Center ).
+- KDC shares a key between users & kerberos server or Services & kerberos
+
