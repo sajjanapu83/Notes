@@ -44,8 +44,40 @@ port numbers ( 16 bit ) at the client end.
 - And the best way is to use DNSec protocol.
 
 Kerberos: Crytographucally secure protocol, authenticating computers & applications over the network.
+- authentication protocol which allows only legitimate users to access the intended services over the internet.
 Earier to kerberos, rlogin commands were used which a bad plan, because they use IP address for authentication 
 
 Kerberos server also called as KDC ( Key Distribution Center ).
-- KDC shares a key between users & kerberos server or Services & kerberos
+- KDC shares a keys between users & kerberos server or Services & kerberos
+- KDC maps users with the keys & we get users from Groups/Access Control Lists 
+- Kerberos uses symmetric encryption/decryption mechanism
+     Ekey(PlainText) = CipherText
+     Dkey(CipherText) = PlainText
+- Kerberos authentication is not used by the web.
+- Just like KDC mapping table, Certifcate Authority (CA) in WEB maintians mapping between Principal & public Keys. In web world 
+Asymmetric keys are used ( public/private keys )
+
+  USER1             USER2
+       \           / 
+   HOST1\         /HOST2
+         \_______/
+         |  NTW  |
+         /---|---\
+        /    |    \
+File Server  |    Printer
+         Mail Server
+         
+         
+         
+                                                  KDC
+                                          |______________________                       
+                               KERBEROS __|        Name | Key    |
+                                          |             | Kc     |
+                                  TGS   __|             | Ks     |
+                                          |______________________|
+                                          
+
+
+SERVICES 
+
 
