@@ -1,0 +1,48 @@
+
+https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-858-computer-systems-security-fall-2014/video-lectures/lecture-12-network-security/
+
+Threat Model:
+- Intercept the packets & Model 
+- Inject Packets
+- Attacker has computer
+- 
+
+TCP Connection:
+
+Client:  C -> S  SYN(SNc)
+Server:  S -> C  SYN(SNs) + ACK(SNc+1)
+Client:  C -> S  ACK(SNs+1)
+
+TCP Data Transfer:
+Client:  C -> S  DATA(SNc+1)
+
+Attacker might guess Sequence Number.
+
+Attacker:  C -> S  SYN(SNc)
+Server:  S -> C  SYN(SNs) + ACK(SNc+1) : If the client gets an unknown packet, then client has to RESET the packet. 
+                  C -> S RST(SNc)           
+Attacker:  C -> S  ACK(SNs+1) ==> Attacker might guess servers sequence#.
+Attacker:  C -> S  DATA(SNc+1)
+
+
+Spoof TCP packets coming from arbitary IP address, because of
+- IP based Authorization:
+  Protocos used IP based Authentication: rlogin, SMTP
+- RST packets
+- Data Injections
+
+TCP Sequence Number Implemetation:
+
+ISN == Random Initial Sequence Number.
+
+ISNc ->  ISN(old style) + Cryptography_HashFunction(src IP, src port , dest IP, dest Port, Key )
+
+SNs -> F( src IP, src port , dest IP, dest Port, Timestamp, Key ) || Timestamp.
+
+DNS uses UDP protocol, and there is no 3way handshake connection establishment, to secure sequence numbers, UDP chooses random 
+port numbers ( 16 bit ) at the client end.
+- And the best way is to use DNSec protocol.
+
+Kerberos: Crytographucally secure protocol, authenticating computers & applications over the network.
+Earier to kerberos, rlogin commands were used which a bad plan, because they use IP address for authentication 
+
