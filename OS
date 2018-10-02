@@ -56,5 +56,54 @@ Process 1                                  Process 2
 |   }      |                             |    }      |
 |__________|                             |___________|
 
-
+Single line code is converted to 3 lines in Assembly Language
+    MOV count R0
+    INCR R0
+    MOV R0 count
+ 
+ Mutual Exclusion: If one process is in crtical section then it should not allow other process to enter critical section.
+ RACE CONDITION: The output is decided by the order in which the process gets executed.
+ 
+ Rules for Synchronization:
+ - Mutual Exclusion
+ - Progress : 
+ - Bounded waiting: should say after how manytimes you will get chance.
+ - Portability / Architectural Neutrality : 
+  
+              ENTRY SECTION
+                   |
+              CRITICAL SECTION   
+                   |
+              EXIT SECTION     
+ 
+ Synchronization Mechanisms are of 2 types
+ - Busy waiting 
+    a) Continuously knocking the door
+ - without busy waiting : 
+    a) check b) go & sleep 
+    
+ 1) LOCK Mechanishm: 
+    - Software mechanism implemented in User Mode.
+    - It is a busy waiting solution, and it can be used for more than 2 processes
+    - if LOCK = 1 then it means Occupied,  LOCK = 0 then Vacant
+ 
+              ENTRY SECTION [ while( LOCK !=0 ); LOCK=1; ]
+                   |
+              CRITICAL SECTION   
+                   |
+              EXIT SECTION [ LOCK=0; ]
+              
+      Example: Dressing Room - Door Knob hanging a tag ( Vacant / Occupied )
+      cons: 
+        - busy waiting doing nothing at while loop
+        - No mutual exclusion provided becuase all processes can enter CS.
+          e.g: 
+          a) P1 checks the room and is Vacant, just before changing the tag .. it is moved to ready queue becz of premption.
+          b) P2 checks the room and is Vacant hence it changes Tag to Occupied and enters CS
+          c) P1 now comes back, since it already checked it is vacant earlier, so enters CS directly without checking again
+          d) Both are in CS & Mutual Exlusion failed
+          
+       1. LOAD LOCK R0
+       2. CMP R0 #0
+    
 
