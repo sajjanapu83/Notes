@@ -59,6 +59,8 @@ Kerberos server also called as KDC ( Key Distribution Center ).
   In web world Browser Validates SSL Certifcate with CA uses Asymmetric Keys ( public/private keys ) for authenticating user
   & then all traffic between 2 parties are encrypted/decrypted using a shared / symmetric key Algorithm.
 
+ **REFER**:  https://www.youtube.com/watch?v=33VYnE7Bzpk
+
    Epublickey(PlainText) = CipherText
    Dsecretkey(CipherText) = Plaintext
    
