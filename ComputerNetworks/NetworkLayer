@@ -108,7 +108,8 @@ MTU: Maximum amount of data that could sit in any datalink layer frame, that cou
 
 AL                                    [ Message/Data     ] ----------------> MESSAGE
 TL                       [ TCP Header + Message/Data     ] ----------------> SEGMENT                           
-NL          [  IP Header + ( TCP Segment came from TL )  ] ----------------> IP DATAGRAM                      
+NL          [  IP Header + ( TCP Segment came from TL )  ] ----------------> IP DATAGRAM  
+   **Note: ARP Broadcast Request packet is sent to DL to find the MAC address of the destination.
 DL [ Header +  ( IP Datagram came from NL )              + TRAILER ] ------> FRAME
 
 
@@ -141,4 +142,29 @@ EXAMPLE: Sender sends a datagram of size 500 to other side of the network.
 Actually Header Length Size is 20 - 60 bytes, but IHL is given 4 bits means anything more than power(2,4)-1=15 cannot be 
 represented in header. So we should use a scaling factor of 60/15 = 4. Similarly for Offset# the saling factor is 8.
 Offset# should always be multiple of 8 so if needed remove few bytes and send them in another packet accordingly.
+
+
+Sending a message to all the hosts with in the network is called Limited Broadcasting.
+Sending a message to all the hosts in other network is called Directed Broadcasting.
+**Broadcting is done at MAC level ( DLL ). Internet doesn't have broadcasting, only LAN's has broadcasting.
+
+Protocols at NL:
+1. ARP: It is applied for the all below scenarios
+ - Host wants to find MAC address of Host
+ - Host wants to find the MAC address of the Router
+ - Router wants to find the MAC address of the another Router
+ - Router wants to find the MAC address of the Host.
+ 
+ARP Request Packet is BroadCasting
+ARP Reply Packet is UniCasting
+
+At this layer inorder to get the MAC address which is needed at DLL, An ARP request packet is created and is broadcasted.
+ARP using the subnet mask it finds out whether destination is in the same network or different network.
+- Scenario 1 (Same Network): Then ARP packet is broadcasted with in the network by giving it to DLL
+- Scenario 2: Then ARP understands that the packet has to be given to Router and router has to forward it to destination, 
+ so here instead of askig for MAC address of B it asks for MAC address of the router ( which is the default gatway in this 
+ scenario) and that continues.
+
+
+
 
