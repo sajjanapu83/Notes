@@ -165,6 +165,8 @@ ARP using the subnet mask it finds out whether destination is in the same networ
  so here instead of askig for MAC address of B it asks for MAC address of the router ( which is the default gatway in this 
  scenario) and that continues.
 
+SELF CONNECTIVITY:
+- Using PING 127.0.0.1 we can check out NIC... Packet will go till DLL & returns to the same host.
 
 
 
