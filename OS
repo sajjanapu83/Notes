@@ -77,10 +77,18 @@ Single line code is converted to 3 lines in Assembly Language
               EXIT SECTION     
  
  Synchronization Mechanisms are of 2 types
- - Busy waiting 
-    a) Continuously knocking the door
+ - Busy waiting ( Continuously knocking the door)
+    a) Lock Mechanism
+    b) TSL instruction provided by OS
+    c) Disable Interrupt: not useful because it is not a user mode.
+    d) Peterson Solution
+    
+    ** Note: All busy wait synchdronization mechanisms have 2 common problems
+      (i) CPU time get wasted because of busy waiting
+      (ii) Priority Inversion problem, that leads to SPIN lock.
+    
  - without busy waiting : 
-    a) check b) go & sleep 
+    a) Sleep & Wake.
     
  1) LOCK Mechanishm: 
     - Software mechanism implemented in User Mode.
@@ -94,10 +102,7 @@ Single line code is converted to 3 lines in Assembly Language
               EXIT SECTION [ LOCK=0; ]
               
       Example: Dressing Room - Door Knob hanging a tag ( Vacant / Occupied )
-      cons: 
-        - busy waiting doing nothing at while loop
-        - No mutual exclusion provided becuase all processes can enter CS.
-          e.g: 
+     
           a) P1 checks the room and is Vacant, just before changing the tag .. it is moved to ready queue becz of premption.
           b) P2 checks the room and is Vacant hence it changes Tag to Occupied and enters CS
           c) P1 now comes back, since it already checked it is vacant earlier, so enters CS directly without checking again
