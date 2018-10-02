@@ -38,3 +38,23 @@ instructions starting from Address ZERO & will number all instructions according
 
 RELOCATION: Using Relocation Info, every rellocatable address is converted to Absolute address before it loading the program.
 
+
+
+
+
+
+PROCESS SYNCHRONIZATION
+==============================================================================================================================
+
+Process 1                                  Process 2 
+|----------|                             |-----------|
+|   {      |                             |    {      |    
+|   ...    |      CRITICAL SECTION       |    ...    |
+|   ...    |   %%%%%%%%%%%%%%%%%%%%%%    |    ...    |
+| count -- |   %       Count         %   |   count++ |
+|   ...    |   %%%%%%%%%%%%%%%%%%%%%%    |    ...    |
+|   }      |                             |    }      |
+|__________|                             |___________|
+
+
+
