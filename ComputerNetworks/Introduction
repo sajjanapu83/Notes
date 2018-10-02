@@ -118,6 +118,7 @@ ISO/OSI Layers
      TL  [ M + SourcePort x - random + DestinationPort 80 - wellknown port]
      NL  [ M + x + 80 + SourceIP + DestinationIP ]
          - Using DNS we get the Destination IP
+         - ARP Broadcast Request packet is sent to DL to find the MAC address of the destination.
      DLL [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router ]
           - ISP providers provide IP address of a router, 
           but using ARP protocol we get MAC address of the router                     
@@ -140,6 +141,7 @@ ISO/OSI Layers
 AL  - MESSAGE
 TL  - MESSAGE + TCP HEADER => SEGMENT
 NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
+      **Note: ARP Broadcast Request packet is sent to DL to find the MAC address of the destination.
 DLL - HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER => FRAME
 PL -  HEADER + MESSAGE + TCP HEADER + IP HEADER + TRAILER + PREAMBLE + SOA => 1PDU
 
