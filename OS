@@ -104,6 +104,47 @@ Single line code is converted to 3 lines in Assembly Language
           d) Both are in CS & Mutual Exlusion failed
           
        1. LOAD LOCK R0
-       2. CMP R0 #0
+       2. CMP R0, #0
+       3. JNZ step1
+       4. store #1, LOCK
+          CRITICAL SECTION
+       5. store #0, LOCK
+       
+       P1:(1), Prempted | P2: (1,2,3,4 CS ) | P1: (2,3,4 CS ) 
+       Both P1 & P2 are in CS , so Mutual Exclusion got failed.
+     
+     Hence LOCK solution got failed.
+     
+    2) TSL
+       
+     |----------------------|---------------------|----------------------------------------------
+     | SOLUTION 1: LOCK     | SOLUTION 2 : LOCK   |  SOLUTION 3: TSL Instruction by OS
+     |______________________|_____________________|______________________________________________
+     | 1. LOAD LOCK R0      | 1. LOAD LOCK R0     | 1. [ LOAD LOCK R0 ; STORE #1, LOCK ]
+     | 2. CMP R0, #0        | 2. STORE #1, LOCK   |     Atomic Operation using TSL Instruction 
+     | 3. JNZ step1         | 3. CMP R0, #0       | 2. CMP R0, #0
+     | 4. STORE #1, LOCK    | 4. JNZ step1        | 3. JNZ step1
+     |    Critical Section  |    Critical Section |    Critical Section
+     | 5. STORE #0, LOCK    | 5. STORE #0, LOCK   | 4. STORE #0, LOCK
+     |______________________|_____________________|______________________________________________
+     |                      |                     |
+     | P1:(1), Prempted     | P1:(1), Prempted    | P1:(1), Prempted
+     | P2: (1,2,3,4 CS )    | P2: (1,2,3,4 CS )   | p2:(1,2,3,1,2,3,1...)
+     | P1: (2,3,4 CS )      | P1: (2,3,4 CS )     |
+     |______________________|_____________________|______________________________________________
+     | Both P1&2 are in CS  | Both P1&2 are in CS | Only one is in CS
+     | No Mutual Exclusion  | No Mutual Exclusion | Mutual Exclusion possible.
+     |                      |                     | Bounded Waiting is not guaranteed
+     |                      |                     | Starvation Possible
+     |                      |                     | Architectual Dependent. 
+     |                      |                     | Priority Inversion Problem
+     |                      |                     |  
+     
+     Priority Inversion Problem: 
+     - P1 enter into CS
+     - Because of priority scheduling algorithm, P1 got prempted & P2 has to enter CS
+     - Since LOCK variable is set by P1, P2 cant enter CS.
+     - P1 cannot enter CS since it got prempted and wating for P2 to get finish
+     - Here it goes dead/spin lock.
     
 
