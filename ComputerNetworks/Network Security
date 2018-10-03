@@ -3,6 +3,8 @@ https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-858-co
 Sunny Classroom: https://youtu.be/LPxeYtMDxl0
 Digital Certs: https://www.youtube.com/watch?v=qXLD2UHq2vk&feature=youtu.be
 
+Certificate Authority (CA): Validates the Identity of the Certificate Holder.
+
 Threat Model:
 - Intercept the packets & Model 
 - Inject Packets
