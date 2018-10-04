@@ -169,4 +169,17 @@ SELF CONNECTIVITY:
 - Using PING 127.0.0.1 we can check out NIC... Packet will go till DLL & returns to the same host.
 
 
+==============================================================================================================================
+                                                 LOGICAL ADDRESSING
+==============================================================================================================================
+
+NAT - Network Address Translation:
+
+- The router setup at home / small business runs a NAT service, which maintains a NAT table along with router table.
+- NAT service translates private - public ip address & vice-versa using the entries present in NAT table
+- 
+    
+
+Internet service provider sets up a router at our home and this router runs a service called NAT.
+
 
