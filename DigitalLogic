@@ -45,17 +45,27 @@ Input | f | f'| MINTERM       | MAXTERM
 1 1 0 | 1 | 0 | abc'          |
 1 1 1 | 1 | 0 | abc           |
 
-Canonical Representation of above example is 
-f = Σ(3,4,5,6,7) => (011) + (100) + (101) + (110) + (111)
-f = a'bc + ab'c' + ab'c + abc' + abc
-
-example 2: The minterms of f(a,b) are { a'b' , a'b ,  ab' , ab } 
+Example 2: The minterms of f(a,b) are { a'b' , a'b ,  ab' , ab } 
 * Note: canonical sum of products is sum of all the minterms for which the function has the value 1
 f(a,b) = a'b' + a'b + ab' + ab = 1
 
 Functions can be represented in different ways
 1. Canonical representation : 
    a) Canonical sum of products is called MINTERM ( it says when the function is going to be 1 )
+      f = Σ(3,4,5,6,7) => (011) + (100) + (101) + (110) + (111)
+      f = a'bc + ab'c' + ab'c + abc' + abc
    b) Canonical product of sums is called MAXTERM ( it says when the function is going to be 0 )
+      f = π(0,1,2) => (0+0+0)(0+0+1)(0+1+0)
+      f = (a+b+c)(a+b+c')(a+b'+c)
+      
 
+AND : a.b
+OR: a+b
+NOT
+       ___
+NAND : a.b = a ↑ b
+       ___
+NOR  : a+b = a ↓ b
+
+XOR : Modulo 2 sum : a ⊕ b
    
