@@ -29,6 +29,9 @@ d) Consensus Theorem: xy + x'z + yz = xy + x'z
    
 Switching expressions, they act as functions, which means they take some input and map to some output
 
+In Computers, we have only 2 inputs { 0, 1 } , hence we can call these functions as boolean functions, which produce result 
+either 0 or 1
+
 Example: f(a,b,c) = a + bc 
 
 If we have 3 variables than we will have pow(2,3) = 8 inputs
@@ -68,4 +71,13 @@ NAND : a.b = a ↑ b
 NOR  : a+b = a ↓ b
 
 XOR : Modulo 2 sum : a ⊕ b
-   
+XNOR : a ⊙ b
+
+SELF DUAL FUNCTION: 
+
+*****************************************************************************************************************************
+
+Electronic gates generally receive voltages as input and produce voltages as output.
+
+Positive Logic System : Here 1 is represented as HIGH VOLTAGE & 0 as LOW VOLTAGE
+Negative Logic System : Here 1 is represented as LOW VOLTAGE & 0 as HIGH VOLTAGE
