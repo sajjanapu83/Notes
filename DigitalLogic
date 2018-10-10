@@ -1,0 +1,32 @@
+Inorder to design any electronic digital circuit, first we will form an switching expression, then we will minimize it and 
+finally we do realization (i.e implement using AND & OR Gates... ).
+
+Switching Exression: It is fininite number of combinations of switching variables and constants { 0,1 } by means of switching
+operations { +,'.',NOT }
+             
+Example: x+x'yz+xz'
+Every occurence of a variable in its true or complement form is called a LITERAL, the above example has 6 literals.
+
+Properties of Simplifying SE
+===================================
+a) Absorption Law: x + xy  => x ( 1 + y ) = x
+b) Dual: x + x'y => (x + x')(x + y) => 1.(x + y) => (x+y)
+      x(x'+y) => xx' + xy => 0 + xy => xy
+c) Demorgan's Law: It says if there is any switching expression like
+    f = ( a,b,c,d,.,+,0,1 ) then
+    _
+    f = ( a',b',c',d',+,.,1,0)
+d) Consensus Theorem: xy + x'z + yz = xy + x'z
+    Proof: 
+    xy+x'z+yz => xy+x'z+yz(1) => xy + x'z+yz(x+x') => xy + x'z + yzx + yzx' => xy +yzx + x'z + yzx' =>
+                 xy(1+x) + x'z(1+y) ==> xy + x'z
+
+**Note: f + f' = 1
+   
+    _______
+   ( x + y ) = x' y' 
+    _____
+   ( x y ) = x' + y'
+   
+   
+   
