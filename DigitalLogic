@@ -22,11 +22,40 @@ d) Consensus Theorem: xy + x'z + yz = xy + x'z
                  xy(1+x) + x'z(1+y) ==> xy + x'z
 
 **Note: f + f' = 1
-   
     _______
    ( x + y ) = x' y' 
     _____
    ( x y ) = x' + y'
    
-   
+Switching expressions, they act as functions, which means they take some input and map to some output
+
+Example: f(a,b,c) = a + bc 
+
+If we have 3 variables than we will have pow(2,3) = 8 inputs
+--------------------------------------------
+Input | f | f'| MINTERM       | MAXTERM
+      |   |   | when(f = 1)   | when(f = 0)
+------|---|---|---------------|-------------
+0 0 0 | 0 | 1 |               | (a+b+c)
+0 0 1 | 0 | 1 |               | (a+b+c')
+0 1 0 | 0 | 1 |               | (a+b'+c)
+0 1 1 | 1 | 0 | a'bc          | 
+1 0 0 | 1 | 0 | ab'c'         |
+1 0 1 | 1 | 0 | ab'c          |
+1 1 0 | 1 | 0 | abc'          |
+1 1 1 | 1 | 0 | abc           |
+
+Canonical Representation of above example is 
+f = Σ(3,4,5,6,7) => (011) + (100) + (101) + (110) + (111)
+f = a'bc + ab'c' + ab'c + abc' + abc
+
+example 2: The minterms of f(a,b) are { a'b' , a'b ,  ab' , ab } 
+* Note: canonical sum of products is sum of all the minterms for which the function has the value 1
+f(a,b) = a'b' + a'b + ab' + ab = 1
+
+Functions can be represented in different ways
+1. Canonical representation : 
+   a) Canonical sum of products is called MINTERM ( it says when the function is going to be 1 )
+   b) Canonical product of sums is called MAXTERM ( it says when the function is going to be 0 )
+
    
