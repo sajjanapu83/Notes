@@ -55,6 +55,11 @@ e) Create EC2 instances
      The best practise is to use NAT Gateway where AWS takes care of High Availability.
    - Edit the ROUTE_TABLE_A and add an entry to allow all traffic to NAT Instance / NAT Gateway
    - Again Now Login to EC2-B and ssh to EC2-A, from there run yum update -y . It works !!!!
+   - EC2-A in private subnet can connect to S3 bucket ( AWS Public endpoint ) via NAT gateways / NAT instances, but the best 
+     practice is to use VPC end points.
+   - Create a VPC_ENDPOINT_A and associate with private Subnet-A.
+   - Edit the default ROUTE_TABLE_A and verify for the new entry for VPC_ENDPOINT_A.
+   
    
 VPC FLOW LOGS
    - It is a feature that enables to capture the information about the IP traffic going TO & FROM the network interfaces in VPC.
@@ -66,7 +71,4 @@ VPC FLOW LOGS
 
 - NAT Instances are used to provide internet traffic to EC2 instances in private subnet
 - Bastion / Jum boxes are used to administer ( using ssh or RDP ) EC2 instances in private subnet.
-
-
-
 
