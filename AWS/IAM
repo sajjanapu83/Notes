@@ -1,0 +1,19 @@
+IAM Policy Ninja - https://www.youtube.com/watch?v=Du478i9O_mc&list=PLuI1Y8zL2B-qAAAXQhUm9ttXEz2hNu1gh
+
+Root User: AWS Account Owner is called super user / root user
+
+- Root user logs in to aws web console & creates 3 different users with auto generated passwords
+  John 
+  Bob
+  Mike
+- Root user Creates 2 groups
+  a) Administrator - User John is added 
+  b) Finanace - User Bob & Mike are added 
+- Root User can create a KMS Keys and provide access to User/Group/Role who can Manage & use KMS keys for encrypting/decrypting 
+  AWS Resources ( Data at REST ).
+
+Identities: It is just a user
+Identity Store: Place were all identities are stored. e.g: Facebook, ActiveDirectory, Google ..etc
+Identity Broker: It is a service, that takes all those identities present in the Identity store and joins to IAM 
+(Indentity Access Management). And the service that allows to do that, is called Security Token Service.
+Federation: It means joining all indentities present in Indentity store to IAM.
