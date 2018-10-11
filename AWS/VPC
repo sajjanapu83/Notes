@@ -1,5 +1,51 @@
 IAM Policy Ninja - https://www.youtube.com/watch?v=Du478i9O_mc&list=PLuI1Y8zL2B-qAAAXQhUm9ttXEz2hNu1gh
 
+VPC 
+- Its a virtual data center in the cloud
+- It is a logical data center in AWS, consists of IGW's / Virtual Private Gateways, Route tables, Subnets, 
+  Network Access Control lists, Security Groups ...etc
+- 1 Subnet = 1 Availability Zone
+- Security Groups are STATEFUL ( if inbound ports are opened then corresponding outbound ports are opened automatically).
+- NACL are STATELESS ( means we need to explicitly open both inbound & outbound ports)
+- No Transivity Peering
+- Default VPC has
+   a) Subnets / Avaialbility zones
+   b) Routable 
+   c) Default Internet gateways
+++++++++++++++++++++++++++++++
+Example to build a Custom VPC
+++++++++++++++++++++++++++++++
+a) By default when a custom VPC is created, it creates
+  - Default Routetable
+  - Default NACL
+  - Default Security Group
+**Note: VPC is created in Multitenant mode ( means underlying Hardware is shared across different AWS Customers ).
+        we have 2 modes default,dedicated.
+
+b) Create Subnets
+  - First 4 & Last IP addresses for each subnet are reserved
+    1) Network Address
+    2) Gateway
+    3) DNS
+    4) Reserver for future use
+    5) BroadCast Address
+  - Create 2 subnets
+    
+c) Create Internet Gateway
+   - By default it is detached & needs to be attached to VPC.
+   - 1 IGW = 1 VPC
+d) Configure default Route tables & Create new one
+   - Edit the Route table make an additional entry by allowing traffic from internet
+      Allow traffic from 0.0.0.0/0 to Default IGW.
+      default entries are Allow Traffic from VPC CIDR block to Local ( which allows communication across the AZ's ).
+   - Explicitly associate subnets to this default route table.
+   - The subnet which got mapped to default route table is called Public subnet. Here we need to enable auto assign public
+     IP addresses.
+   - Create a new custom Route table which doest map to IGW.
+   - The subnets which got mapped to above new custom route table are called private subnets.
+   
+
+
 Root User: AWS Account Owner is called super user / root user
 
 - Root user logs in to aws web console & creates 3 different users with auto generated passwords
