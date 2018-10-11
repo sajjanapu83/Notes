@@ -29,21 +29,34 @@ b) Create Subnets
     3) DNS
     4) Reserver for future use
     5) BroadCast Address
-  - Create 2 subnets
+  - Create 2 subnets ( Subnet-A, Subnet-B )
+  - Default NACL is associated to Subnet-A & Subnet-B
+  - Note: Subnet's are mapped to only one NACL.
+  - NACL's can span across the subnets.
     
 c) Create Internet Gateway
    - By default it is detached & needs to be attached to VPC.
    - 1 IGW = 1 VPC
-d) Configure default Route tables & Create new one
-   - Edit the Route table make an additional entry by allowing traffic from internet
+d) Configure default Route tables ( ROUTE_TABLE_A) & Create new one
+   - Default Route table has an entry to Allow Traffic from VPC CIDR block to Local (which allows communication across the AZ's).
+   - Create a new custom Route table ( ROUTE_TABLE_B ) which is mapped to IGW.
+   - Edit the ROUTE_TABLE_B make an additional entry by allowing traffic from internet
       Allow traffic from 0.0.0.0/0 to Default IGW.
-      default entries are Allow Traffic from VPC CIDR block to Local ( which allows communication across the AZ's ).
-   - Explicitly associate subnets to this default route table.
-   - The subnet which got mapped to default route table is called Public subnet. Here we need to enable auto assign public
-     IP addresses.
-   - Create a new custom Route table which doest map to IGW.
-   - The subnets which got mapped to above new custom route table are called private subnets.
-   
+   - Explicitly associate subnets to this default route table.  
+   - The subnet which got mapped to new custom route table ROUTE_TABLE_B are called public subnets. Here we need to enable auto 
+     assign public IP addresses.( Example: Subnet-B is public subnet )
+   - The subnets which got mapped to above default route table ROUTE_TABLE_A are called private subnets.(Example: Subnet-A is 
+     private )
+e) Create EC2 instances
+   - EC2-A created in Private subnet-A
+   - EC2-B created in public subnet-B
+   - Login to EC2-B and we can ssh to EC2-A, but from there when we do yum update... it gets timeout since it is not connected
+     to IGW. And the only way to get access to Internet for EC2-B is via NAT Instances / NAT Gateways
+   - Create a NAT instance in Public subnet & disable Source & Destination check option since it has to pass the IP packets.
+     The best practise is to use NAT Gateway where AWS takes care of High Availability.
+   - Edit the ROUTE_TABLE_A and add an entry to allow all traffic to NAT Instance / NAT Gateway
+   - Again Now Login to EC2-B and ssh to EC2-A, from there run yum update -y . It works !!!!
+ 
 
 
 Root User: AWS Account Owner is called super user / root user
