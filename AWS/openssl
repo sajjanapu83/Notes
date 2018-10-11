@@ -1,0 +1,7 @@
+
+- Create a private key
+  openssl genrsa -aes256 -out myPrivateCA.key 2048
+- Create a self signed certificate using privatekey
+  openssl req -new -x509 -days 365 -key myPrivateCA.key -out myPrivateCA.crt
+- Sign the CSR using self-signed certificate
+
