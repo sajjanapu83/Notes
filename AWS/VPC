@@ -1,4 +1,3 @@
-IAM Policy Ninja - https://www.youtube.com/watch?v=Du478i9O_mc&list=PLuI1Y8zL2B-qAAAXQhUm9ttXEz2hNu1gh
 
 VPC 
 - Its a virtual data center in the cloud
@@ -56,26 +55,17 @@ e) Create EC2 instances
      The best practise is to use NAT Gateway where AWS takes care of High Availability.
    - Edit the ROUTE_TABLE_A and add an entry to allow all traffic to NAT Instance / NAT Gateway
    - Again Now Login to EC2-B and ssh to EC2-A, from there run yum update -y . It works !!!!
- 
+   
+VPC FLOW LOGS
+   - It is a feature that enables to capture the information about the IP traffic going TO & FROM the network interfaces in VPC.
+     And the Flow Log data is stored using AWS Cloudwatch Logs.
+   - It can be created at 
+     1) VPC Level
+     2) Subnet Level
+     3) Network Interface Level
 
-
-Root User: AWS Account Owner is called super user / root user
-
-- Root user logs in to aws web console & creates 3 different users with auto generated passwords
-  John 
-  Bob
-  Mike
-- Root user Creates 2 groups
-  a) Administrator - User John is added 
-  b) Finanace - User Bob & Mike are added 
-- Root User can create a KMS Keys and provide access to User/Group/Role who can Manage & use KMS keys for encrypting/decrypting 
-  AWS Resources ( Data at REST ).
-
-Identities: It is just a user
-Identity Store: Place were all identities are stored. e.g: Facebook, ActiveDirectory, Google ..etc
-Identity Broker: It is a service, that takes all those identities present in the Identity store and joins to IAM 
-(Indentity Access Management). And the service that allows to do that, is called Security Token Service.
-Federation: It means joining all indentities present in Indentity store to IAM.
+- NAT Instances are used to provide internet traffic to EC2 instances in private subnet
+- Bastion / Jum boxes are used to administer ( using ssh or RDP ) EC2 instances in private subnet.
 
 
 
