@@ -1,0 +1,20 @@
+The ENI ( default one ) that is associated with the EC2 instance on the startup is slightly different in functionality versus 
+the ENI that is created externally and added to the running EC2 instance.
+
+ENI's bound to Availability zone, that means an ENI created in one AZ cannot be moved to another AZ.
+
+Information stored on ENI
+- MAC address : The virtual hardware address of the network interface
+- Internal IP address: These are allocated by the VPC's DHCP server. AWS documentation says these IP's are static and are taken
+  from the IP range of the subnet in which this ENI & Instance are in.
+- External IP ( Dyanmic & Elastic ):
+- SRC/DEST check flag:
+- Security Groups
+
+Security Groups are attached to ENI's not to the EC2 instances.
+
+The ENI created by default with the instance is allocated with a primary IP which cannot be changed, but you can add the
+secondary addresses as well. These secondary addresses are auto-allocated or can be explictly specified.
+
+  
+**Note: The number of IP's on the ENI's are limited by the machine type not by the ENI.
