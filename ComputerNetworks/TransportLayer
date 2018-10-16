@@ -55,9 +55,9 @@ example:
               |       (299-200) seq = 200    |                          suddenly appear when a new connection is established
               |----------------------------->| SUCCESS                  incase source operating system uses the same port x
               |                              |                          which is used in earlier connection.
-              |                              |
-              |*****************************>| CONNECTION LOST
-             (IPs:PortX)                    (IPr:Port80) 
+              |                              |                          E.g: Fixed like 0, both first and second connection
+              |*****************************>| CONNECTION LOST          seq#'s are started with 0 & the delayed packet inprevious 
+             (IPs:PortX)                    (IPr:Port80)                connection suddenly appreared in new connection.
               |<============================>| NEW TCP CONNECTION ESTABLISHED
               |                              |
               |       (0-99) seq = 0         |
