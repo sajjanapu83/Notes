@@ -29,10 +29,28 @@ Data Link Layer  - Electrical & Communation students   - Deals with both Hardwar
 Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
 
 **Note:
-ISP providers can steal the history of our data and can sell to any one. So thats the reason we should always use secured HTTP protocol ( HTTPS ) while requesting information from the server.
-Secured HTTP protocol is responsible to entry the data transferred over the network between sender and receiver, but some meta data link which url is accessed all the information is not encrypted and that can cause issues too when we connect to Internet at coffee shops & Internet cafe's. 
+ISP providers can steal the history of our data and can sell to any one. So thats the reason we should always use secured HTTP 
+protocol ( HTTPS ) while requesting information from the server.
+Secured HTTP protocol is responsible to encypt the data transferred over the network between sender and receiver, but some 
+meta data link which url is accessed all the information is not encrypted and that can cause issues too when we connect to 
+Internet at coffee shops & Internet cafe's. 
 VPN ( Virtual Private Network ): This solves the problem by creating secured tunnel between your Host computer and the VPN server, that helps in securing data END to END btw sender & receiver. Here entire meta data of our transactions is not exposed to ISP providers, but all are stored at VPN server.
 e.g: Mozilla Firefox comes with a free VPN setup.
+
+HTTPS is set by the owner of the website, and the user has no control over it. 
+HTTPS provides authentication of the website and its associated web server, which protects against man-in-the-middle attacks. 
+Additionally, it encrypts communications between a client and server, which ensures the communications between a user and 
+website cannot be read or forged by any third-party reader.
+HTTPS will encrypt information you enter into a website, but it won’t disguise your location or offer any privacy protection. 
+It will also not offer any defense against internet censorship.
+
+A VPN is set up by the user and works on every website or application online. A VPN creates a secure tunnel between a computer 
+and the internet, allowing anonymous browsing.
+When you are connected to a VPN, your ISP only sees that encrypted traffic is passing through VPN servers, but it cannot 
+decipher the data or know which websites you have visited.
+A VPN will encrypt communications between your computer and the VPN servers, hide your IP address and location, and grant 
+access to the whole web, but it won’t protect you from the information you share willingly, like a credit card number typed 
+into an unsecure browser page.
 
 ISO/OSI Layers
 
@@ -43,7 +61,7 @@ ISO/OSI Layers
       - The messages sent over Copper wire are converted into Electrical Signals
       - The messages sent over Optical Fibre are converted into Light
       - The messages sent over Wireless network are converted into EMV ( Electro Magnetic Waves )
-   b) Deals with Transmission Modes: Wires/ph can be in any of the below tranmission modes
+   b) Deals with Transmission Modes: Wires can be in any of the below tranmission modes
       - Simplex : Data Flows in one way between sender & receiver.
         e.g: Data flow from Antena to Televison is one way
       - Half Duplex Links: Data Flows from both sides between sender & receiver but not simultaneously
@@ -78,14 +96,15 @@ ISO/OSI Layers
    ** Note: MAC address can also be used as logical address but it consists of 3 parts ( VendorID/ManufactureID, Date, 
             SerialNumber ), which is not easy for routing the packet 
   3. Network Layer: IP Packet at network Layer is un-reliable
-     **Note: if we use virtual circuits then IP Packets here at network layer are reliable and there is no need of transport layer
+   **Note: if we use virtual circuits then IP Packets here at network layer are reliable and there is no need of transportlayer
      Responsibilities:
      a) Host - Host connectivity
      b) Logical Addressing
      c) Routing - The process of building the routing table is called routing and using the routing table is called switching
      d) Switching - Deciding to which network the packet has to send.
      e) Congestion Control
-     f) Fragmentation: Technique used to divide the packet inorder to send across different LAN Technologies with in a             network e.g: TokenRing connected to Ethernet
+     f) Fragmentation: Technique used to divide the packet inorder to send across different LAN Technologies with in a network 
+     e.g: TokenRing connected to Ethernet
      
   4. Transport Layer: Using TCP IP packet is made reliable.
      Responsiblities:
@@ -101,17 +120,20 @@ ISO/OSI Layers
      a) Authentication / Authorization using digital signatures
      b) Checkpointing: e.g: Downloading movie from Torrent.
      c) Synchronization: e.g: Video & audio comes in seperate files & lip sync needs to me taken care.
-     d) Dialog Control: e.g: Web Conference - only one person ins allowed to speak even though links are full duplex, we have to restrict few links as half duplex.
+     d) Dialog Control: e.g: Web Conference - only one person is allowed to speak even though links are full duplex, we have to
+        restrict few links as half duplex.
      e) Logical Grouping of operations: e.g: Databases Atomicity - Either all commands should execute or none should execute.
-     
-     Since these functionalities are not mandatory, Computer network operating system wont provide these functionalities, if needed user has to implement at application side.
+   
+     Since these functionalities are not mandatory, Computer network operating system wont provide these functionalities, 
+     if needed user has to implement at application side.
   6. Presentation Layer:
      Responsibilties:
-     a) Character Translation: e.g: one computer supports ASCII code & other Host with different, then this layers takes care of translation part.
+     a) Character Translation: e.g: one computer supports ASCII code & other Host with different, then this layers takes care of
+        translation part.
      b) Encryption / Decyption : e.g: Message - Cipher text - Message
      c) Compression: e.g: Zip the data & un-zip the data
      
-     These functionalities are not required by all applications, so these are taken care by the user when ever it isrequired.
+     These functionalities are not required by all applications, so these are taken care by the user when ever it is required.
   
   7. Application Layer: e.g: User's Application Code.
    
