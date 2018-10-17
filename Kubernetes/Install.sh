@@ -61,3 +61,8 @@ export KUBECONFIG=$HOME/admin.conf
 
 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+
+
+vim /etc/sysctl.conf
+net.ipv4.ip_forward = 1
+sysctl --system
