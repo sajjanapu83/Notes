@@ -34,8 +34,9 @@ yum install -y kubelet kubectl kubeadm etcd
 # STEP4: Start kubelet service
 
 systemctl daemon-reload;systemctl enable kubelet;systemctl start kubelet;
-ystemctl status kubelet;
+systemctl status kubelet;
 journalctl -xeu kubelet
+systemctl cat kubelet
 
 # STEP5: Initialize kubeadm
 
