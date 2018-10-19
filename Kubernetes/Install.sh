@@ -49,6 +49,8 @@ kill -9 *****
 
 kubeadm init #
 https://www.linuxtechi.com/install-kubernetes-1-7-centos7-rhel7/
+systemctl enable firewalld
+systemctl start firewalld
 [root@k8s-master ~]# firewall-cmd --permanent --add-port=6443/tcp
 [root@k8s-master ~]# firewall-cmd --permanent --add-port=2379-2380/tcp
 [root@k8s-master ~]# firewall-cmd --permanent --add-port=10250/tcp
