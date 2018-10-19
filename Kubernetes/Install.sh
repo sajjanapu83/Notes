@@ -38,6 +38,16 @@ systemctl status kubelet;
 journalctl -xeu kubelet
 systemctl cat kubelet
 
+# This wont work so first run 
+echo 1 > /proc/sys/net/ipv4/ip_forward # Enable Ipv4 forwarding
+kubeadm init # this will fail too, but restart kubelet
+systemctl daemon-reload;systemctl restart kubelet; # this will work
+kubeadm int # this will fail saying some port is in use
+netstat -lnp | grep 1025 # indentify the process & kill the process
+kill -9 *****
+
+kubeadm init #
+
 # STEP5: Initialize kubeadm
 
 cat <<EOF >  /etc/sysctl.d/k8s.conf
