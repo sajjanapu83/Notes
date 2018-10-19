@@ -82,6 +82,7 @@ kubeadm init --pod-network-cidr=10.244.0.0/16
 cp /etc/kubernetes/admin.conf $HOME/
 chown $(id -u):$(id -g) $HOME/admin.conf
 export KUBECONFIG=$HOME/admin.conf
+strace -eopenat kubectl version
 
 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
