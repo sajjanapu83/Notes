@@ -46,8 +46,18 @@ kubeadm int # this will fail saying some port is in use
 netstat -lnp | grep 1025 # indentify the process & kill the process
 kill -9 *****
 
-kubeadm init #
 
+kubeadm init #
+https://www.linuxtechi.com/install-kubernetes-1-7-centos7-rhel7/
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=6443/tcp
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=2379-2380/tcp
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=10250/tcp
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=10251/tcp
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=10252/tcp
+[root@k8s-master ~]# firewall-cmd --permanent --add-port=10255/tcp
+[root@k8s-master ~]# firewall-cmd --reload
+[root@k8s-master ~]# modprobe br_netfilter
+[root@k8s-master ~]# echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 # STEP5: Initialize kubeadm
 
 cat <<EOF >  /etc/sysctl.d/k8s.conf
@@ -55,6 +65,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sysctl --system
+
 
 docker info | grep -i cgroup
 cat /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
