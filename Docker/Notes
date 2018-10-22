@@ -1,0 +1,14 @@
+A Docker container is a lightweight, standalone executable package that contains everything it needs to run: code, runtime, 
+system tools, system libraries – anything you can install on a server. By encapsulating and isolating everything in a container
+, this guarantees that the container will always run the same, regardless of the environment it is running in.
+
+Docker containers remove the dependencies between applications and their underlying infrastructure, providing new possibilities 
+in portability and efficiency.
+
+Containers are promising because they eliminate the dependencies between applications and infrastructure -- but they’re just a 
+technology. Just like a hypervisor needs a layer of management around to be useful in the enterprise, containers need a 
+platform to be truly effective at scale.
+
+It’s a platform to build, secure and manage containerized applications in an enterprise environment. It’s more than just 
+containers with orchestration and provisioning capability. A container platform can support secure software distribution, 
+application lifecycle management, automation, and governance. It opens up opportunities to transform organizations.
