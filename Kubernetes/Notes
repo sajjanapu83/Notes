@@ -9,6 +9,10 @@
 - Replica sets are the next level to Relication Controllers which uses Annotations instead of Labels/Selectors
 - Replica sets matches pods using the complex expressions using Annotations
 
+- Daemon Set creates one pod per node ( including master ).
+  usecases: logging, Monitoring..etc
+  
+
 
 - A service is an abstraction of logical set of pods defined by a policy
 - It acts a intermeidary for the pods to talk each other
@@ -33,8 +37,12 @@ Kube-Master
 
 It consists of 3 main components
 - API : Exposes REST API's to the consumers to talk to kubernetes cluster
-- Controller
-- Scheduler'
+- Controller : its job is to controll the cluster & always maintain its desired state.
+- Scheduler : Its job is to pickup the right node and run the pod
+
+Kube-Worker
+
+- Kubelet : It acts like an agent, communicates with kube-master all the time.
 
 kubectl config view
 kubectl config use-context <<ContextName>>
