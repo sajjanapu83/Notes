@@ -7,6 +7,8 @@
 - Replication Controller's selectors matches the pods based on the labels
 - Replication Controllers maintain the desired count all the time
 - Replica sets are the next level to Relication Controllers which uses Annotations instead of Labels/Selectors
+- Replica sets matches pods using the complex expressions using Annotations
+
 
 - A service is an abstraction of logical set of pods defined by a policy
 - It acts a intermeidary for the pods to talk each other
@@ -17,6 +19,15 @@
 - Services can be resolved by the name with in the same namespace
 - Pods in other namespace can access the service by adding the namespace to the DNS path
   e.g: myService.myNamespace
+  
+  
+Best Practise
+ - Deployments provides declarative update for pods & replica sets
+ - Deployment object is flexible for managing and scaling applications is kubernetes
+ - Deployment enables to perform rolling updates with zero downtime.
+ - Deployment enables to rollback to previous/last deployment.
+ 
+ 
 
 Kube-Master
 
@@ -33,7 +44,11 @@ kubectl describe svc <<servicename>>
 kubectl get nodes
 kubectl get svc
 kubectl get pods
+kubectl get deployments
 kubectl create -f web-pod.yml -f web-rc.yml -f web-svc.yml ## to create pod,replication controller & services
 kubectl apply -f web-svc.yml  ## to apply modified changes
+
+kubectl create secret generic dbsecret --from-file=./username.txt --from-file=./password.txt
+kubectl get secret -o yaml
 
 
