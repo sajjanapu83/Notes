@@ -1,1 +1,22 @@
-Test
+
+- Pods are the fundamental units of deployment
+- Each pod has one or more containers that may expose ports
+- Each pod has a routable IP address assigned to it
+- Pod Ip address may change during its life time
+- Labels are used to logically identify pods that match specific criteria
+- Replication Controller's selectors matches the pods based on the labels
+- Replication Controllers maintain the desired count all the time
+- Replica sets are the next level to Relication Controllers which uses Annotations instead of Labels/Selectors
+
+- A service is an abstraction of logical set of pods defined by a policy
+- It acts a intermeidary for the pods to talk each other
+- 
+
+Kube-Master
+
+It consists of 3 main components
+- API : Exposes REST API's to the consumers to talk to kubernetes cluster
+- Controller
+- Scheduler
+
+
