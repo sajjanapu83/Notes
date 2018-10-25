@@ -12,6 +12,12 @@
 - It acts a intermeidary for the pods to talk each other
 - 
 
+- The DNS server watches the kubernetes API ( Kube-Master ) for new services that are created.
+- The DNS server creates a set of DNS records for each service
+- Services can be resolved by the name with in the same namespace
+- Pods in other namespace can access the service by adding the namespace to the DNS path
+  e.g: myService.myNamespace
+
 Kube-Master
 
 It consists of 3 main components
