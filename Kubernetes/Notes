@@ -23,6 +23,17 @@ Kube-Master
 It consists of 3 main components
 - API : Exposes REST API's to the consumers to talk to kubernetes cluster
 - Controller
-- Scheduler
+- Scheduler'
+
+kubectl config view
+kubectl config use-context <<ContextName>>
+kubectl describe pod <<podname>>
+kubectl describe node <<nodename>>
+kubectl describe svc <<servicename>>
+kubectl get nodes
+kubectl get svc
+kubectl get pods
+kubectl create -f web-pod.yml -f web-rc.yml -f web-svc.yml ## to create pod,replication controller & services
+kubectl apply -f web-svc.yml  ## to apply modified changes
 
 
