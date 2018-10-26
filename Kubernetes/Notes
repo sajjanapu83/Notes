@@ -64,12 +64,12 @@ kubectl get nodes -o json |
 Kube-DashBoard
 
 - To create a Dashboard
-  kubectl -apply -f https://goo.gl/Qamqab
+  kubectl apply -f https://goo.gl/Qamqab
   
   Edit service file and change the type to NodePort from ClusterIP
   kubectl -n kube-system edit svc kubernetes-dashboard
 
 - To grant access run the below
-  kubectl -apply -f https://goo.gl/CHsLTA 
+  kubectl apply -f https://goo.gl/CHsLTA 
 
 
