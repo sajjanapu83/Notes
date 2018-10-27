@@ -60,6 +60,9 @@ kubectl cordon <<NODE IP>> ## Disables scheduling new pods to this node. Useful 
 to it like patch update. and to bring it back to scheduling run the below one
 
 kubectl uncordon <<NODE IP>>
+kubectl drain <<Node>> --force . ## more powerful than cordon, it will gracefully moves the pods to another node, if pods are
+part of replicaset/relicationController. Behind the scenes it will cordon & deletes the running pod by respecting ReplicaSet 
+behavior
 
 
 kubectl create secret generic dbsecret --from-file=./username.txt --from-file=./password.txt
