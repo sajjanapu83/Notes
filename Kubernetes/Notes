@@ -88,4 +88,23 @@ Kube-DashBoard
   
 Helm Installation
 
+curl -O https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
+chmod 777 helm-v2.11.0-linux-amd64.tar.gz
+tar -zxvf helm-v2.11.0-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm
+vim ~/.bash_profile
+export PATH = $PATH:usr/local/bin 
+helm init
+helm version
+
+Install Spinnaker
+
+kubectl create serviceaccount --namespace kube-system tiller 
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+kubectl patch deploy --namespace kube-system tiller-deploy -p '{"spec":{"template":{"spec":{"serviceAccount":"tiller"}}}}'
+
+curl -Lo values.yaml https://raw.githubusercontent.com/kubernetes/charts/master/stable/spinnaker/values.yaml
+helm install -n kubelive stable/spinnaker -f values.yaml --timeout 300  --version 0.3.5 --namespace spinnaker
+
+
 
