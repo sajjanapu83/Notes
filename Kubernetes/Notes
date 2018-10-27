@@ -64,6 +64,9 @@ kubectl drain <<Node>> --force . ## more powerful than cordon, it will gracefull
 part of replicaset/relicationController. Behind the scenes it will cordon & deletes the running pod by respecting ReplicaSet 
 behavior
 
+kubectl port-forward <<podname>> port:port ## it bypasses exposing ports using service & exposes port only to localhost,
+which helps us to debug the webapplication
+
 
 kubectl create secret generic dbsecret --from-file=./username.txt --from-file=./password.txt
 kubectl get secret -o yaml
