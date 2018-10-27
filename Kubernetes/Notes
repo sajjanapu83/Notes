@@ -68,7 +68,7 @@ kubectl port-forward <<podname>> port:port ## it bypasses exposing ports using s
 which helps us to debug the webapplication
 
 kubectl cp ./test.html podname:/usr/src/test.html  ## copies file from host machine to pod directly & vice-versa
-
+KUBE_EDITOR="vim" kubectl edit pod/web
 
 kubectl create secret generic dbsecret --from-file=./username.txt --from-file=./password.txt
 kubectl get secret -o yaml
