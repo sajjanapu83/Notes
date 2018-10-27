@@ -56,6 +56,12 @@ kubectl get deployments
 kubectl create -f web-pod.yml -f web-rc.yml -f web-svc.yml ## to create pod,replication controller & services
 kubectl apply -f web-svc.yml  ## to apply modified changes
 
+kubectl cordon <<NODE IP>> ## Disables scheduling new pods to this node. Useful if we want to perform any maintainence
+to it like patch update. and to bring it back to scheduling run the below one
+
+kubectl uncordon <<NODE IP>>
+
+
 kubectl create secret generic dbsecret --from-file=./username.txt --from-file=./password.txt
 kubectl get secret -o yaml
 kubectl get nodes -o json | 
@@ -71,5 +77,7 @@ Kube-DashBoard
 
 - To grant access run the below
   kubectl apply -f https://goo.gl/CHsLTA 
+  
+Helm Installation
 
 
