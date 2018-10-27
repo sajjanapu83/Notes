@@ -43,7 +43,7 @@ It consists of 3 main components
 Kube-Worker
 
 - Kubelet : It acts like an agent, communicates with kube-master all the time.
-
+kubectl explain ## gives all alias names
 kubectl config view
 kubectl config use-context <<ContextName>>
 kubectl describe pod <<podname>>
