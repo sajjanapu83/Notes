@@ -93,3 +93,5 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 vim /etc/sysctl.conf
 net.ipv4.ip_forward = 1
 sysctl --system
+
+kubeadm token create --print-join-command
