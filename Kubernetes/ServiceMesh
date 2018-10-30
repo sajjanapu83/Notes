@@ -1,0 +1,17 @@
+- Large application is broken down to multiple micro-services & they all talk to each other in the form of Mesh called as 
+  Service Mesh.
+- In the above scenario we have couple of challenges. Between the microservices we have
+  a) No Enryption by default
+  b) No retries, No failover's
+  c) No intellegent Loadbalancing, the Ingress controller will just do round-robin
+  d) No Routing decisions made btw the applications.. it can be applied only at Ingress controller
+  e) No Metrics/logs/traces
+  f) No access control
+  
+ *** Implementing all these for an application is an extra effort, so one solution to this is to add a proxy to each pod 
+ which does all these operations, this is called side car deployment.
+ ISTIO is the great solution for this.
+ 
+ kubectl apply -f <(istioctl kube-inject -f web-deployment.yml)
+ 
+  
