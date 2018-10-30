@@ -33,7 +33,8 @@ For ROLE BASED ACCESS CONTROL ( RBAC )
     resources: ["pods"]
     verbs: ["get", "list"]
 
-**Note: for admin we keep star * under groups/resources/verbs (["*"])
+**Note: for admin we keep star * under groups/resources/verbs (["*"]). To create Cluster Role just remove namespace & make 
+kind as ClusterRole
     
   b) RoleBindings : Binds users/groups to the roles defined in previous step
   
