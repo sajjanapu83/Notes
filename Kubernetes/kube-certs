@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=CnHTCTP8d48&index=2&list=LLqnqwu41LW_VGmsQkCksPyA&t=1280s
+
 openssl genrsa -out kar.key 2048
 
 openssl req -new -key kar.key -out kar.csr -subj="/CN=kar/O=devs"
