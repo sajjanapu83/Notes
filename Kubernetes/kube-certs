@@ -19,8 +19,9 @@ openssl x509 -in kar.crt -text -noout
 kubectl config use-context kar@kubernetes
 kubectl config use-context kubernetes-admin@kubernetes
 
-or create a kar.config file and run this
-kubectl --kubeconfig kar.config get pods
+
+kubectl --kubeconfig kar.config get pods  ## Run kubectl on worker nodes after copying the kubeconfig file from master or 
+create one user config file ( steps at the end ).
 
 
 For ROLE BASED ACCESS CONTROL ( RBAC )
