@@ -14,7 +14,9 @@ https://brancz.com/2017/10/16/kubernetes-auth-x509-client-certificates/
 https://ahmet.im/blog/kubernetes-network-policy/
 
 #### RBAC Policies #####
+
 https://docs.bitnami.com/kubernetes/how-to/configure-rbac-in-your-kubernetes-cluster/
+https://github.com/ahmetb/kubernetes-network-policy-recipes
 
 
 https://labs.play-with-k8s.com
