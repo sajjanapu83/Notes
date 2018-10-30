@@ -1,9 +1,12 @@
 https://www.youtube.com/watch?v=CnHTCTP8d48&index=2&list=LLqnqwu41LW_VGmsQkCksPyA&t=1280s
 
+## User Creates a Private key
 openssl genrsa -out kar.key 2048
 
+## User generates a certificate signing request ( CSR file ) & sends to Administrator
 openssl req -new -key kar.key -out kar.csr -subj="/CN=kar/O=devs"
 
+## Administrator generates a user/client certificate
 openssl x509 -req -in kar.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key 
 -CAcreateserial -out kar.crt -days 500
 
