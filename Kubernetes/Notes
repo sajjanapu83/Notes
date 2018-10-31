@@ -97,6 +97,8 @@ export PATH = $PATH:usr/local/bin
 helm init
 helm version
 
+For mac -> brew install kubernetes-helm
+
 Install Spinnaker
 
 kubectl create serviceaccount --namespace kube-system tiller 
@@ -110,7 +112,9 @@ install istio
 https://thenewstack.io/tutorial-blue-green-deployments-with-kubernetes-and-istio/
 
 curl -L https://git.io/getLatestIstio | sh -
-
+kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+## First change LoadBalance to NodePort & then run this file
+kubectl apply -f install/kubernetes/istio-demo.yaml 
 
 
 
