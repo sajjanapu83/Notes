@@ -21,3 +21,8 @@ https://github.com/ahmetb/kubernetes-network-policy-recipes
 
 https://labs.play-with-k8s.com
 
+#### Tools #######
+https://www.abhishek-tiwari.com/10-open-source-tools-for-highly-effective-kubernetes-sre-and-ops-teams/
+pip install kube-shell
+kube-shell
+
