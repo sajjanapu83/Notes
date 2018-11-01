@@ -26,3 +26,6 @@ https://www.abhishek-tiwari.com/10-open-source-tools-for-highly-effective-kubern
 pip install kube-shell
 kube-shell
 
+### Vsphere
+https://blog.inkubate.io/install-and-manage-automatically-a-kubernetes-cluster-on-vmware-vsphere-with-terraform-and-kubespray/
+
