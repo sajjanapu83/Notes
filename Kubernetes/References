@@ -27,5 +27,6 @@ pip install kube-shell
 kube-shell
 
 ### Vsphere
+https://blog.inkubate.io/install-and-configure-a-multi-master-kubernetes-cluster-with-kubeadm/
 https://blog.inkubate.io/install-and-manage-automatically-a-kubernetes-cluster-on-vmware-vsphere-with-terraform-and-kubespray/
 
