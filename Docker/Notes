@@ -14,3 +14,12 @@ platform to be truly effective at scale.
 It’s a platform to build, secure and manage containerized applications in an enterprise environment. It’s more than just 
 containers with orchestration and provisioning capability. A container platform can support secure software distribution, 
 application lifecycle management, automation, and governance. It opens up opportunities to transform organizations.
+
+https://www.youtube.com/watch?v=vQX5nokoqrQ&t=1450s
+- Where should i live? - Scheduling
+- How do i talk to other containers? - Networking at container level ( Flannel, Weave Net, Calico ...etc )
+- How do i talk to the world? - Routing using Ingress Controller
+- What happens if i get sick? - Recovery
+- How do we version control deployment? - Helm
+
+- Helm Chart defines a group of manifest files
