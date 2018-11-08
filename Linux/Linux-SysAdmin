@@ -19,6 +19,16 @@ Advandtages of systemd:
 1) Socket activation
 2) parallel execution
 
+Linux Kernel has a concept, which manages all the system resources in a hierarchial grouping & labeling called
+Control Groups (Cgroups)
+Each Cgroups - Limits the use of the system resources ( CPU, RAM ..etc )
+Each Namespace - Limits the view of the processes , creating a logical isolated boundary.
+
+Systemd took advantage of Cgroups & grouped all its processes together into their own type of Cgroups, which has its own slice 
+of resource pie
+
+Systemd manages the units of services grouped together approproately names slices
+
 systemd-cgls
 systemd-cgtop
 
