@@ -1,5 +1,5 @@
 class Fraction:
-    def __init__(self,num,den):
+    def __init__(self,num,den):  ## __init__ is like a constructor 
         self.num = num
         self.den = den
 
