@@ -6,11 +6,20 @@ Ist : ASIBLE_CONFIG varaible
 3rd: .ansible.cfg in current user home directory
 last: etc/ansible/ansible.cfg
 
+Default inventory path --> /etc/ansible/hosts
+
 To remove password: sudo visudo --> NOPASSWD: ALL
 
 ansible local -m ping
-ansible local -s -m ping  ## -s means as SUDO , -m means module
+ansible local -s -m ping  ## -s means as SUDO , -m means module, -a means arbitary commands
 ansible local -s -m shell -a 'yum list installed | grep python'
+
+With custom hosts path i.e present in current directory
+ansible local -i hosts -m ping
+
+To display all the ansible facts using setup module
+ansible local -s -m setup | more
+ansible local -m setup --tree /tmp/facts   ### saves all info in the facts file.
 
 
 Ansible
