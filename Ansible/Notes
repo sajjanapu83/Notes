@@ -10,16 +10,47 @@ Default inventory path --> /etc/ansible/hosts
 
 To remove password: sudo visudo --> NOPASSWD: ALL
 
+ansible all --list-hosts
 ansible local -m ping
 ansible local -s -m ping  ## -s means as SUDO , -m means module, -a means arbitary commands
 ansible local -s -m shell -a 'yum list installed | grep python'
+ansible local -s -m yum -a 'pkg=lynx state=installed update_cache=true'
 
 With custom hosts path i.e present in current directory
 ansible local -i hosts -m ping
 
-To display all the ansible facts using setup module
+To display all the facts on local machine using setup module
 ansible local -s -m setup | more
 ansible local -m setup --tree /tmp/facts   ### saves all info in the facts file.
+ansible local -m setup -a 'filter=*ipv4*'
+ansible local -s -m yum -a 'pkg=lynx state=installed update_cache=true'
+
+## appserver.yml
+- hosts: appserver
+  vars:
+   key01: Value01
+  vars_files:
+  - vars01.yml
+  - vars02.yml
+  vars_prompt:
+  - name: RunTimeKey at the time of playbook execution
+    prompt: RuntimeKey
+  tasks:
+  - name: Install Lynx 
+    yum: pkg=lynx state=installed update_cache=true
+
+ansible-playbook -s appserver.yml  ### executes the playbook
+
+## Play01.yml ( First section provide Target section )
+- hosts: appserver
+  user: test
+  sudo: yes
+  connection: ssh ## default
+  gather_facts: no/yes
+  
+ansible-playbook Play01.yml  ( ### no need of -s option since the playbook already has that option sudo: yes ).
+
+   
 
 
 Ansible
