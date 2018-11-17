@@ -1,5 +1,17 @@
 Test
 
+Order Of Precendence
+Ist : ASIBLE_CONFIG varaible 
+2nd:  ansible.cfg in current directory 
+3rd: .ansible.cfg in current user home directory
+last: etc/ansible/ansible.cfg
+
+To remove password: sudo visudo --> NOPASSWD: ALL
+
+ansible local -m ping
+ansible local -s -m ping  ## -s means as SUDO , -m means module
+ansible local -s -m shell -a 'yum list installed | grep python'
+
 
 Ansible
   Linux
