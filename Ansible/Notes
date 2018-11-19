@@ -41,6 +41,7 @@ ansible local -s -m yum -a 'pkg=lynx state=installed update_cache=true'
 
 ansible-playbook -s appserver.yml  ### executes the playbook
 
+
 ## Play01.yml ( First section provide Target section )
 - hosts: appserver
   user: test
