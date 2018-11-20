@@ -2,3 +2,81 @@
 - name: Disable SWAP
   lineinfile:
     dest: /etc/sys
+  tasks:
+    - ping:
+    - name: Install cfssl
+      become: true
+      shell: |
+            curl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl
+            curl https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson
+            chmod +x /usr/local/bin/cfssl /usr/local/bin/cfssljson
+      tags: cfssl
+    - name: Create ca-config.json file
+      shell: |
+            cat << EOF > ~/ansible_workspace/ca-config.json
+            {
+              "signing": {
+                "default": {
+                   "expiry": "9000h"
+                 },
+                 "profiles": {
+                    "kubernetes": {
+                       "usages": ["signing", "key encipherment", "server auth", "client auth"],
+                       "expiry": "9000h"
+                     }
+                  }
+               }
+             }
+    - name: Create ca-csr.json file
+      shell: |
+            cat << EOF > ~/ansible_workspace/ca-csr.json
+            {
+              "CN": "kubernetes",
+              "key": {
+                 "algo": "rsa",
+                 "size": 2048
+              },
+              "names": [
+                {
+                  "C": "US",
+                  "L": "NY",
+                  "O": "kubernetes",
+                  "OU": "DEV",
+                  "ST": "NY"
+               }
+              ]
+             }
+    - name: Create certificate authority
+      shell: |
+           cfssl gencert -initca ~/ansible_workspace/ca-csr.json | cfssljson -bare ~/ansible_workspace/ca
+      tags: ca
+    - name: Create admin-csr.json file
+      shell: |
+            cat << EOF > ~/ansible_workspace/admin-csr.json
+            {
+              "CN": "admin",
+              "key": {
+                 "algo": "rsa",
+                 "size": 2048
+              },
+              "names": [
+                {
+                  "C": "US",
+                  "L": "NY",
+                  "O": "kubernetes",
+                  "OU": "DEV",
+                  "ST": "NY"
+               }
+              ]
+             }
+      tags: admin-csr
+    - name: Create admin ca
+      shell: |
+            cd ~/ansible_workspace
+            cfssl gencert \
+             -ca=ca.pem \
+             -ca-key=ca-key.pem \
+             -config=ca-config.json \
+             -profile=kubernetes \
+             admin-csr.json | cfssljson -bare admin
+      tags: admin-ca
