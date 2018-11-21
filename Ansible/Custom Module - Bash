@@ -1,0 +1,68 @@
+- hosts: local
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: csr without state
+    csr1:
+      file: '{{ item.file }}'
+      country: '{{ item.country }}'
+      location: '{{ item.location }}'
+      o: '{{ item.o }}'
+      ou: '{{ item.ou }}'
+      ST: '{{ item.ST }}'
+    with_items:
+      - { file: admin, country: USA, location: NY, o: kubernetes, ou: DEV, ST: NewYork }
+      - { file: test01, country: USA, location: NY, o: kubernetes, ou: DEV, ST: NewYork }
+      - { file: test02, country: USA, location: NY, o: kubernetes, ou: DEV, ST: NewYork }
+    register: csr_out
+  - debug:
+      var: csr_out
+      
+In the Current Directory of the playbook create a directory named library & place all your custom modules written in 
+python/bash/powershell
+
+library/csr1.bash
+
+#!/bin/bash
+source $1
+state=${state:-present}
+if [[ $state == "present" ]]; then
+  if [ ! -e $file ]; then
+     echo "`
+        cat << EOF > ./$file-csr.json
+            {
+              "CN": "$file",
+              "key": {
+                 "algo": "rsa",
+                 "size": 2048
+              },
+              "names": [
+                {
+                  "C": "$country",
+                  "L": "$location",
+                  "O": "$o",
+                  "OU": "$ou",
+                  "ST": "$st"
+               }
+              ]
+             }
+      `"
+
+    echo { \"changed\": true }
+    exit 0
+  else
+    echo { \"changed\": false }
+    exit 0
+  fi
+fi
+
+if [[ $state == "absent" ]]; then
+   if [ -e $file ]; then
+      rm $file
+      echo { \"changed\": true }
+      exit 0
+   else
+     echo { \"changed\": false }
+     exit 0
+   fi
+fi
