@@ -1,7 +1,14 @@
 ---
-- name: Disable SWAP
-  lineinfile:
-    dest: /etc/sys
+- hosts: local
+  become: false
+  user: myname
+  gather_facts: no
+  connection: ssh
+  vars:
+   WORKER0_HOST: Host1
+   WORKER0_IP: 192.168.0.10
+   WORKER1_HOST: Host2
+   WORKER1_IP: 192.168.0.11
   tasks:
     - ping:
     - name: Install cfssl
@@ -42,7 +49,7 @@
                   "L": "NY",
                   "O": "kubernetes",
                   "OU": "DEV",
-                  "ST": "NY"
+                   "ST": "NY"
                }
               ]
              }
@@ -50,11 +57,11 @@
       shell: |
            cfssl gencert -initca ~/ansible_workspace/ca-csr.json | cfssljson -bare ~/ansible_workspace/ca
       tags: ca
-    - name: Create admin-csr.json file
+    - name: Create '{{ item.value.HOST }}'-csr.json file
       shell: |
-            cat << EOF > ~/ansible_workspace/admin-csr.json
+            cat << EOF > ~/ansible_workspace/{{ item.value.HOST }}-csr.json
             {
-              "CN": "admin",
+              "CN": "'{{ item.value.HOST }}'",
               "key": {
                  "algo": "rsa",
                  "size": 2048
@@ -69,8 +76,52 @@
                }
               ]
              }
-      tags: admin-csr
-    - name: Create admin ca
+      loop: "{{ lookup('dict', WORKERNODES) }}"
+      tags: workernodes
+    - name: Create {{ item.value.HOST }} ca
+      shell: |
+            cd ~/ansible_workspace
+            cfssl gencert \
+             -ca=ca.pem \
+             -ca-key=ca-key.pem \
+             -config=ca-config.json \
+             -hostname={{ item.value.IP }},{{ item.value.HOST }}  \
+             -profile=kubernetes \
+             {{ item.value.HOST }}-csr.json | cfssljson -bare {{ item.value.HOST }}
+      loop: "{{ lookup('dict', WORKERNODES) }}"
+      tags: worker0
+    - name: debug test
+      debug:
+        msg: "User {{ item.key }} is {{ item.value.HOST }} ({{ item.value.IP }})"
+      loop: "{{ lookup('dict', WORKERNODES) }}"
+      tags: test
+    - name: Create {{ item }}-csr.json file
+      shell: |
+            cat << EOF > ~/ansible_workspace/{{ item }}-csr.json
+            {
+              "CN": "{{ item }}",
+              "key": {
+                 "algo": "rsa",
+                 "size": 2048
+              },
+              "names": [
+                {
+                  "C": "US",
+                  "L": "NY",
+                  "O": "kubernetes",
+                  "OU": "DEV",
+                  "ST": "NY"
+               }
+              ]
+             }
+      with_items:
+        - admin
+        - kube-controller-manager
+        - kube-proxy
+        - kube-scheduler
+        - service-account
+      tags: csr
+    - name: Create {{ item }} ca
       shell: |
             cd ~/ansible_workspace
             cfssl gencert \
@@ -78,5 +129,11 @@
              -ca-key=ca-key.pem \
              -config=ca-config.json \
              -profile=kubernetes \
-             admin-csr.json | cfssljson -bare admin
-      tags: admin-ca
+             {{ item }}-csr.json | cfssljson -bare {{ item }}
+      with_items:
+        - admin
+        - kube-controller-manager
+        - kube-proxy
+        - kube-scheduler
+        - service-account
+      tags: certs
