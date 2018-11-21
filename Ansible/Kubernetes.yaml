@@ -5,19 +5,28 @@
   gather_facts: no
   connection: ssh
   vars:
-   WORKER0_HOST: Host1
-   WORKER0_IP: 192.168.0.10
-   WORKER1_HOST: Host2
-   WORKER1_IP: 192.168.0.11
+   APICERT_HOST: '192.168.0.1,192.168.0.10,HOST1,192.168.0.11,HOST2,192.168.0.12,LOADBALANCERHOST,127.0.0.1,localhost,kubernetes.default'
+   KUBERNETES_ADDRESS: 192.168.0.12
+   WORKERNODES:
+    WORKER0:
+     HOST: HOST1
+     IP: 192.168.0.10
+    WORKER1:
+     HOST: HOST2
+     IP: 192.168.0.11
   tasks:
     - ping:
     - name: Install cfssl
       become: true
-      shell: |
-            curl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o /usr/local/bin/cfssl
-            curl https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -o /usr/local/bin/cfssljson
-            chmod +x /usr/local/bin/cfssl /usr/local/bin/cfssljson
+      get_url:
+        url: '{{ item.url }}'
+        dest: '{{ item.dest }}'
+        mode: '{{ item.mode }}'
+      with_items:
+        - { url: 'https://pkg.cfssl.org/R1.2/cfssl_linux-amd64', dest: /usr/local/bin/cfssl, mode: 755 }
+        - { url: 'https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64', dest: /usr/local/bin/cfssljson, mode: 755 }
       tags: cfssl
+      delegate_to: 10.27.40.18
     - name: Create ca-config.json file
       shell: |
             cat << EOF > ~/ansible_workspace/ca-config.json
@@ -137,3 +146,33 @@
         - kube-scheduler
         - service-account
       tags: certs
+    - name: Generate Config files
+      shell: |
+            mkdir -p ~/ansible_workspace
+            cd ~/ansible_workspace
+            kubectl config set-cluster mykubernetes \
+              --certificate-authority=ca.pem \
+              --embed-certs=true \
+              --server=https://{{ KUBERNETES_ADDRESS }}:6443 \
+              --kubeconfig={{ item }}.kubeconfig
+            kubectl config set-credentials {{ item }} \
+              --client-certificate={{ item }}.pem \
+              --embed-certs=true \
+              --kubeconfig={{ item }}.kubeconfig
+            kubectl config set-context default \
+              --cluster=mykubernetes \
+              --user=kubernetes-admin \
+              --kubeconfig={{ item }}.kubeconfig
+      with_items:
+       - HOST1
+       - HOST2
+       - kube-proxy
+       - kube-controller-manager
+       - kube-scheduler
+       - admin
+      delegate_to: 127.0.0.1
+      tags: configfiles
+
+    - name: debug values
+      debug: msg={{ APICERT_HOST }}
+      tags: debugtest
