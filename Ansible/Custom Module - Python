@@ -1,0 +1,25 @@
+#!/usr/bin/python
+from ansible.module_utils.basic import *
+
+def main():
+   # module=AnsibleModule(argument_spec = dict(myname = dict(required=True, type='str')))
+    module=AnsibleModule( argument_spec={
+            'myname': {'required':True, 'type': 'str'}
+            })
+    myname = module.params['myname']
+    module.exit_json(changed=False, mycustname=myname)
+
+if __name__ == "__main__":
+    main()
+    
+    
+- hosts: local
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: check my custpymodule
+    custpymodule:
+      myname: My Custom Module in Python
+    register: custpy_out
+  - debug:
+      var: custpy_out
