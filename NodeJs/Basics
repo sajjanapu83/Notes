@@ -14,3 +14,20 @@ what will be installed)
 Event Loop Model:
 
 EventLoop Processes its quequed events only when the CALL STACK is empty
+
+NodeJS is a runtime javascript engines, executes the code outside of browser. It has 2 major dependent modules V8 & Libuv
+Node Js SDK : This is a wrapper on top of V8 & libuv, it has lot of standard modules which interacts with Core C++ libraries 
+using process.binding().
+V8 - 70% in JS & 30% in C++. : V8 Engine acts as a mediator, which takes sure, Javascript method calls are converted to 
+C++ functions
+Libuv - 100% C++ : Core logic is written in C++. It maintains threadpool.
+
+
+npm init
+// Express has a lot of helper modules, which makes easy to deal with http requests.
+npm install --save express
+// webpack is used to bundle all js modules to a single file commonly called as bundle.js
+npm install --save-dev webpack@2.2.0-rc.0
+// babel is a javascript compiler, which translates code to EC2015 browser compatable versions
+npm install --save-dev @babel/core babel-loader@7 babel-preset-latest
+npm install --save-dev style-loader css-loader
