@@ -27,7 +27,9 @@ npm init
 // Express has a lot of helper modules, which makes easy to deal with http requests.
 npm install --save express
 // webpack is used to bundle all js modules to a single file commonly called as bundle.js
-npm install --save-dev webpack@2.2.0-rc.0
+npm install --save-dev webpack
 // babel is a javascript compiler, which translates code to EC2015 browser compatable versions
 npm install --save-dev @babel/core babel-loader@7 babel-preset-latest
 npm install --save-dev style-loader css-loader
+npm install --save-dev extract-text-webpack-plugin
+
