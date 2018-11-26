@@ -32,4 +32,5 @@ npm install --save-dev webpack
 npm install --save-dev @babel/core babel-loader@7 babel-preset-latest
 npm install --save-dev style-loader css-loader
 npm install --save-dev extract-text-webpack-plugin
+npm install --save-dev image-webpack-loader url-loader file-loader
 
