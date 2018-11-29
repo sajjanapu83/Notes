@@ -57,9 +57,10 @@ Life cycle of Node : (example => node index.js)
  // Node first excutes all the file content.
  myfile.runContents();
  
+ Node Event loop is actually a combination of different phases listed below
  function shouldContinue() {
  ##: this will decide whether eventloop execute for another tick.
-   // #1: Any Pending Timers (setTimeout, SetInterval)
+   // PHASE#1: Any Pending Timers (setTimeout, SetInterval)
    // #2: Any Pending OS Tasks
    // #3: Any Pending Operations
           return pendingTimers.length || pendingOSTasks.length || pendingOperations.length;
@@ -74,4 +75,24 @@ Life cycle of Node : (example => node index.js)
    
    }
    
+setTimeout is simply like calling the function after delay has finished. essentially means execute after all current functions
+in the present queue get executed. No guarantees can be made about how long it could take.
+
+setImmediate is similar in this regard except that it doesn't use queue of functions. It checks queue of I/O eventhandlers.
+
+http://voidcanvas.com/setimmediate-vs-nexttick-vs-settimeout/
+
+setImmediate callbacks are called after I/O Queue callbacks are finished or timed out. setImmediate callbacks are placed 
+in Check Queue, which are processed after I/O Queue.
+
+setTimeout(fn, 0) callbacks are placed in Timer Queue and will be called after I/O callbacks as well as Check Queue callbacks. 
+As event loop, process the timer queue first in each iteration, so which one will be executed first depends on which phase event loop is.
+==========================================================================
+
+Node Event Loop is single threaded
+Some of the node framework / Std Library function calls are not single threaded.
+ - Java script function calls that deligate work to C++ function are not single thread. because libuv maintians threadpool
+   with a default size of 4.
+ 
+
 
