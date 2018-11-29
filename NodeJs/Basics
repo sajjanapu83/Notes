@@ -21,6 +21,8 @@ using process.binding().
 V8 - 70% in JS & 30% in C++. : V8 Engine acts as a mediator, which takes sure, Javascript method calls are converted to 
 C++ functions
 Libuv - 100% C++ : Core logic is written in C++. It maintains threadpool.
+EventLoop is like a control structure which decides what one thread should do at a one given point of time.
+Every Node program has exactly one eventloop.
 
 
 npm init
@@ -33,4 +35,43 @@ npm install --save-dev @babel/core babel-loader@7 babel-preset-latest
 npm install --save-dev style-loader css-loader
 npm install --save-dev extract-text-webpack-plugin
 npm install --save-dev image-webpack-loader url-loader file-loader
+
+Life cycle of Node : (example => node index.js)
+
+1. Node takes the contents of the file & executes all the code.
+2. Node immediately enters into a eventloop. 
+3. Behind the scenes eventloop behaves like a while loop & it executes body in one single tick.
+3. Eventloop has to meet some criteria's inorder to continue the loop
+   - If there are any functions with setTimeout, SetInterval,  still running.
+      - Once done it calls the relevent callbacks.
+   - If there are any pendingOperatingSystem tasks. ( eg: server listening to a given port )
+      - Once done, node executes relevent callbacks.
+   - if there are any long running operations . ( eg: dealing with fs module, read file from harddrive.. )
+      - Node pauses execution for sometime & continues when its done.
+   - if ther are any functions with pending timers - SetImmediate
+ 
+ const pendingTimers = [];
+ const pendingOSTasks = [];
+ const pendingOperations = [];
+ 
+ // Node first excutes all the file content.
+ myfile.runContents();
+ 
+ function shouldContinue() {
+ ##: this will decide whether eventloop execute for another tick.
+   // #1: Any Pending Timers (setTimeout, SetInterval)
+   // #2: Any Pending OS Tasks
+   // #3: Any Pending Operations
+          return pendingTimers.length || pendingOSTasks.length || pendingOperations.length;
+   // #4: Any Pending Timers (SetImmediate)
+   // #5: Handle any close events ( eg: read streams )
+   
+  }
+   
+   while( shouldContinue()) 
+   {
+   // Event loop body - executes in one ticke
+   
+   }
+   
 
