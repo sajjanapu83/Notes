@@ -1,4 +1,7 @@
 
+GOOGLE CLOUD ACCOUNT
+https://console.cloud.google.com/home/activity?project=zinc-citron-224118
+
 - Pods are the fundamental units of deployment
 - Each pod has one or more containers that may expose ports
 - Each pod has a routable IP address assigned to it
