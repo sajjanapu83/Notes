@@ -16,7 +16,11 @@
 
 - A service is an abstraction of logical set of pods defined by a policy
 - It acts a intermeidary for the pods to talk each other
-- 
+- Types of Services
+  a) ClusterIP Service: Exposes set of pods to other objects in the cluster.
+  b) NodePort Service: Exposes set of pods to outside world ( useful only for dev purpose ).
+  c) LoadBalancer Service: Legacy way of getting network traffic into cluster.
+  d) Ingress Service: Exposes a set of services to outside world
 
 - The DNS server watches the kubernetes API ( Kube-Master ) for new services that are created.
 - The DNS server creates a set of DNS records for each service
