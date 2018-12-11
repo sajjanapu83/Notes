@@ -96,9 +96,24 @@ instructions starting from Address ZERO & will number all instructions according
 RELOCATION: Using Relocation Info, every rellocatable address is converted to Absolute address before it loading the program.
 
 
+Process Overview:
+a) Process is present in secondary memory ( hard disk ) - this is called Virual Memory Concept - pow(10,-3) seconds/instruction
+b) Part of the process is present in main memory ( RAM ) - Paging - CPU Takes pow(10,-6) seconds /instruction
+c) Part of the page is present in the cache - CPU takes pow(10,-9) seconds/instruction
+d) Part of the cache is present in registers 
+    - here example cpu takes pow(10,-12) seconds to execute an instruction
+    - cache hit: required element/word present in cache
+    - hit latency: time taken to find it in cache
+    - Cache Miss: required element/word/instruction not there
+    - Miss Latency: time taken to get from main memory and place it in cache.
+    - hit : present in main memory
+    - pagefault: not in main memory
+ How are you going to decide which part of pages loaded to mainmemory or from mainmemory to cache?
+  Using Locality of referece
+  - Spacial Locality: Block size 
+  - Temporal Locality: LRU algo is commonly used in page replacement algorithm
 
-
-
+Similar to pagetable at cache side it maintains Tag directory.
 
 PROCESS SYNCHRONIZATION
 ==============================================================================================================================
