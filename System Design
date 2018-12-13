@@ -1,1 +1,10 @@
 https://github.com/donnemartin/system-design-primer
+
+CAP Theorem
+
+
+Centralized Systems - RDBMS - ACID - CA Model
+Distributed Systems - NoSQL - BASE
+  (B)asically (A)vailable (S)oftstate (E)ventuall Consistent
+  a) CP Model:
+  b) AP Model:
