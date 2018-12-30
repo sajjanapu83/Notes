@@ -13,7 +13,8 @@ PROGRAM is measured using TIME & SPACE Complexity.
       More Processes in RAM , More CPU Utilization.
       
    b) Managing more process in RAM is called Memory Management & it is acheived using memory partioning
-      (i) STATIC ( Contigious Allocation ): RAM is partioned into fixed sizes to load processes and relocation addresses are calculated by MMU using
+      (i) STATIC ( Contigious Allocation ): RAM is partioned into fixed sizes to load processes and relocation addresses are 
+      calculated by MMU using
           LIMIT & RELOCATION Registers
           LIMIT REGISTER: Holds the size of the process
           RELOCATION REGISTER: Holds the Base address of the process in RAM
