@@ -1,5 +1,7 @@
 https://goto.docker.com/rs/929-FJL-178/images/Definitive_Guide_Docker_10202016.pdf 
 
+Microservices: It is a group of homogenous containers working together to deliver a meaningful application
+
 A Docker container is a lightweight, standalone executable package that contains everything it needs to run: code, runtime, 
 system tools, system libraries – anything you can install on a server. By encapsulating and isolating everything in a container
 , this guarantees that the container will always run the same, regardless of the environment it is running in.
