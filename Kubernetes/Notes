@@ -2,6 +2,15 @@
 GOOGLE CLOUD ACCOUNT
 https://console.cloud.google.com/home/activity?project=zinc-citron-224118
 
+Microservices: It is a group of homogenous containers working together to deliver a meaningful application
+
+Using Kubernetes API's we submit workload configurations ( YAML files ) to kubernetes Master.
+
+## Sets the all the needed environmental variables for docker.
+eval $(minikube docker-env)
+env
+
+
 - Pods are the fundamental units of deployment
 - Each pod has one or more containers that may expose ports
 - Each pod has a routable IP address assigned to it
