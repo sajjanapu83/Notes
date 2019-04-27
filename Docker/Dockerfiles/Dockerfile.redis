@@ -1,0 +1,9 @@
+# Tell the docker server what to do
+#1: Install OS
+#2: Download and install application
+#3: Startup command for the container
+
+FROM alpine 
+RUN apk add --update redis #RUN - Instructions are executed at BUILD Time
+RUN apk add --update gcc
+CMD ["redis-server"] # CMD - Instrunctions are executed at RUN Time inside container

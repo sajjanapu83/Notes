@@ -1,0 +1,4 @@
+ENV_NAME=JOHN
+ENV_AGE=55
+
+#docker run --env-file=env_list -e GRADE=D -it --rm e_args

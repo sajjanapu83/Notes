@@ -1,0 +1,12 @@
+FROM alpine
+MAINTAINER KK512
+ARG NAME
+ARG AGE=12
+ENV ENV_NAME=${NAME}
+ENV ENV_AGE=${AGE}
+#CMD['echo ${ENV_NAME}']
+
+#https://vsupalov.com/docker-arg-env-variable-guide/
+
+#docker build -f Dockerfile.ARGS -t d_args --build-arg NAME=KAR512 --build-arg AGE=34 .
+#docker run -it --rm d_args sh

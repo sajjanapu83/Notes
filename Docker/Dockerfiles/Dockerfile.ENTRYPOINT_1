@@ -1,0 +1,15 @@
+FROM alpine
+MAINTAINER KK512
+ARG NAME
+ARG AGE=12
+ENV ENV_NAME=${NAME}
+ENV ENV_AGE=${AGE}
+
+
+ENTRYPOINT ["sh", "-c", "echo ${ENV_NAME}"]
+CMD ["Hello world"] 
+
+#docker build -f Dockerfile.ENTRYPOINT_1 -t d_entrypoint1 --build-arg NAME=KAR512 --build-arg AGE=34 .
+#docker run -it --rm d_entrypoint1 sh
+
+#http://goinbigdata.com/docker-run-vs-cmd-vs-entrypoint/

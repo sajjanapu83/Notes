@@ -1,0 +1,13 @@
+FROM alpine
+MAINTAINER KK512
+ARG NAME
+ARG AGE=12
+ENV ENV_NAME=${NAME}
+ENV ENV_AGE=${AGE}
+COPY init.sh .
+
+ENTRYPOINT ["sh", "init.sh"]
+
+
+#docker build -f Dockerfile.ENTRYPOINT -t d_entrypoint --build-arg NAME=KAR512 --build-arg AGE=34 .
+#docker run -it --rm d_entrypoint sh

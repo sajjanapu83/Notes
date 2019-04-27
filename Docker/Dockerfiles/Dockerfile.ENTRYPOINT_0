@@ -1,0 +1,8 @@
+FROM alpine
+MAINTAINER KK512
+ENTRYPOINT ["echo"] # any executable
+CMD ["echo12", "Hello"] # Passes as params to docker run command
+
+#docker build -f Dockerfile.ENTRYPOINT_0 -t d_entrypoint_0 .
+#docker run d_entrypoint_0
+#docker run d_entrypoint_0 echo hello world

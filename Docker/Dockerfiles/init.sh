@@ -1,0 +1,1 @@
+echo "${ENV_NAME} - ${ENV_AGE}"
