@@ -59,7 +59,9 @@ It consists of 3 main components
 Kube-Worker
 
 - Kubelet : It acts like an agent, communicates with kube-master all the time.
-kubectl explain ## gives all alias names
+kubectl explain <<type>>## gives all alias names
+kubectl explain pod --recursive ## gives full pod defination
+kubectl explain node --recursive
 kubectl config view
 kubectl config use-context <<ContextName>>
 kubectl describe pod <<podname>>
@@ -69,6 +71,8 @@ kubectl get nodes
 kubectl get svc
 kubectl get pods
 kubectl get deployments
+kubectl get rs
+kubectl scale --replicas=5 rs/rs-name
 kubectl create -f web-pod.yml -f web-rc.yml -f web-svc.yml ## to create pod,replication controller & services
 kubectl apply -f web-svc.yml  ## to apply modified changes
 
