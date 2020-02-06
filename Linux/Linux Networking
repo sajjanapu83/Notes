@@ -1,0 +1,14 @@
+lsof -i -n ### List open files
+netstat -ntulp ( numeric,tcp,udp,listening,pid )
+iptables -L -n
+iptables -t nat -nL 
+route
+ifconfig
+ip link
+ip addr
+nc -v <<ip>> <<port>> #### net cat
+telnet <<ip>> <<port>>
+curl -kv <<ip>>:<<port>>
+nmap <<ip>> ( port scan listening ports )
+
+
