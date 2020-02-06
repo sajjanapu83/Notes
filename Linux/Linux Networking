@@ -2,6 +2,8 @@ lsof -i -n ### List open files
 netstat -ntulp ( numeric,tcp,udp,listening,pid )
 iptables -L -n
 iptables -t nat -nL 
+iptables -F ( flushes all rules )
+iptables -t nat -F ( flushes all nat table rules )
 route
 ifconfig
 ip link
@@ -11,4 +13,7 @@ telnet <<ip>> <<port>>
 curl -kv <<ip>>:<<port>>
 nmap <<ip>> ( port scan listening ports )
 
-
+IPTABLES: 
+tables 
+  --> Chains 
+     --> Rules
