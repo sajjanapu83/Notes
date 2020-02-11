@@ -15,8 +15,18 @@
  kubectl apply -f <(istioctl kube-inject -f web-deployment.yml)
  
 
-Kubernetes Service VS Istio Virtual Service
+Kubernetes Service VS Istio Virtual Service ??
 
 kubernetes Service's discovers IP address of the individual pods ( Service discovery using embedded Core DNS ) 
 Where as Istio Virtual service's are managed by pilot and allow us to override Envoy proxy configurations to acheive things
 such as intellegent traffic management. 
+
+Why Ingress Component in Kubernetes ?
+
+If you want to expose the kubernetes service to outside world ( i.e out side kubernetes cluster ) we go with ingress component,
+which helps setting up with minimal cloud loadbalancers ( AWS/GCP/F5 ...etc ).
+With out Ingress if we expose service with Type set as Load balancer then each service will endup with one load balancer (
+one-one mapping btw service and lb ), which results in huge cost.
+
+Why Ingress Gateway in Istio ??
+It's replacement to k8s Ingress component, if we go with Istio
