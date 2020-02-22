@@ -24,6 +24,12 @@ env
 - Daemon Set creates one pod per node ( including master ).
   usecases: logging, Monitoring..etc
   
+  STATIC PODS: These are created and managed by Kubelet not by Kube API server. Inorder to create Static pods, pod definition 
+  file should be placed at specific default location ( /etc/kubernetes/manifests/xxx-pod.yaml ). This default location can
+  be changed during the start of kubelet service by passing custom location.
+  Kubernetes Control Plane components (kube-api-server,kube-control-manager,kube-schedular, etcd) which are part of kube-system
+  namespace are STATIC PODS manintianed by KUBELET in MASTER Node.
+  
 
 
 - A service is an abstraction of logical set of pods defined by a policy
