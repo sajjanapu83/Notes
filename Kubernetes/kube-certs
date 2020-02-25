@@ -10,6 +10,8 @@ openssl req -new -key kar.key -out kar.csr -subj="/CN=kar/O=devs"
 openssl x509 -req -in kar.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key 
 -CAcreateserial -out kar.crt -days 500
 
+kubectl config set-cluster kubernetes --certificate-authority=ca.crt --embed-certs=true --server=https://X.X.X.X:6443
+
 kubectl config set-credentials kar --client-certificate=kar.crt --client-key=kar.key --embed-certs=true
 kubectl config set-context kar@kubernetes --cluster=kubernetes --user=kar
 
