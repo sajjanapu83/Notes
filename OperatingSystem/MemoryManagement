@@ -9,3 +9,23 @@ HEAP MEMORY
 
 CPU Generates thousands of virtual addresses ( Logical Addresses ) during the execution of the program
 MMU ( Memory management unit ) isa hardware device, which maps LA to Physical Address using paging concept.
+
+
+
+
+
+|#######|                 |#######|~~~~~~~8lines Address BUS~~~~~~~~~~~~~~
+|  CPU  |=======LA========|  MMU  |~~~~~~~8lines~~~~~~~~~~~~~~
+|       |                 |       |~~~~~~~8lines~~~~~~~~~~~~~~
+|#######|                 |#######|~~~~~~~8lines~~~~~~~~~~~~~~
+
+32 Bit computer with 4GB RAM
+
+1 byte      = 8 bits
+1 Kilo Byte = 2^10 Bytes
+1 Mega Byte = 2^20 Bytes
+1 Giga Byte = 2^30 Bytes
+
+4 GB = 4 * 2^30 = 2^32 Bytes
+
+
