@@ -1,0 +1,11 @@
+STACK MEMORY
+
+
+
+HEAP MEMORY
+ a) Internal Fragmentation
+ b) External Fragmentation
+
+
+CPU Generates thousands of virtual addresses ( Logical Addresses ) during the execution of the program
+MMU ( Memory management unit ) isa hardware device, which maps LA to Physical Address using paging concept.
