@@ -114,7 +114,14 @@ ISO/OSI Layers
      d) Segmentation
      e) Multiplexing & De-Multiplexing : 
      f) Congestion Control
-     
+     Reliable Data Delivery across the network.
+       a) Packet corrupted / malformed: The below repairing techniques are used at recepient side
+          CRC (cyclic redundancy check ) at Datalink layer
+          Checksum at IP/Network layer
+          Eror correcting codes at Application layer.
+       b) Packet lost : If packet is lost during the transmit, the above techniques wont help, 
+          instead TCP uses ARQ (Automatic Repeat Request ) technique.
+          
   5. Session Layer:
      Responsibilities:
      a) Authentication / Authorization using digital signatures
