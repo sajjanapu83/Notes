@@ -8,10 +8,10 @@ Scenario 2: Two Processes present in the different host present in different loc
    
 Nearly 70+ mandatory functionalities are present. The closely related one's are grouped together & formed layers.
 Advantages of Layering
-- Divide & Conquer
-- Encapsulation
-- Abstraction
-- Testing made easy 
+> Divide & Conquer
+> Encapsulation
+> Abstraction
+> Testing made easy 
 
 Depending upon various Hardware/Software functionalities and groupings, there are several referenece models. Few of them are
 - ISO-OSI Model
