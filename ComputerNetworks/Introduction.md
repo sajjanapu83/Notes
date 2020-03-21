@@ -52,7 +52,7 @@ A VPN will encrypt communications between your computer and the VPN servers, hid
 access to the whole web, but it won’t protect you from the information you share willingly, like a credit card number typed 
 into an unsecure browser page.
 
-ISO/OSI Layers
+:+1: ISO/OSI Layers
 
 1. Physical Layer:
    Responsibilities: 
