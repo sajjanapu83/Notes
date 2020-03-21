@@ -176,7 +176,7 @@ ISO/OSI Layers
      EXAMPLE:
      IPg is ip address of google.
      IPa is the source IP address
-     
+     ```
      AL  [M]
      TL           [M+x+80]
      NL(hop-HOP)  [M+x+80+IPa+IPg]                                    [M+x+80+IPa+IPg]
@@ -185,7 +185,7 @@ ISO/OSI Layers
      DLL [M+x+80+IPa+IPg+MACa+ ***ARPSignal ***]             [M+x+80+IPa+IPg+MACa+MACr1]            [M+x+80+IPa+IPg+MACa+MACg]
      PL  [M+x+80+IPa+IPg+MACa+MACr1+ PREAMBLE+SOA]   
 
-
+    ```
 AL  - MESSAGE
 TL  - MESSAGE + TCP HEADER => SEGMENT
 NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
