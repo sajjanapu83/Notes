@@ -1,5 +1,5 @@
-:hole: https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
-:hole: https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
+https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
+https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
 
 Scenario 1: Two Processes(client , Server) present with in the same host:
    Sender & Receiver communicate with each other using a concept called IPC ( Inter Process Communication )
