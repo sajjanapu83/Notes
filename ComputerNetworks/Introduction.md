@@ -77,11 +77,11 @@ ISO/OSI Layers
       Baud rate - number of voltages transferred per second.
       Baudrate = 2 * Bitrate
 2. DataLink Layer ( HOP - HOP connectivity ): It is divided into two parts 
-   i)  LLC ( Logical Link Layer ) :
+   *  LLC ( Logical Link Layer ) :
        Responsibilities:
        a) Error Control ( CRC , CheckSum ) : CRC is used here & CheckSum is used at TCP level
        b) Flow Control ( STOP & WAIT , GO-BACKN , SR ) : GO-BACKN is most commonly used.
-   ii) MAC ( Medium Access Control )
+   * MAC ( Medium Access Control )
        Responsibilities:
        a) Error Control
        b) Framing
