@@ -8,10 +8,10 @@ Scenario 2: Two Processes present in the different host present in different loc
    
 Nearly 70+ mandatory functionalities are present. The closely related one's are grouped together & formed layers.
 Advantages of Layering
-> Divide & Conquer
-> Encapsulation
-> Abstraction
-> Testing made easy 
+- Divide & Conquer
+- Encapsulation
+- Abstraction
+- Testing made easy 
 
 Depending upon various Hardware/Software functionalities and groupings, there are several referenece models. Few of them are
 - ISO-OSI Model
@@ -97,15 +97,15 @@ ISO/OSI Layers
             SerialNumber ), which is not easy for routing the packet 
      L2 Routing:
      ## 𝐇𝐨𝐬𝐭 𝐌𝐚𝐜𝐡𝐢𝐧𝐞 (𝐀) 𝐰𝐚𝐧𝐭𝐬 𝐭𝐨 𝐬𝐞𝐧𝐝 𝐚 𝐩𝐚𝐜𝐤𝐞𝐭 𝐭𝐨 𝐃𝐞𝐬𝐢𝐭𝐧𝐚𝐭𝐢𝐨𝐧 𝐌𝐚𝐜𝐡𝐢𝐧𝐞 (𝐁) 𝐢𝐧 𝐭𝐡𝐞 𝐬𝐚𝐦𝐞 𝐬𝐮𝐛𝐧𝐞𝐭
-     * Host A calculates it NetowrkID using its subnetmask
-     * Host A caluclates Destination Machine NetowrkID using (A)'s subnet mask, if both matches then same subnet.
-     * Host A checks its ARP cache table for Destination (B)'s MAC address using destination IP
-     * If there is no entry in the ARP cache, Host (A) sends a ARP Braodcast message to all Machines in the subnet and learns
+     - Host A calculates it NetowrkID using its subnetmask
+     - Host A caluclates Destination Machine NetowrkID using (A)'s subnet mask, if both matches then same subnet.
+     - Host A checks its ARP cache table for Destination (B)'s MAC address using destination IP
+     - If there is no entry in the ARP cache, Host (A) sends a ARP Braodcast message to all Machines in the subnet and learns
        its mac address
-     * All machines receives ARP braodcast message - All machines whose IP address doesnt match with the one in the packet
+     - All machines receives ARP braodcast message - All machines whose IP address doesnt match with the one in the packet
        ignores to respond - Only Machine (B) responds with its MAC address using ARP reply Unicast message to Host (A).
-     * Host (A) saves desitnation MAC address in ARP cache table for furture reference
-     * Now Host(A) got all details, prepares Ethernet Headers & sends to Destination (B) through physical wire. 
+     - Host (A) saves desitnation MAC address in ARP cache table for furture reference
+     - Now Host(A) got all details, prepares Ethernet Headers & sends to Destination (B) through physical wire. 
        
      
      
@@ -160,6 +160,7 @@ ISO/OSI Layers
    
      Entire Flow - Host connect to google.com
      
+     ```
      AL  [ Message-M ]
      TL  [ M + SourcePort x - random + DestinationPort 80 - wellknown port]
      NL  [ M + x + 80 + SourceIP + DestinationIP ]
@@ -171,6 +172,7 @@ ISO/OSI Layers
           and that is used in the packet.
      PL   [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router + Start of the Frame Address SFA]
      
+     ```
      EXAMPLE:
      IPg is ip address of google.
      IPa is the source IP address
