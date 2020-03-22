@@ -1,12 +1,9 @@
-No:   | Topics
------ | ---------------------
- 1.   |  Arrays 
- 
+
 No: | Topics
 ------------ | -------------
 one | `Arrays` `Stacks `
 two | 
-Content in the first column | Content in the second column
+
 
 > #### One-Dimensional Array
 - :writing_hand: [ Traverse ](Code/1_program_to_traverse_elements_from_1_dimensional_array.md)
