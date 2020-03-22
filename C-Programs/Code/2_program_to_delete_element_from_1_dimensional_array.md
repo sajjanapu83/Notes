@@ -1,8 +1,9 @@
 
 ```ruby
 /* 
-Program: To show array operation
-Purpose: Program to delete element from 1-dimensional array
+Program : To show array operation
+Purpose : Program to delete element from 1-dimensional array
+online-Compiler : https://www.onlinegdb.com/online_c_compiler
 */
 
 #include <stdio.h>
