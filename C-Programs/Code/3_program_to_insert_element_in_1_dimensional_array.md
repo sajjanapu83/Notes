@@ -1,6 +1,6 @@
 
 
-```ruby
+```javascript
 /* 
 Program : To show array operation
 Purpose : Program to insert element in 1-dimensional array
