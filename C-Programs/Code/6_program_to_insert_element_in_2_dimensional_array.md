@@ -16,7 +16,7 @@ online-Compiler : https://www.onlinegdb.com/online_c_compiler
 /*++++ Function Declaration begins ++++*/
 
 void traverse(char[][C], int);
-int delete(char[][C], int, int, char[]);
+int insert(char[][C], int, int, char[]);
 
 /*++++ Function Declaration ends ++++*/
 
