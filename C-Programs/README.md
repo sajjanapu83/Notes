@@ -4,7 +4,7 @@ No:   | Topics
  
 No: | Topics
 ------------ | -------------
-one | Arrays, Stacks 
+one | `Arrays` `Stacks `
 two | 
 Content in the first column | Content in the second column
 
