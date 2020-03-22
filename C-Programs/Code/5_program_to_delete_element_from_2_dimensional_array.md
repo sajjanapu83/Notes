@@ -37,7 +37,7 @@ void main() {
   traverse(A,n);
   printf(" Enter the index of an element to delete from an Array");
   scanf("%d",&pos);
-  n=delete(A,n,pos)
+  n=delete(A,n,pos);
   traverse(A,n);
   getch();  
 }
@@ -59,11 +59,11 @@ int delete(char A[][C], int n, int pos) {
   strcpy(item,A[pos]);
   printf(" Deleting element at index %d is %s \n",pos,item);
   while(pos<=n) {
-    strcpy(A[pos],A[pos+1])
+    strcpy(A[pos],A[pos+1]);
     pos++;
   }
   n = n - 1;
-  return n
+  return n;
 
 }
 
