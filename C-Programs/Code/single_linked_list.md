@@ -9,5 +9,32 @@ typedef struct list_tag {
   struct list_tag *link;
 } node;
 
+/*+++++ Function Declarations Begin +++++*/
+
+node *SLcreation(node *);
+node *SLinsertion(node *);
+node *SLdeletion(node *);
+void SLdisplay(node *);
+
+/*+++++ Function Declarations End +++++*/
+
+void main() {
+  node *START = NULL;
+  int choice;
+  do {
+    printf("\n\t\t Program for  singly linked list \n");
+    printf("\n\t\t\t Menu: \n");
+    printf("\n\t\t1.Create");
+    printf("\n\t\t2.Insert");
+    printf("\n\t\t3.Delete");
+    printf("\n\t\t4.Display");
+    printf("\n\t\t5.Exit");
+    printf("\n\t\t Enter choice : ");
+    scanf("%d", &choice);
+  
+  }
+
+}
+
 
 ```
