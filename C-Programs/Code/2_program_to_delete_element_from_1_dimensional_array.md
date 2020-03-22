@@ -54,9 +54,8 @@ void traverse(int A[], int  n) {
 }
 
 int delete(int A[], int n, int pos) {
-  int item;
-  item = A[pos];
-  printf("Deleted item from index %d value is %d", pos, A[pos]);
+  
+  printf("Deleted item from index %d value is %d\n", pos, A[pos]);
   while(pos <= n) {
     A[pos] = A[pos+1];
     pos++;
