@@ -4,7 +4,8 @@ No:   | Topics
  
 No: | Topics
 ------------ | -------------
-1. | ` Arrays ` ` Stacks `
+1. | `Arrays` `Stacks` 
+2. | 
 Content in the first column | Content in the second column
 
 > #### One-Dimensional Array
