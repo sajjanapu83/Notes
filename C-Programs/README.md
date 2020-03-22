@@ -1,5 +1,5 @@
- #.   | Topics
------ | ------
+ #    | Topics
+----- | ---------------------
  1.   | ` Arrays ` ` Stacks `
 
 > #### One-Dimensional Array
