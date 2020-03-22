@@ -4,7 +4,7 @@ No:   | Topics
  
 No: | Topics
 ------------ | -------------
-Content from cell 1 | Content from cell 2
+1. | ` Arrays ` ` Stacks `
 Content in the first column | Content in the second column
 
 > #### One-Dimensional Array
