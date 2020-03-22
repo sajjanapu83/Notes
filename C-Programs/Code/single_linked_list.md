@@ -31,7 +31,23 @@ void main() {
     printf("\n\t\t5.Exit");
     printf("\n\t\t Enter choice : ");
     scanf("%d", &choice);
-  
+    switch(choice) {
+      case 1:
+        START = SLcreation(START);
+        break;
+      case 2:
+        START = SLinsertion(START);
+        break;
+      case 3:
+        START = SLdeletion(START);
+        break;
+      case 4:
+        printf("\n+++++++++ Linked List +++++++++\n");
+        SLdisplay(START);
+        break;
+        ';l
+)"?
+    }
   }
 
 }
