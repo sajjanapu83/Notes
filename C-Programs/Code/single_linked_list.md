@@ -45,11 +45,24 @@ void main() {
         printf("\n+++++++++ Linked List +++++++++\n");
         SLdisplay(START);
         break;
-        ';l
-)"?
+      case 5:
+        exit(0);
+      default :
+        printf("\nwrong choice:");
     }
   }
+  while (choice !=5);
+  printf("\n");
+  
+}
 
+node *SLcreation(node *START) {
+  node *temp, *prev;
+  int item;
+  printf("\nEnter data:");
+  
+  
+return START;
 }
 
 
