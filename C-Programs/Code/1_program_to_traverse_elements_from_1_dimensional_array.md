@@ -1,10 +1,10 @@
 ```ruby
 /* 
-col     | col2
-------- | -------
-Program | To show array operation
-Purpose | Program to traverse elements from 1-dimensional array
-online-Compiler | https://www.onlinegdb.com/online_c_compiler 
+
+Program : To show array operation
+Purpose : Program to traverse elements from 1-dimensional array
+online-Compiler : https://www.onlinegdb.com/online_c_compiler 
+
 */
 
 #include <stdio.h>
