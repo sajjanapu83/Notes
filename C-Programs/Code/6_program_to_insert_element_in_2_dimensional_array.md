@@ -61,7 +61,7 @@ int insert(char A[][C], int n, int pos, char[] item) {
   printf(" insert element at index %d is %s \n",pos,item);
   
   for(i=n; i>=pos; i--) {
-    strcpy(A[n+1],A[n]);
+    strcpy(A[i+1],A[i]);
   }
   strcpy(A[pos],item);
   n = n + 1;
