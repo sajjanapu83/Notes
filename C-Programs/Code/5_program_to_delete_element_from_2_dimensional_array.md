@@ -1,3 +1,5 @@
+
+```ruby
 /* 
 
 Program : To show array operation
@@ -66,3 +68,5 @@ int delete(char A[][C], int n, int pos) {
 }
 
 /*++++ Function Definition ends ++++*/
+
+```
