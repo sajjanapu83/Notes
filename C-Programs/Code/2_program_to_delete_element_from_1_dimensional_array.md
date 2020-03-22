@@ -35,6 +35,8 @@ void main() {
   
   n = delete(A,n,pos);
   
+  traverse(A,n);
+  
   getch();
   
 }
