@@ -16,7 +16,6 @@ void traverse(int[], int);
 
 void main() {
   int i=0, A[SIZE], n;
-  clrscr();
   
   printf("\n No of elements to store in an array: " );
   scanf("%d", &n);
@@ -41,7 +40,7 @@ void traverse(int A[], int  n) {
     printf("%d\n", A[i]);
     i++;
   }
-  printf("\n")
+  printf("\n");
 }
 
 /*++++ Function Definition ends ++++*/
