@@ -1,3 +1,6 @@
+
+```ruby
+
 /* 
 
 Program : To show array operation
@@ -48,3 +51,5 @@ void traverse(char A[][C], int n) {
 }
 
 /*++++ Function Definition ends ++++*/
+
+```
