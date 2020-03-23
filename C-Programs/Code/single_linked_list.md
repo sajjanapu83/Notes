@@ -60,7 +60,7 @@ node *SLcreation(node *START) {
   temp->data = item;
   temp->link = NULL;
   if (inode == NULL) {
-    // `Check if linkedlist is EMPTY`
+    // ### Check if linkedlist is EMPTY
     inode=START=temp;
   } else {
       while (inode->link != NULL) {
