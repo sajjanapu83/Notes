@@ -60,6 +60,7 @@ node *SLcreation(node *START) {
   temp->data = item;
   temp->link = NULL;
   if (inode == NULL) {
+    // `Check if linkedlist is EMPTY `
     inode=START=temp;
   } else {
       while (inode->link != NULL) {
@@ -83,12 +84,12 @@ node *SLdeletion(node *START) {
 }
 
 void SLdisplay(node *START) {
-printf("[ START ] => ");
-while (START != NULL) {
+  printf("[ START ] => ");
+  while (START != NULL) {
     printf("[ %d ] =>", START->data);
     START = START->link;
-}
-printf(" [ NULL ]");
+  }
+  printf(" [ NULL ]");
     
 }
 
