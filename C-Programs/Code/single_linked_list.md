@@ -60,14 +60,15 @@ node *SLcreation(node *START) {
   temp->data = item;
   temp->link = NULL;
   if (inode == NULL) {
-    // ### Check if linkedlist is EMPTY
+    // linkedlist is EMPTY
     inode=START=temp;
   } else {
+      // traverse till last node using inode & link to new temp memory block
       while (inode->link != NULL) {
           inode = inode->link;
       }
       inode->link=temp;
-      inode = temp;
+      inode = temp; // store the address of new temp memory block to inode.
   }
   
   return START;
