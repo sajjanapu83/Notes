@@ -59,10 +59,19 @@ void main() {
 node *SLcreation(node *START) {
   node *temp, *prev;
   int item;
+  prev = START = NULL;
   printf("\nEnter data:");
+  scanf("%d", &item);
+  temp = (node*)malloc(sizeof(node));
+  temp->data = item;
+  temp->link = NULL;
+  if (START == NULL)
+    START = temp;
+  else
+    prev->link=temp;
+  prev =temp;
   
-  
-return START;
+  return START;
 }
 
 
