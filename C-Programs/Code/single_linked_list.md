@@ -1,3 +1,9 @@
+```
+
+inode: Assume this node as iteration node, just like we define i in while loop...
+
+```
+
 ```ruby
 
 #include <stdio.h>
