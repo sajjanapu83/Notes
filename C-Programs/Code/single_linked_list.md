@@ -6,6 +6,7 @@ inode: Assume this node as iteration node, just like we define i in while loop..
 
 ```ruby
 
+
 #include <stdio.h>
 #include <malloc.h>
 
@@ -81,7 +82,33 @@ node *SLcreation(node *START) {
 }
 
 node *SLinsertion(node *START) {
-
+    
+    node *temp, *inode;
+    int pos, i, item;
+    printf("Enter position of insertion : ");
+    scanf("%d", &pos);
+    temp = (node*)malloc(sizeof(node));
+    printf("\nEnter data to be inserted : ");
+    scanf("%d", &item);
+    temp->data = item;
+    temp->link = NULL;
+    inode = START;
+    i=0;
+    if ((pos == 1) || ( START == NULL)) {
+        temp->link= START;
+        START = temp;
+    } else {
+        inode = START;
+        i=2;
+        while((i<pos) && (inode->link != NULL) ) {
+        inode = inode->link;
+        ++i;
+        }
+    temp->link = inode->link;
+    inode->link=temp;
+        
+    }
+    
     return START;
 }
 
@@ -99,6 +126,5 @@ void SLdisplay(node *START) {
   printf(" [ NULL ]");
     
 }
-
 
 ```
