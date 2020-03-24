@@ -78,8 +78,9 @@ int main()
                 // Free All nodes ( clear heap memory)
                 while(TOP) {
                     node* temp = TOP;
-                    TOP = TOP -> link;
+                    TOP = TOP->link;
                     free(temp);
+                    printf("Memory - Cleared \n");
                 }
                 exit(0);
                 
