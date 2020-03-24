@@ -1,5 +1,6 @@
 
 ```ruby
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,7 +75,14 @@ int main()
                 display();
                 break;
             case 5:
+                // Free All nodes ( clear heap memory)
+                while(TOP) {
+                    node* temp = TOP;
+                    TOP = TOP -> link;
+                    free(temp);
+                }
                 exit(0);
+                
             default:
                 printf(" Wrong choice ;\n");
                 break;
@@ -86,5 +94,6 @@ int main()
 
     return 0;
 }
+
 
 ```
