@@ -1,8 +1,8 @@
 ##### Operation: 
-> Push
-> Pop
-> Top
-> Is_Empty
+- Push
+- Pop
+- Top
+- Is_Empty
 
 ```
 
