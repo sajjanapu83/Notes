@@ -13,3 +13,5 @@
 > #### Stacks
 - :writing_hand: [ Using Arrays ](Code/Stacks_Arrays.md)
 - :writing_hand: [ Using Single Linked List ](Code/Stacks_SLL.md)
+> #### Queues
+- :writing_hand: [ Using Single Linked List ](Code/Queue_SLL.md)
