@@ -11,4 +11,4 @@
 > #### Linked List
 - :writing_hand: [ Single Linked List ](Code/single_linked_list.md)
 > #### Stacks
-- :writing_hand: [ Using Arrays ](7_program_to_perform_operations_in_stack_array.md)
+- :writing_hand: [ Using Arrays ](Code/Stacks_Arrays.md)
