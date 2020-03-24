@@ -12,3 +12,4 @@
 - :writing_hand: [ Single Linked List ](Code/single_linked_list.md)
 > #### Stacks
 - :writing_hand: [ Using Arrays ](Code/Stacks_Arrays.md)
+- :writing_hand: [ Using Single Linked List ](Code/Stacks_Arrays.md)
