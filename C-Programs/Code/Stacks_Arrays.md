@@ -33,7 +33,7 @@ void pop() {
 }
 
 void display() {
-    for(int i=0; i<=top; i++){
+    for(int i=top; i>=0; i--){
         printf("%d ", A[i]);
     }
 }
