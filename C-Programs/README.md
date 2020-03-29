@@ -15,3 +15,9 @@
 - :writing_hand: [ Using Single Linked List ](Code/Stacks_SLL.md)
 > #### Queues
 - :writing_hand: [ Using Single Linked List ](Code/Queue_SLL.md)
+> #### Startegies for solving a problem
+- :writing_hand: [ Divide & Conquer ](Code/_.md)
+- :writing_hand: [ Greedy Method ](Code/_.md)
+- :writing_hand: [ Branch & Bound ](Code/_.md)
+- :writing_hand: [ Backtracking ](Code/_.md)
+- :writing_hand: [ Dynamic programming ](Code/_.md)
