@@ -16,7 +16,7 @@
 > #### Queues
 - :writing_hand: [ Using Single Linked List ](Code/Queue_SLL.md)
 > #### Startegies for solving a problem
-- :writing_hand: [ Divide & Conquer ](Code/_.md)
+- :writing_hand: [ Divide & Conquer ](https://www.youtube.com/watch?v=2Rr2tW9zvRg&list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O&index=18)
 - :writing_hand: [ Greedy Method ](Code/_.md)
 - :writing_hand: [ Branch & Bound ](Code/_.md)
 - :writing_hand: [ Backtracking ](Code/_.md)
