@@ -25,8 +25,8 @@
 > #### Trees
 - Binary Search Trees ( BST )
 - Balanced Binary Search Trees ( BBST )
-  > AVL Trees
-  > Red-Black Trees
-  > Slay Trees
+  - AVL Trees
+  - Red-Black Trees
+  - Slay Trees
 
 
