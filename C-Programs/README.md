@@ -21,3 +21,11 @@
 - :writing_hand: [ Branch & Bound ( Used to solve only for minimization problems](Code/_.md)
 - :writing_hand: [ Backtracking ](Code/_.md)
 - :writing_hand: [ Dynamic programming ](Code/_.md)
+> #### Trees
+- Binary Search Trees ( BST )
+- Balanced Binary Search Trees ( BBST )
+  > AVL Trees
+  > Red-Black Trees
+  > Slay Trees
+
+
