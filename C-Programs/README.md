@@ -28,7 +28,8 @@
   - AVL Trees
   - Red-Black Trees
   - Slay Trees
-- Height Balanced B-trees ( Grows Upwards )
-  - 2_3 trees
-  - 2_3_4 trees
+- B-Trees ( Grows Upwards )
+  - Height Balanced B-trees 
+    - 2_3 trees
+    - 2_3_4 trees
   
