@@ -32,4 +32,7 @@
   - Height Balanced B-trees 
     - 2_3 trees
     - 2_3_4 trees
+> #### Disjoint sets 
+- Union By rank
+- Path Compression
   
