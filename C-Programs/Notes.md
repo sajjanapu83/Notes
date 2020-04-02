@@ -1,4 +1,4 @@
-###Arrays 
+### Arrays 
 - Different ways to think and solve array problems
   - Sort (Heap)
   - Search (Binary Search)
