@@ -11,6 +11,18 @@
   - Majority element ( Moore Voting )
   - Sliding Window
     - list of anagrams in a string
-    - Max sum in a subset of k size.
+    - Max sum in a subset of k size. 
+### Strings
+- Pattern Matching
+  - KMP
+### Sort
+- Quick Sort ( example: students standing in line based on their height on their own )
+  - Follows Divde & Conquer strategy
+  - Choose Pivot as 
+    - Starting element:  Not good idea, time complexity leads to n*n
+    - Median: Time Complexity improved to nlogn, but my lead to n*n for few cases
+    - Random: same as above
+- Merge Sort
+  - Follows Divde & Conquer strategy 
   
 
