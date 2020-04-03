@@ -24,5 +24,8 @@
     - Random: same as above
 - Merge Sort
   - Follows Divde & Conquer strategy 
+  - Suitable for millions of records & linked list, but not for small list of array elements
+  - Its not an inplace sort algorithm, it needs an extra array to store the sorted elements.
+  - its stable, it wont effect the position of  duplicate records after sort.
   
 
