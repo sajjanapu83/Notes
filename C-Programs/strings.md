@@ -4,7 +4,33 @@
 #include <stdlib.h>
 #include <string.h>
 
-void findlength(char *s)
+void swap(char *a, char *b) {
+// with out temp variable using bitwise XOR operation.
+    *a = *a^*b;
+    *b = *a^*b;
+    *a = *a^*b;
+}
+
+void swapUsingTemp(char *a, char *b) {
+    char t;
+    t = *a;
+    *a = *b;
+    *b = t;
+}
+
+void strReverse( char *s) {
+    int i=0, j=strlen(s)-1;
+    
+    while(i < j) {
+        swap(&s[i], &s[j]);
+        //swapUsingTemp(&s[i], &s[j]);
+        i++;
+        j--;
+    }
+    printf("\nReverse = %s ", s);
+}
+
+void findlength (char *s)
 {
   int i;
   for (i = 0; s[i] != '\0'; i++);
@@ -12,7 +38,7 @@ void findlength(char *s)
   printf ("length of %s is %d", s, i);
 }
 
-void strUpper(char *s)
+void strUpper (char *s)
 {
   int i;
   for (i = 0; s[i] != '\0' && (s[i] >= 97 && s[i] <= 122); i++)
@@ -24,7 +50,7 @@ void strUpper(char *s)
   printf ("\nUpper = %s", s);
 }
 
-void strLower(char *s)
+void strLower (char *s)
 {
   int i;
   for (i = 0; s[i] != '\0'; i++)
@@ -37,7 +63,7 @@ void strLower(char *s)
   printf ("\nLower = %s ", s);
 }
 
-void main()
+void main ()
 {
 
   char str1[] = "weLcome";
@@ -45,7 +71,7 @@ void main()
   findlength (str1);
   strUpper (str1);
   strLower (str1);
-
+  strReverse(str1);
 
 }
 
