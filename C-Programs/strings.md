@@ -30,6 +30,13 @@ void strReverse( char *s) {
     printf("\nReverse = %s ", s);
 }
 
+void strReverse01( char *s) {
+    for(int i=0, j=strlen(s)-1;i < j; i++,j--) 
+       swap(&s[i], &s[j]);
+    
+    printf("\nReverse01 = %s ", s);
+}
+
 void findlength (char *s)
 {
   int i;
