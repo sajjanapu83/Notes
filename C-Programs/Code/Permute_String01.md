@@ -1,3 +1,4 @@
+```
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -37,3 +38,4 @@ void main()
     printf("Total permuatations = %d", count);
    
 }
+```
