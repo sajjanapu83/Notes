@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 int count=0;
-char letters[] = "abc";
+char letters[] = "abcd";
 int *visited;
 void permuatations(char *str, int start, int end)
 {
@@ -11,7 +11,6 @@ void permuatations(char *str, int start, int end)
     {
         printf("%s\n", str);
         count++;
-        i=0;
     }
     else
     {
@@ -37,4 +36,5 @@ void main()
     printf("Total permuatations = %d", count);
    
 }
+
 ```
