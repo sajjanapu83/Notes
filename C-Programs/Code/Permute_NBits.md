@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 static int count=0;
-char letters[] = "abc";
+char letters[] = "abc"; // "01"
 void permuatations(char *str, int start, int end)
 {
     if(start == end)
