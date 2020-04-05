@@ -10,6 +10,8 @@
   - Suitable for millions of records & linked list, but not for small list of array elements
   - Its not an inplace sort algorithm, it needs an extra array to store the sorted elements.
   - its stable, it wont effect the position of  duplicate records after sort.
+- Heap Sort
+- Insertion Sort
 ### Strings
 - Pattern Matching
   - KMP
@@ -35,6 +37,7 @@
     ``` r=q , q=p , p=p->next q->next=r ```
 
   - Detect Loop : Take 2 pointers p & q, move p by one and q by 2 nodes. if they both meet then its a loop.
+  - Merge Sort & Insertion Sort are suitable for Linked List
 
 
   
