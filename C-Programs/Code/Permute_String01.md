@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static int count=0;
-static int i=0;
+int count=0;
 char letters[] = "abc";
 int *visited;
 void permuatations(char *str, int start, int end)
