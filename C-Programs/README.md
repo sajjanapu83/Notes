@@ -20,6 +20,7 @@
 - :writing_hand: [ Greedy Method ](Code/_.md)
 - :writing_hand: [ Branch & Bound ( Used to solve only for minimization problems](Code/_.md)
 - :writing_hand: [ Backtracking ](Code/_.md)
+  - [ Permute string of N bits ](Code/Permute_String.md)
 - :writing_hand: [ Dynamic programming ](Code/_.md)
   - :writing_hand: [ 1 ](https://www.youtube.com/watch?v=P8Xa2BitN3I)
 > #### Trees 
