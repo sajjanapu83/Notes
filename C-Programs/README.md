@@ -22,6 +22,7 @@
 - :writing_hand: [ Backtracking ](Code/_.md)
   - [ Permute string of N bits ](Code/Permute_NBits.md)
   - [ Permute string Approach1 ](Code/Permute_String01.md)
+  - [ NQueens ](Code/NQueens.md)
 - :writing_hand: [ Dynamic programming ](Code/_.md)
   - :writing_hand: [ 1 ](https://www.youtube.com/watch?v=P8Xa2BitN3I)
 > #### Trees 
