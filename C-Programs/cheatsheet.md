@@ -5,7 +5,7 @@ Create | Insert | BST_SIZE | MinKey | MaxKey |
 struct node { 
 int data; struct node *left; struct node *right; }; | struct node { int data; struct node *left; struct node *right; };  | struct node { int data; struct node *left; struct node *right; }; | struct node { int data; struct node *left; struct node *right; }; | struct node { int data; struct node *left; struct node *right; }; |
 
-
+```
 "typedef struct BSTNode {
     int data;
     struct BSTNode *ltree;
@@ -42,6 +42,6 @@ int data; struct node *left; struct node *right; }; | struct node { int data; st
         root = root->rtree;
     return root->data;
 }"
-		
+```		
 		
 		
