@@ -70,6 +70,13 @@ void strLower (char *s)
   printf ("\nLower = %s ", s);
 }
 
+char* substr(char *str,int pos,int n){
+    char *s = (char *)malloc(n*sizeof(char));
+    for(int i=pos;str[i]!='\0';i++)
+       s[i-pos]=str[i];
+  return s;
+}
+
 void main ()
 {
 
