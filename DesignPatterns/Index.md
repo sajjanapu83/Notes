@@ -11,6 +11,7 @@ Example:
 a) HtmlBuilder
 b) XmlBuilder
 c) TreeBuilder
+d) String Builder
 
 ```
 - Factory:
