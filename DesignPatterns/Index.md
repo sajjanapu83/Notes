@@ -30,7 +30,7 @@ Factory Method:
 a) Uses static methods with in a class, which internally calls private constructors..
 
 Factory:
-b) Seperate object construction 
+a) Uses inner classes technique for factory class construction...
 
 ```
 
