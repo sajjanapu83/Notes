@@ -17,8 +17,20 @@ d) String Builder
 - Factory:
 
 ```
+Scenario: Two contructors with same defination is not allowed in a class..
+ constructor1(int,int) {
+ //! locgic 1
+ }
+ constructor1(int,int) {
+  //! logic 2
+ }
+
+Solution: FACTORY PATTERN
 Factory Method:
-a) Uses static methods, which internally calls private constructors..
+a) Uses static methods with in a class, which internally calls private constructors..
+
+Factory:
+b) Seperate object construction 
 
 ```
 
