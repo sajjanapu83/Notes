@@ -19,7 +19,7 @@ d) String Builder
 ```
 Scenario: Two contructors with same defination is not allowed in a class..
  constructor1(int,int) {
- //! locgic 1
+ //! logic 1
  }
  constructor1(int,int) {
   //! logic 2
@@ -27,9 +27,11 @@ Scenario: Two contructors with same defination is not allowed in a class..
 
 Solution: FACTORY PATTERN
 #### Factory Method:
-a) Uses static methods with in a class, which internally calls private constructors..
+a) Uses static methods with in a class, which internally calls private constructor for object creation..
 
-#### Inner Factory Method:
+A factory can be external ( use friend keyword ). or internal ( as an inner-class ).
+
+#### Inner Factory: 
 a) Uses inner classes technique for factory class construction...
 
 Abstract Factory:
