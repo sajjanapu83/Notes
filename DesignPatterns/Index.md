@@ -26,10 +26,10 @@ Scenario: Two contructors with same defination is not allowed in a class..
  }
 
 Solution: FACTORY PATTERN
-Factory Method:
+#### Factory Method:
 a) Uses static methods with in a class, which internally calls private constructors..
 
-Factory:
+#### Inner Factory Method:
 a) Uses inner classes technique for factory class construction...
 
 ```
