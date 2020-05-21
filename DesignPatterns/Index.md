@@ -1,6 +1,8 @@
+- https://www.dotnettricks.com/learn/designpatterns
+- https://channel9.msdn.com/Shows/Visual-Studio-Toolbox/Design-Patterns-Decorator
+- https://github.com/skimedic/presentations/tree/master/Patterns/Current/Structural/Decorator
 
 ## Creational Design Patterns
-- https://www.dotnettricks.com/learn/designpatterns
 - Builder:
 
 ```
