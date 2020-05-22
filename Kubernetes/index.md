@@ -22,4 +22,4 @@
 
 | Attempt | #1 | #2 |
 | :---: | :---: | :---: |
-| ```diff Seconds<br /> one ``` | 301 | 283 |
+| ```diff<br /> Seconds<br /> one ``` | 301 | 283 |
