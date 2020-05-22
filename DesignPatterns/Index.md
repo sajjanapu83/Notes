@@ -6,7 +6,7 @@
 - Builder:
 
 ```diff
-- Creation of object is done piece by piece...
++ Creation of object is done piece by piece...
          or
 Object construction is done piece by piece...
 
@@ -17,7 +17,7 @@ c) TreeBuilder
 d) String Builder
 
 ```
-- ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=Factory:)
+- Factory:
 
 ```
 Scenario: Two contructors with same defination is not allowed in a class..
