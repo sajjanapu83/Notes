@@ -17,7 +17,7 @@ c) TreeBuilder
 d) String Builder
 
 ```
-- ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `Factory:`
+- ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=Factory:)
 
 ```
 Scenario: Two contructors with same defination is not allowed in a class..
