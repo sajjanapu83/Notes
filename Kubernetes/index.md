@@ -1,7 +1,7 @@
 
-## Pods
+## Pods Scheduling
 
-- ####   Manual Scheduling New Pods
+- ####   Scheduling New Pods Manually
 ```diff
 ##   Pod_Manual_Scheduling
 
@@ -22,7 +22,7 @@
 
 ```
 
-- #### Manual Scheduling Existing pods
+- #### Scheduling Existing Pods Manually
 ```diff
 ##   Manual_Scheduling Existing Pods
 
@@ -39,5 +39,39 @@
 !|        --request POST 
 !|        --data '{"apiVersion":"v1", "kind": "Binding" ... }
 !|        http://$IP/api/v1/namespaces/default/pods/$PODNAME/binding/
+
+```
+
+- ####   Taint => Node
+```diff
+##   Taints a Node
+
++| kubectl taint nodes node-name key=value:taint-effect
+
+!| taint-effect => ( NoSchedule, PreferNoSchedule, NoExecute )
+
+Example:
++| kubectl taint nodes node-01 app=blue:NoSchedule
+
+```
+
+- ####   Tolerations => Pod
+```diff
++|   apiVersion: v1
++|   kind: Pod
++|   metadata:
++|     name: nginx
+!|     namespace: dev
++|     labels:
++|       app: nginx
++|   spec:
++|     containers:
++|     - name: nginx
++|       image: nginx
+-|     tolerations:
+-|     - key: "app"
+-|       operator: "Equals"
+-|       value: "blue"
+-|       effect: "NoSchedule"
 
 ```
