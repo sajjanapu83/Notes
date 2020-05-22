@@ -117,3 +117,28 @@ Example:
 
 - ####   Node Affinity
 
+```diff
+
+#|  kubectl label nodes <node-name> <label-key>=<label-value> 
+
+
++|  kubectl label nodes node-01 size=Large
++|  kubectl label nodes node-02 size=Medium
++|  kubectl label nodes node-03 size=Small
+-----------------------------------------------------------
++|   apiVersion: v1
++|   kind: Pod
++|   metadata:
++|     name: nginx
+!|     namespace: dev
++|     labels:
++|       app: nginx
++|   spec:
++|     containers:
++|     - name: nginx
++|       image: nginx
+-|     nodeSelector:
+-|       size: Large
+
+```
+
