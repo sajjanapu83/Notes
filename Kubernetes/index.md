@@ -1,6 +1,7 @@
 
 - Pods:
 
+##   Manual Scheduling New Pods
 ```diff
 ##   Pod_Manual_Scheduling
 
@@ -18,5 +19,25 @@
 -|       ports:
 -|       - containerPort: 8080  
 #|     nodeName: node-01
+
+```
+
+## Manual Scheduling Existing pods
+```diff
+##   Pod_Manual_Scheduling
+
++|   apiVersion: v1
++|   kind: Binding
++|   metadata:
++|     name: nginx
++|   target:
++|     apiVersion: v1
++|     kind: Node
++|     name: node-02
+
+!| curl --header "Content-Type:application/json" 
+!|      --request POST 
+!|      --data '{"apiVersion":"v1", "kind": "Binding" ... }
+!|      http://$IP/api/v1/namespaces/default/pods/$PODNAME/binding/
 
 ```
