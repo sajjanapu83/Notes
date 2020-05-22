@@ -5,8 +5,8 @@
 ## Creational Design Patterns
 - Builder:
 
-```
-Creation of object is done piece by piece...
+```diff
+- Creation of object is done piece by piece...
          or
 Object construction is done piece by piece...
 
@@ -16,7 +16,7 @@ b) XmlBuilder
 c) TreeBuilder
 d) String Builder
 
-```diff
+```
 - Factory:
 
 ```
