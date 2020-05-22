@@ -19,7 +19,3 @@
 #|     nodeName: node-01
 
 ```
-
-| Attempt | #1 | #2 |
-| :---: | :---: | :---: |
-| ```diff<br /> Seconds<br /> one ``` | 301 | 283 |
