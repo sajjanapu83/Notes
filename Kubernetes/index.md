@@ -8,11 +8,11 @@
 +|   metadata:
 +|     name: pod-name
 !|     namespace: dev
-+     labels:
-+       app: pod-label-name
-+   spec:
-+     containers:
-+     - name: nginx
-+       image: nginx
--       containerPort: 80       
++|     labels:
++|       app: pod-label-name
++|   spec:
++|     containers:
++|     - name: nginx
++|       image: nginx
+-|       containerPort: 80       
 ```
