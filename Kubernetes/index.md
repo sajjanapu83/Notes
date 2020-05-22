@@ -1,6 +1,6 @@
 
 - Pods:
-![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `Manual Scheduling New Pods`
+- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `Manual Scheduling New Pods`
 - ####   Manual Scheduling New Pods
 ```diff
 ##   Pod_Manual_Scheduling
