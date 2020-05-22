@@ -6,13 +6,16 @@
 +|   apiVersion: v1
 +|   kind: Pod
 +|   metadata:
-+|     name: pod-name
++|     name: nginx
 !|     namespace: dev
 +|     labels:
-+|       app: pod-label-name
++|       app: nginx
 +|   spec:
 +|     containers:
 +|     - name: nginx
 +|       image: nginx
--|       containerPort: 80       
+-|       ports:
+-|       - containerPort: 8080  
+#|     nodename: node-01
+
 ```
