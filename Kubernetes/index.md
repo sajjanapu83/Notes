@@ -35,7 +35,7 @@
 +|     kind: Node
 +|     name: node-02
 
-!| curl --header "Content-Type:application/json" 
+!|   curl --header "Content-Type:application/json" 
 !|      --request POST 
 !|      --data '{"apiVersion":"v1", "kind": "Binding" ... }
 !|      http://$IP/api/v1/namespaces/default/pods/$PODNAME/binding/
