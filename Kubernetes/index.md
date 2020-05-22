@@ -17,5 +17,9 @@
 -|       ports:
 -|       - containerPort: 8080  
 #|     nodeName: node-01
-@@ done
+
 ```
+
+| Attempt | #1 | #2 |
+| :---: | :---: | :---: |
+| Seconds | 301 | 283 |
