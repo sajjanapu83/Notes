@@ -75,3 +75,34 @@ Example:
 -|       effect: "NoSchedule"
 
 ```
+
+- ####   NodeSelector
+
+```diff
+
+#|  kubectl label nodes <node-name> <label-key>=<label-value> 
+Example:
+
++|  kubectl label nodes node-01 size=Large
+
++|   apiVersion: v1
++|   kind: Pod
++|   metadata:
++|     name: nginx
+!|     namespace: dev
++|     labels:
++|       app: nginx
++|   spec:
++|     containers:
++|     - name: nginx
++|       image: nginx
+-|     nodeSelector:
+-|       size: Large
+
+!| Limitations: Uses single Label & selector, wont support multiple labels
++| %Solution%: Node Affinity
+
+```
+
+- ####   Node Affinity
+
