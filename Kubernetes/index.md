@@ -1,7 +1,7 @@
 
 - Pods:
 
-####   Manual Scheduling New Pods
+- ####   Manual Scheduling New Pods
 ```diff
 ##   Pod_Manual_Scheduling
 
@@ -22,7 +22,7 @@
 
 ```
 
-#### Manual Scheduling Existing pods
+- #### Manual Scheduling Existing pods
 ```diff
 ##   Pod_Manual_Scheduling
 
