@@ -2,6 +2,7 @@
 - Pods:
 
 ```diff
+* Manual Scheduling
 
 +|   apiVersion: v1
 +|   kind: Pod
