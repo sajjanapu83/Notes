@@ -2,7 +2,7 @@
 # Pod: Smallest unit of deployment
 + Service: It is just like a viritual service inside the cluster, groups a set of related pods and provides an 
 + interface to other pods to communicate.
-+ Kublet: It acts like an agent, whose responsiblity is to create a pod on an node and report to kube-api-server
+! Kublet: It acts like an agent, whose responsiblity is to create a pod on an node and report to kube-api-server
 - Scheduler: It decides on which node the pod has to be created based on node ranks ... 
 ! kube-proxy: It is responsible to Maintain IP-Table rules, to forward traffic between the pods across the cluster.
 
