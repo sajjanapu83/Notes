@@ -17,5 +17,5 @@
 -|       ports:
 -|       - containerPort: 8080  
 #|     nodeName: node-01
---- done
+@@ done
 ```
