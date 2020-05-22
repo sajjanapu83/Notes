@@ -24,7 +24,7 @@
 
 - #### Manual Scheduling Existing pods
 ```diff
-##   Pod_Manual_Scheduling
+##   Manual_Scheduling Existing Pods
 
 +|   apiVersion: v1
 +|   kind: Binding
