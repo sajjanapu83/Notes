@@ -7,8 +7,8 @@
 
 ```diff
 + Creation of object is done piece by piece...
-         or
-Object construction is done piece by piece...
+$         or
++ Object construction is done piece by piece...
 
 Example:
 a) HtmlBuilder
