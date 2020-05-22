@@ -16,6 +16,6 @@
 +|       image: nginx
 -|       ports:
 -|       - containerPort: 8080  
-#|     nodename: node-01
-
+#|     nodeName: node-01
+--- done
 ```
