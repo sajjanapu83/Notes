@@ -24,7 +24,8 @@
 !| Solution: We cannot make it with this approach ... [ 25, 10, 4, ? ]
 !| ISSUE: It is not always guaranteed, that greedy method provides correct solution.
 
-If a problem has a solution, then we can surely (100%) say, DYNAMIC PROGRAMMING approach finds the solution
++| Solution Using Dynamic Programming: [ 25, 4, 4, 4, 4 ]
++| If a problem has an optimal solution, then we can always guarantee, that DYNAMIC PROGRAMMING approach finds the solution
 
 
 
