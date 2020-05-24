@@ -18,7 +18,7 @@
 - :writing_hand: [ Using Single Linked List ](Code/Queue_SLL.md)
 > #### Startegies for solving a problem
 - :writing_hand: [ Divide & Conquer ](https://www.youtube.com/watch?v=2Rr2tW9zvRg&list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O&index=18)
-- :writing_hand: [ Greedy Method ](Code/_.md)
+- :writing_hand: [ Greedy Method ](Code/Greedy.md)
 - :writing_hand: [ Branch & Bound ( Used to solve only for minimization problems](Code/_.md)
 - :writing_hand: [ Backtracking ](Code/_.md)
   - [ Permute string of N bits ](Code/Permute_NBits.md)
