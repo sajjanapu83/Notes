@@ -11,6 +11,8 @@
 !| Greedy method always aim to pick the highest denomination coin.
 --------------------------------------------------------------------
 +| Solution: [ 9, 1, 1 ]
+-| This is not the optimal solution, because we can acheive with just 2 coins.
+#| Correct Answer: [ 5, 6 ]
 
 
 
