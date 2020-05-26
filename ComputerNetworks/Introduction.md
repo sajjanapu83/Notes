@@ -158,6 +158,8 @@ into an unsecure browser page.
      These functionalities are not required by all applications, so these are taken care by the user when ever it is required.
   
   7. Application Layer: e.g: User's Application Code.
+  
+  ```
    
      Entire Flow - Host connect to google.com
      
@@ -172,8 +174,6 @@ into an unsecure browser page.
           but using ARP protocol we get MAC address of the router                     
           and that is used in the packet.
      PL   [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router + Start of the Frame Address SFA]
-    
-    ```
     
      ```
      EXAMPLE:
