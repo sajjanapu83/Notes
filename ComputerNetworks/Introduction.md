@@ -1,4 +1,4 @@
-
+```diff
 - https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
 - https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
 
@@ -172,7 +172,9 @@ into an unsecure browser page.
           but using ARP protocol we get MAC address of the router                     
           and that is used in the packet.
      PL   [ M + x + 80 + SourceIP + DestinationIP + SourceMACAddress + MACAddress of Router + Start of the Frame Address SFA]
-     
+    
+    ```
+    
      ```
      EXAMPLE:
      IPg is ip address of google.
