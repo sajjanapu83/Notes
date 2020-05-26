@@ -1,4 +1,4 @@
-```diff
+
 - https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
 - https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
 
@@ -159,7 +159,6 @@ into an unsecure browser page.
   
   7. Application Layer: e.g: User's Application Code.
   
-  ```
    
      Entire Flow - Host connect to google.com
      
