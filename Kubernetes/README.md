@@ -7,7 +7,35 @@
 ! kube-proxy: It is a daemon-set, responsible to Maintain IP-Table rules for each service, to forward traffic between the pods across the cluster.
 
 ```
+## Pods spec
 
++|   apiVersion: v1
++|   kind: Pod
++|   metadata:
++|     name: my-pod
+!|     namespace: dev
++|     labels:
++|       app: my-pod
++|   spec:
+#|     nodeName: node-01
+#|     schedulerName: default-scheduler
+-|     securityContext:
+-|       runAsUser: 5000
+-|       runAsGroup: 5000
+-|     volumes:
+-|     - name: my-vol
+-|       emptyDir: {}
++|     containers:
++|     - name: my-container
++|       image: hello-world
+-|       command: ["sh", "-c", "sleep 10m"]
+-|       ports:
+-|       - containerPort: 8080  
+-|       volumeMounts:
+-|       - name: my-vol
+-|         mounthPath: /data/hello
+-|       securityContext:
+-|         allowPrivilegeEscalation: false
 
 ## Pods Scheduling
 
