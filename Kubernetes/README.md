@@ -8,7 +8,7 @@
 
 ```
 ## Pods spec
-
+```diff
 +|   apiVersion: v1
 +|   kind: Pod
 +|   metadata:
@@ -36,6 +36,8 @@
 -|         mounthPath: /data/hello
 -|       securityContext:
 -|         allowPrivilegeEscalation: false
+
+```
 
 ## Pods Scheduling
 
