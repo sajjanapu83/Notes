@@ -26,3 +26,13 @@
 
 
 ```
+
+## POD Networking
+
+#### POD Networking Model Rules
+- Every pod in the k8s cluster should have unique IP address
+- Every pod should be able to communicate with every other pod with in the same node.
+- Every pod should be able to communicate with every other pod on other nodes without configuring NAT rules.
+
+There are various Networking solutions available in the market which implements the above the rules...
+e.g: Flannel, WeaveNet, cilium, vmware NSX ..etc.
