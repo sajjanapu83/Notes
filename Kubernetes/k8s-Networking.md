@@ -19,18 +19,9 @@
 -  To persist the changes modify and set the below one in file located at /etc/sysctl.conf  
 ! net.ipv4.ip_forward = 1 
 
--+++++++++++++++++++++++++++++++
-**NOTE**
-# Once schedular decides on which node the pod has to be created...
-# Kubelet service on that particular node, actually creates docker containers with NONE network & then invokes CNI plugin 
-which takes care of rest of the netowrk configuration
--+++++++++++++++++++++++++++++++
-
-
 ```
 
 ## POD Networking
-
 #### POD Networking Model Rules
 - Every pod in the k8s cluster should have unique IP address
 - Every pod should be able to communicate with every other pod with in the same node.
@@ -38,3 +29,17 @@ which takes care of rest of the netowrk configuration
 
 There are various Networking solutions available in the market which implements the above the rules...
 e.g: Flannel, WeaveNet, cilium, vmware NSX ..etc.
+
+- Every k8s node in the cluster, runs a kubelet process which is responsible for creating the pod.
+- Each Kubelet service on each node listens/watches to the changes in the cluster through kube-api-server 
+- Every time if a pod has to be created it creates the pod on the node with NONE network mode option.
+- It then invokes the CNI network plugin to configure the networking for that pod.
+
+## Service Networking
+#### Service Networking Model Rules
+- Unlike PODs, services are not created on each node or assigned to each node.
+- They are cluster-wide concept & they exist across all the nodes in the cluster.
+- Unlike PODs have containers and containers have namespaces with interfaces and Ips assigned to those interfaces.
+  With services Nothing like that exists. There are no processes or name spaces or interfaces for a service.
+- It's just a virtual object.
+- When we create a service object in kubernetes, it is assigned an IP address from a pre-defined range. The kube-proxy components running on each node, get’s that IP address and creates forwarding rules on each node in the cluster, saying any traffic coming to this IP, the IP of the service, should go to the IP of the POD.
