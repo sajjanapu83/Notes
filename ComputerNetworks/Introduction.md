@@ -21,8 +21,8 @@ Depending upon various Hardware/Software functionalities and groupings, there ar
 - X.25
 - IEEE ( mainly deals with LAN technologies )
 
-Application Layer - Computer Science students - User Interface
-Presentation Layer - Computer Science students - User Interface
+> Application Layer - Computer Science students - User Interface
+> Presentation Layer - Computer Science students - User Interface
 Session Layer - Computer Science students - User Interface
 Transport Layer - Computer Science students - Thick Layer ( lot of functionalities .... eg: TCP)
 Network Layer - Computer Science students - Complex Routing algorithms
