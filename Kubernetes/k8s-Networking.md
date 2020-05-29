@@ -19,5 +19,10 @@
 -  To persist the changes modify and set the below one in file located at /etc/sysctl.conf  
 ! net.ipv4.ip_forward = 1 
 
+-+++++++++++++++++++++++++++++++
+# Kubernetes actually creates docker containers with NONE network & then invokes CNI plugins which takes care of rest of 
+# the configuration
+-+++++++++++++++++++++++++++++++
+
 
 ```
