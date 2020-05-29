@@ -20,8 +20,10 @@
 ! net.ipv4.ip_forward = 1 
 
 -+++++++++++++++++++++++++++++++
-# Kubernetes actually creates docker containers with NONE network & then invokes CNI plugins which takes care of rest of 
-# the configuration
+**NOTE**
+# Once schedular decides on which node the pod has to be created...
+# Kubelet service on that particular node, actually creates docker containers with NONE network & then invokes CNI plugin 
+which takes care of rest of the netowrk configuration
 -+++++++++++++++++++++++++++++++
 
 
