@@ -2,11 +2,11 @@
 - https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
 - https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
 
-Scenario 1: Two Processes(client , Server) present with in the same host:
+#### Scenario 1: Two Processes(client , Server) present with in the same host:
    Sender & Receiver communicate with each other using a concept called IPC ( Inter Process Communication )
-Scenario 2: Two Processes present in the different host present in different locations: 
+#### Scenario 2: Two Processes present in the different host present in different locations: 
    Sender ( Client ) & Receiver ( Server) communicate with each other with the help of Hardware/Software functionalities          provided by the Computer Networks, in such a manner that they think they are actually talking to each other with in the        same host & same network.
-   
+#### History   
 Nearly 70+ mandatory functionalities are present. The closely related one's are grouped together & formed layers.
 Advantages of Layering
 - Divide & Conquer
