@@ -2,7 +2,7 @@
 - https://commotionwireless.net/docs/cck/networking/learn-networking-basics/
 - https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html
 
-> Scenario 1: Two Processes(client , Server) present with in the same host:
+#### Scenario 1: Two Processes(client , Server) present with in the same host:
    Sender & Receiver communicate with each other using a concept called IPC ( Inter Process Communication )
 #### Scenario 2: Two Processes present in the different host present in different locations: 
    Sender ( Client ) & Receiver ( Server) communicate with each other with the help of Hardware/Software functionalities          provided by the Computer Networks, in such a manner that they think they are actually talking to each other with in the        same host & same network.
@@ -21,14 +21,15 @@ Depending upon various Hardware/Software functionalities and groupings, there ar
 - X.25
 - IEEE ( mainly deals with LAN technologies )
 
-> Application Layer - Computer Science students - User Interface
-> Presentation Layer - Computer Science students - User Interface
-Session Layer - Computer Science students - User Interface
-Transport Layer - Computer Science students - Thick Layer ( lot of functionalities .... eg: TCP)
-Network Layer - Computer Science students - Complex Routing algorithms
-Data Link Layer  - Electrical & Communation students   - Deals with both Hardware & software
-Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
+- Application Layer - Computer Science students - User Interface
+- Presentation Layer - Computer Science students - User Interface
+- Session Layer - Computer Science students - User Interface
+- Transport Layer - Computer Science students - Thick Layer ( lot of functionalities .... eg: TCP)
+- Network Layer - Computer Science students - Complex Routing algorithms
+- Data Link Layer  - Electrical & Communation students   - Deals with both Hardware & software
+- Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
 
+```diff
 **Note:
 ISP providers can steal the history of our data and can sell to any one. So thats the reason we should always use secured HTTP 
 protocol ( HTTPS ) while requesting information from the server.
@@ -37,6 +38,7 @@ meta data link which url is accessed all the information is not encrypted and th
 Internet at coffee shops & Internet cafe's. 
 VPN ( Virtual Private Network ): This solves the problem by creating secured tunnel between your Host computer and the VPN server, that helps in securing data END to END btw sender & receiver. Here entire meta data of our transactions is not exposed to ISP providers, but all are stored at VPN server.
 e.g: Mozilla Firefox comes with a free VPN setup.
+```
 
 HTTPS is set by the owner of the website, and the user has no control over it. 
 HTTPS provides authentication of the website and its associated web server, which protects against man-in-the-middle attacks. 
