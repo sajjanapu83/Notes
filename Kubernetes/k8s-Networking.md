@@ -2,7 +2,7 @@
 
 ## BASICS
 
-> `ip link` : To list and modify interfaces on the machine/host.
+> ip link : To list and modify interfaces on the machine/host.
 > ip addr : To see ip addresses assigned to those interfaces.
 > ip addr add : To set addresses on the interfaces.
 + e.g: ip addr add 192.168.1.20/24 dev etho
