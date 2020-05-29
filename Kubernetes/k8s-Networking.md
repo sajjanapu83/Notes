@@ -1,6 +1,9 @@
-```diff
-
 ## BASICS
+
+- Two machines in a same network are connected to each other using SWITCHES
+- Two machine in different networks are connected to each other using ROUTER via GATEWAY.
+
+```diff
 
 > ip link : To list and modify interfaces on the machine/host.
 > ip addr : To see ip addresses assigned to those interfaces.
