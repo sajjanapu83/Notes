@@ -20,7 +20,8 @@ Depending upon various Hardware/Software functionalities and groupings, there ar
 - ATM
 - X.25
 - IEEE ( mainly deals with LAN technologies )
->
+
+```
 - Application Layer - Computer Science students - User Interface
 - Presentation Layer - Computer Science students - User Interface
 - Session Layer - Computer Science students - User Interface
@@ -28,6 +29,7 @@ Depending upon various Hardware/Software functionalities and groupings, there ar
 - Network Layer - Computer Science students - Complex Routing algorithms
 - Data Link Layer  - Electrical & Communation students   - Deals with both Hardware & software
 - Physical Link Layer - Electrical & Communation students - Deals with Only Hardware
+```
 
 ```diff
 **Note:
