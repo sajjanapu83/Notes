@@ -1,5 +1,4 @@
 
-```
 ## Pods Scheduling
 
 - ####   Scheduling New Pods Manually
