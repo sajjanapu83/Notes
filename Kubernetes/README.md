@@ -38,6 +38,33 @@
 -|         allowPrivilegeEscalation: false
 
 ```
+## Pods - Volume Mount to host directory
+```diff
++|   apiVersion: v1
++|   kind: Pod
++|   metadata:
++|     name: my-pod
+!|     namespace: dev
++|     labels:
++|       app: my-pod
++|   spec:
+#|     nodeName: node-01
+#|     schedulerName: default-scheduler
+-|     volumes:
+-|     - name: my-vol
+-|       hostPath: 
+-|         path: /tmp/test
+-|         type: DirectoryOrCreate
++|     containers:
++|     - name: my-container
++|       image: hello-world
+-|       command: ["sh", "-c", "sleep 10m"]
+-|       ports:
+-|       - containerPort: 8080  
+-|       volumeMounts:
+-|       - name: my-vol
+-|         mounthPath: /tmp/test
+```
 - :point_right: [ k8s-Scheduling ](k8s-scheduling.md/)
 - :point_right: [ k8s-Networking ](k8s-Networking.md/)
 
