@@ -149,7 +149,8 @@ Example:
 ```diff
 
 #|  kubectl label nodes <node-name> <label-key>=<label-value> 
-
+#|  Scenarios: How pods are scheduled, executed when,
+#|     a) Nodes are Labelled vs Nodes are not labelled vs labels modified    
 
 +|  kubectl label nodes node-01 size=Large
 +|  kubectl label nodes node-02 size=Medium
