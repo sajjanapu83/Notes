@@ -15,5 +15,5 @@ spec:
     - kube-apiserver
     - --authorization-mode=Node,RBAC
       <content-hidden>
--  - --basic-auth-file=/tmp/users/user-details.csv
+-   - --basic-auth-file=/tmp/users/user-details.csv
 ```
