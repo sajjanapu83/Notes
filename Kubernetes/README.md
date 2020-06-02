@@ -38,5 +38,6 @@
 -|         allowPrivilegeEscalation: false
 
 ```
-- :point_right: [ k8s-scheduling ](k8s-scheduling.md/)
+- :point_right: [ k8s-Scheduling ](k8s-scheduling.md/)
+- :point_right: [ k8s-Networking ](k8s-Networking.md/)
 
