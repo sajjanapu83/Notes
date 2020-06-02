@@ -85,7 +85,6 @@
 
 - ####   Taint => Node
 ```diff
-##   Taints a Node
 
 +| kubectl taint nodes node-name key=value:taint-effect
 
