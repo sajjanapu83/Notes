@@ -9,6 +9,8 @@
 ```
 ## Pods spec
 ```diff
+#|   kubectl explain pod.spec --recursive
+#|
 +|   apiVersion: v1
 +|   kind: Pod
 +|   metadata:
@@ -33,7 +35,7 @@
 -|       - containerPort: 8080  
 #|       resources:
 #|         requests:
-#|           memory: "1Gi"
+#|           memory: "500Mi"
 #|           cpu: 0.5
 #|         limits:
 #|           memory: "1Gi"
