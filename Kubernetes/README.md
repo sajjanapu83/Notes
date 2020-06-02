@@ -58,9 +58,9 @@
 +|     containers:
 +|     - name: my-container
 +|       image: hello-world
--|       command: ["sh", "-c", "sleep 10m"]
--|       ports:
--|       - containerPort: 8080  
++|       command: ["sh", "-c", "sleep 10m"]
++|       ports:
++|       - containerPort: 8080  
 -|       volumeMounts:
 -|       - name: my-vol
 -|         mounthPath: /tmp/test
