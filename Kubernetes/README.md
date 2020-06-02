@@ -5,7 +5,7 @@
 ! Kublet: It acts like an agent, whose responsiblity is to create a pod on an node and report to kube-api-server
 - Scheduler: It decides on which node the pod has to be created based on node ranks ... 
 ! kube-proxy: It is a daemon-set, responsible to Maintain IP-Table rules for each service, to forward traffic between the pods across the cluster.
-
+https://kubernetes.io/docs/concepts/cluster-administration/logging/
 ```
 ## Pods spec
 ```diff
