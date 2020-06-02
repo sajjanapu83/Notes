@@ -21,9 +21,12 @@
 +|   spec:
 #|     nodeName: node-01
 #|     schedulerName: default-scheduler
+#|     serviceAccount: default
 -|     securityContext:
 -|       runAsUser: 5000
 -|       runAsGroup: 5000
+-|       capabilities:
+-|         add: ["MAC_ADMIN"]
 -|     volumes:
 -|     - name: my-vol
 -|       emptyDir: {}
