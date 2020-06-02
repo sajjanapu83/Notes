@@ -176,5 +176,13 @@ Example:
 -|               operator: In
 -|               values: 
 -|               - Large
+-|               - Medium
+```
+
+```
+operator: IN, NotIn, Exists
+Types: requiredDuringSchedulingIgnoreDuringExecution 
+       preferredDuringSchedulingIgnoreDuringExecution
+       requiredDuringSchedulingRequiredDuringExecution
 ```
 
