@@ -68,4 +68,5 @@
 ```
 - :point_right: [ k8s-Scheduling ](k8s-scheduling.md/)
 - :point_right: [ k8s-Networking ](k8s-Networking.md/)
+- :point_right: [ k8s-security.md ](k8s-security.md/)
 
