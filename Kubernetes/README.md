@@ -64,6 +64,7 @@
 -|       volumeMounts:
 -|       - name: my-vol
 -|         mounthPath: /tmp/test
+-|         readOnly: true
 ```
 - :point_right: [ k8s-Scheduling ](k8s-scheduling.md/)
 - :point_right: [ k8s-Networking ](k8s-Networking.md/)
