@@ -31,6 +31,13 @@
 -|       command: ["sh", "-c", "sleep 10m"]
 -|       ports:
 -|       - containerPort: 8080  
+#|       resources:
+#|         requests:
+#|           memory: "1Gi"
+#|           cpu: 0.5
+#|         limits:
+#|           memory: "1Gi"
+#|           cpu: 1
 -|       volumeMounts:
 -|       - name: my-vol
 -|         mounthPath: /data/hello
