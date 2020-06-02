@@ -167,8 +167,14 @@ Example:
 +|     containers:
 +|     - name: nginx
 +|       image: nginx
--|     nodeSelector:
--|       size: Large
-
+-|     affinity:
+-|       nodeAffinity:
+-|         requiredDuringSchedulingIgnoreDuringExecution:
+-|           nodeSelectorTerms:
+-|           - matchExpressions:
+-|             - Key: size
+-|               operator: In
+-|               values: 
+-|               - Large
 ```
 
