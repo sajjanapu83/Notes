@@ -1,7 +1,7 @@
 ## Combinations: 
 ```diff
 
-  Deals with only selection.
+Deals with only selection.
 + Example: select 11 out of 20 players in a cricket team
 + Answer: nCr => n!/((n-r)!*r!) => 20C11
 ```
