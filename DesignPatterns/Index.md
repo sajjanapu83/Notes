@@ -9,6 +9,8 @@ Bad Code:
 
 OO is about mannaging dependencies, by selectively re-inverting certain key dependencies in the architecture, so that you can prevent RIGIDITY, FRAGILITY, Non Reusability -@Uncle Bob
 
+SRP: Don't put functions that changes for different reason in the same class.
+
 ## Creational Design Patterns
 - Builder:
 
