@@ -11,7 +11,7 @@ namespace GangOfFour
     }    
 }
 ```
-## SQLProductCategory ( Implement Logic )
+## SQLProductCategory ( Implement Interface Logic )
 ```ruby
 namespace GangOfFour
 {
