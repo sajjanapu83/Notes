@@ -11,7 +11,7 @@ namespace GangOfFour
     }    
 }
 ```
-## SQLProductCategory ( Implement Interface Logic )
+## SQLProductRepository ( Implement Interface Logic )
 ```ruby
 namespace GangOfFour
 {
@@ -26,6 +26,23 @@ namespace GangOfFour
             productNames.Add("Infant");
             productNames.Add("Toddler");
             return productNames;
+        }
+    }
+}
+```
+## Object Creation
+```ruby
+using System;
+namespace GangOfFour
+{
+    public class ProductFactory
+    {
+        public ProductFactory()
+        {
+        }
+        public static IProductRepository create()
+        {
+            return new SQLProductRepository();
         }
     }
 }
