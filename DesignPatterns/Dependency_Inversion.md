@@ -11,7 +11,7 @@ namespace GangOfFour
     }    
 }
 ```
-## SQLProductRepository ( Implement Interface Logic )
+## Implement Interface Logic ( SQLProductRepository )
 ```ruby
 namespace GangOfFour
 {
@@ -30,7 +30,7 @@ namespace GangOfFour
     }
 }
 ```
-## Object Creation
+## Object Creation ( ProductFactory )
 ```ruby
 using System;
 namespace GangOfFour
@@ -47,3 +47,47 @@ namespace GangOfFour
     }
 }
 ```
+## FrontEnd Display Logic 
+```ruby
+using System;
+namespace GangOfFour
+{
+    public class ProductCatalog
+    {
+        private IProductRepository _productRepository;
+        public ProductCatalog(IProductRepository _productRepository)
+        {
+            this._productRepository = _productRepository;
+        }
+        public void displayProducts()
+        {
+            foreach (string name in _productRepository.GetAllProductNames())
+            {
+                Console.WriteLine(name.ToString());
+            }
+        }
+    }
+
+}
+```
+## Client Program
+using System;
+namespace GangOfFour
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("==> DEPENDENCY INVERSION *****");
+
+            IProductRepository productRepository = ProductFactory.create();
+
+            ProductCatalog catalog = new ProductCatalog(productRepository);
+            catalog.displayProducts();
+            /* 
+             * Inversion Of Control (IoC)
+             *  https://stackoverflow.com/questions/3058/what-is-inversion-of-control
+             */
+        }
+    }
+}
