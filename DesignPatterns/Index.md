@@ -11,6 +11,8 @@ OO is about mannaging dependencies, by selectively re-inverting certain key depe
 
 SRP: Don't put functions that changes for different reason in the same class.
 
+IoC: https://stackoverflow.com/questions/3058/what-is-inversion-of-control 
+
 ## Creational Design Patterns
 - Builder:
 
