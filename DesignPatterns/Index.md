@@ -7,6 +7,8 @@ Bad Code:
 - Fragility
 - Coupling/Dependency ( re-use other's code )
 
+OO is about mannaging dependencies, by selectively re-inverting certain key dependencies in the architecture, so that you can prevent RIGIDITY, FRAGILITY, Non Reusability -@Uncle Bob
+
 ## Creational Design Patterns
 - Builder:
 
