@@ -71,6 +71,7 @@ namespace GangOfFour
 }
 ```
 ## Client Program
+```ruby
 using System;
 namespace GangOfFour
 {
@@ -91,3 +92,4 @@ namespace GangOfFour
         }
     }
 }
+```
