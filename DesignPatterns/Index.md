@@ -2,6 +2,11 @@
 - https://channel9.msdn.com/Shows/Visual-Studio-Toolbox/Design-Patterns-Decorator
 - https://github.com/skimedic/presentations/tree/master/Patterns/Current/Structural/Decorator
 
+Bad Code:
+- Rigidity
+- Fragility
+- Coupling/Dependency ( re-use other's code )
+
 ## Creational Design Patterns
 - Builder:
 
