@@ -10,5 +10,23 @@ namespace GangOfFour
         public List<string> GetAllProductNames();
     }    
 }
-
+```
+## SQLProductCategory ( Implement Logic )
+```ruby
+namespace GangOfFour
+{
+    public class SQLProductRepository: IProductRepository
+    {
+        public SQLProductRepository()
+        {
+        }
+        public List<string> GetAllProductNames()
+        {
+            List<string> productNames = new List<string>();
+            productNames.Add("Infant");
+            productNames.Add("Toddler");
+            return productNames;
+        }
+    }
+}
 ```
