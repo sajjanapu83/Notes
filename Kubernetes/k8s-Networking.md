@@ -45,6 +45,7 @@ e.g: Flannel, WeaveNet, cilium, vmware NSX ..etc.
 - When we create a service object in kubernetes, it is assigned an IP address from a pre-defined range. The kube-proxy components running on each node, get’s that IP address and creates forwarding rules on each node in the cluster, saying any traffic coming to this IP, the IP of the service, should go to the IP of the POD.
 
 ## Container Network Interface ( CNI )
+![CNI](https://github.com/cskarthik22/Notes/blob/master/Kubernetes/Images/Screen%20Shot%202020-06-07%20at%2012.01.49%20AM.png)
 - https://rancher.com/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/
 - https://itnext.io/benchmark-results-of-kubernetes-network-plugins-cni-over-10gbit-s-network-updated-april-2019-4a9886efe9c4
 
