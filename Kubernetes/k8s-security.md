@@ -107,10 +107,18 @@ subjects:
 - kind: User
   name: admin-dev
   apiGroup: rbac.authorization.k8s.io/v1
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io/v1
 ```
 ```
 kubectl create -f my-role.yml
 kubectl create -f my-role-binding.yml
+
+kubectl get roles
+kubectl get rolebindings
+kubectl describe role 
 ```
 ## Kube-Config
 
