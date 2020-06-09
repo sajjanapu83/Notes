@@ -19,6 +19,7 @@ spec:
 ```
 ## Digital Certs
 
+> Root CA certificate ( ca.crt )
 ```diff
 !| Generate Keys 
    openssl genrsa -out ca.key 2048
