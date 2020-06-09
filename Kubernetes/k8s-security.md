@@ -157,6 +157,11 @@ roleRef:
 
 ```
 kubectl api-resources
+kubectl create -f my-cluster-role.yml
+kubectl create -f my-cluster-role-binding.yml
+
+kubectl get clusterroles
+kubectl get clusterrolebindings
 ```
 
 ## CHECK Resource access
