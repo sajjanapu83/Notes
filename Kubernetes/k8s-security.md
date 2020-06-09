@@ -66,7 +66,7 @@ spec:
       cluster: 
 !       certificate-authority-data: <<<< cat ca.crt | base64 >>>>
         server: https://my-cluster-test:6443
-+   context:
++ context:
     - name: my-admin-dev@my-cluster-dev
       context:
         cluster: my-cluster-dev
@@ -77,7 +77,7 @@ spec:
         cluster: my-cluster-test
         user: my-admin-test
         namespace: test-project-01
-+   users:
++ users:
     - name: my-admin-dev
       user:
         client-certificate: admin-dev.crt
