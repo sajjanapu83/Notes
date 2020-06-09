@@ -51,7 +51,7 @@ spec:
 ```
 > Server Certificates
 
-## Request new admin cert
+## AUTHENTICATION - Request new admin cert
 ```
 openssl genrsa -out admin-dev.key 2048
 openssl req -new -key admin-dev.key -subj="/CN=admin-dev" -out admin-dev.csr
@@ -83,6 +83,8 @@ the below 2 entries are responsible for approving & signing
  --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
  --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
 ```
+## AUTHORIZATION
+
 
 ## Kube-Config
 
