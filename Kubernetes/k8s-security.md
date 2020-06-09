@@ -84,8 +84,34 @@ the below 2 entries are responsible for approving & signing
  --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
 ```
 ## AUTHORIZATION
+```
+vi my-role.yml
 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list", "get", "create", "update", "delete"]
+```
+```
+vi my-role-binding.yml
 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+subjects:
+- kind: User
+  name: admin-dev
+  apiGroup: rbac.authorization.k8s.io/v1
+```
+```
+kubectl create -f my-role.yml
+kubectl create -f my-role-binding.yml
+```
 ## Kube-Config
 
 ```diff
