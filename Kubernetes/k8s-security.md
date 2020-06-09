@@ -25,17 +25,24 @@ spec:
    openssl genrsa -out ca.key 2048
 #2 Request Certificate Signing Request
    openssl req -new -key ca.key -subj "/CN=Kubernetes-ca" -out ca.csr
-#3 Sign Certificate
+#3 Sign Certificate ( self sign )
    openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
 ```
 
 > Client Certificates
 ```diff
-- ADMIN
++ KUBE-ADMIN
 #1 Generate Keys 
    openssl genrsa -out admin.key 2048
 #2 Request Certificate Signing Request
-   openssl req -new -key admin.key -subj "/CN=Kube-admin" -out admin.csr
-   
+   openssl req -new -key admin.key -subj "/CN=Kube-admin/O=system:masters" -out admin.csr
+#3 Sign with root ca Certificate 
+   openssl x509 -req -in admin.csr -CA ca.crt -CAkey ca.key -out admin.crt
++ KUBE-SHCEDULAR
 
++ KUBE-CONTROLLER
+
++ KUBE-PROXY
+   
 ```
+> Server Certificates
