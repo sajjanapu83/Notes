@@ -214,3 +214,30 @@ kubectl config use-context my-admin-test@my-cluster-test
 kubectl config -h
 
 ```
+## Docker private registry
+
+```
+STEP1: Setup private registry 
+a) docker login <<<< privateregistry_url >>>>
+b) kubectl create secret docker-registry my-reg-cred \
+   -- docker-server= <<<< privateregistry_url >>>>
+   -- docker-username= <<<< loginusername >>>>
+   -- docker-password= <<<< loginpwd >>>>
+   -- docker-email= <<< emailid >>>>
+
+STEP2: Create a pod using image present in the private registry
+
+vi my-nginx-pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: <<<< privateregistry_url >>>>/imagename:latest
+  imagePullSecrets:
+  - name: my-reg-cred
+   
+```
