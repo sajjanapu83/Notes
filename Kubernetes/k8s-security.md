@@ -214,7 +214,7 @@ kubectl config use-context my-admin-test@my-cluster-test
 kubectl config -h
 
 ```
-## Docker private registry
+## Docker private registry & securing images
 
 ```
 STEP1: Setup private registry 
