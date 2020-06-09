@@ -51,6 +51,33 @@ spec:
 ```
 > Server Certificates
 
+## Request new admin cert
+```
+openssl genrsa -out admin-dev.key 2048
+openssl req -new -key admin-dev.key -subj="/CN=admin-dev" -out admin-dev.csr
+
+vi admin-dev-csr.yml
+
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: admin-dev
+spec:
+  groups:
+  - system:authenticated
+  usages: 
+  - digital signature
+  - key encipherment
+  - server auth
+  request:
+    <<<< cat admin-dev.csr | base64 >>>>
+```
+```
+kubectl get csr
+kubectl certificate approve admin-dev
+kubectl get csr admin-dev -o yaml
+```
+
 ## Kube-Config
 
 ```diff
