@@ -21,6 +21,7 @@ spec:
 
 > Root CA certificate ( ca.crt )
 ```diff
++ ROOT CA
 #1 Generate Keys 
    openssl genrsa -out ca.key 2048
 #2 Request Certificate Signing Request
