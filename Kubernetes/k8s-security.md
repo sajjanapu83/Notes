@@ -118,7 +118,7 @@ kubectl create -f my-role-binding.yml
 
 kubectl get roles
 kubectl get rolebindings
-kubectl describe role 
+kubectl describe role developer
 ```
 
 ## CHECK Resource access
