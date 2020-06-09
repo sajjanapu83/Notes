@@ -84,6 +84,6 @@ users:
       client-certificate: admin-test.crt
       client-key: admin-test.key
 ```
-``` 
-default location: vi ~/.kube/config
+```diff
+!| default location: vi ~/.kube/config
 ```
