@@ -120,6 +120,13 @@ kubectl get roles
 kubectl get rolebindings
 kubectl describe role 
 ```
+
+## CHECK Resource access
+```
+kubectl auth can-i create deployments
+kubectl auth can-i delete nodes
+kubectl auth can-i delete nodes --as admin-dev
+```
 ## Kube-Config
 
 ```diff
