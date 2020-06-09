@@ -17,3 +17,14 @@ spec:
       <content-hidden>
 -   - --basic-auth-file=/tmp/users/user-details.csv
 ```
+## Digital Certs
+
+```diff
+!| Generate Keys 
+   openssl genrsa -out ca.key 2048
+!| Request Certificate Signing Request
+   openssl req -new -key ca.key -subj "/CN=Kubernetes-ca" -out ca.csr
+!| Sign Certificate
+   openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+
+```
