@@ -54,38 +54,38 @@ spec:
 ## Kube-Config
 
 ```diff
-apiVersion: v1
-kind: Config
-current-context: my-admin-dev@my-cluster-dev
-clusters:
-  - name: my-cluster-dev
-    cluster: 
-      certificate-authority: ca.crt
-      server: https://my-cluster-dev:6443
-  - name: my-cluster-test
-    cluster: 
-+     certificate-authority-data: <<<< cat ca.crt | base64 >>>>
-      server: https://my-cluster-test:6443
-context:
-  - name: my-admin-dev@my-cluster-dev
-    context:
-      cluster: my-cluster-dev
-      user: my-admin-dev
-      namespace: dev-project-01
-  - name: my-admin-test@my-cluster-test
-    context:
-      cluster: my-cluster-test
-      user: my-admin-test
-      namespace: test-project-01
-users:
-  - name: my-admin-dev
-    user:
-      client-certificate: admin-dev.crt
-      client-key: admin-dev.key
-  - name: my-admin-test
-    user:
-      client-certificate: admin-test.crt
-      client-key: admin-test.key
+  apiVersion: v1
+  kind: Config
+  current-context: my-admin-dev@my-cluster-dev
++ clusters:
+    - name: my-cluster-dev
+      cluster: 
+        certificate-authority: ca.crt
+        server: https://my-cluster-dev:6443
+    - name: my-cluster-test
+      cluster: 
+!       certificate-authority-data: <<<< cat ca.crt | base64 >>>>
+        server: https://my-cluster-test:6443
++   context:
+    - name: my-admin-dev@my-cluster-dev
+      context:
+        cluster: my-cluster-dev
+        user: my-admin-dev
+        namespace: dev-project-01
+    - name: my-admin-test@my-cluster-test
+      context:
+        cluster: my-cluster-test
+        user: my-admin-test
+        namespace: test-project-01
++   users:
+    - name: my-admin-dev
+      user:
+        client-certificate: admin-dev.crt
+        client-key: admin-dev.key
+    - name: my-admin-test
+      user:
+        client-certificate: admin-test.crt
+        client-key: admin-test.key
 ```
 ```diff
 !| default location: vi ~/.kube/config
