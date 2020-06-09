@@ -28,6 +28,9 @@ spec:
    openssl req -new -key ca.key -subj "/CN=Kubernetes-ca" -out ca.csr
 #3 Sign Certificate ( self sign )
    openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+   
+#4 View the certificate
+   openssl x509 -in ca.crt -text -noout
 ```
 
 > Client Certificates
