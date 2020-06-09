@@ -21,11 +21,21 @@ spec:
 
 > Root CA certificate ( ca.crt )
 ```diff
-!| Generate Keys 
+#1 Generate Keys 
    openssl genrsa -out ca.key 2048
-!| Request Certificate Signing Request
+#2 Request Certificate Signing Request
    openssl req -new -key ca.key -subj "/CN=Kubernetes-ca" -out ca.csr
-!| Sign Certificate
+#3 Sign Certificate
    openssl x509 -req -in ca.csr -signkey ca.key -out ca.crt
+```
+
+> Client Certificates
+```diff
+- ADMIN
+#1 Generate Keys 
+   openssl genrsa -out admin.key 2048
+#2 Request Certificate Signing Request
+   openssl req -new -key admin.key -subj "/CN=Kube-admin" -out admin.csr
+   
 
 ```
