@@ -119,6 +119,44 @@ kubectl create -f my-role-binding.yml
 kubectl get roles
 kubectl get rolebindings
 kubectl describe role developer
+kubectl api-resources
+```
+
+## CLuster Role Binding
+```
+vi my-cluster-role.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admin-cluster-role
+rules:
+- apiGroups: [""]
+  resources: ["persistentvolumes"]
+  verbs: ["list", "get", "create", "watch", "delete"]
+- apiGroups: ["storage.k8s.io"]
+  resources: ["storageclasses"]
+  verbs: ["list", "get", "create", "watch", "delete"]
+  
+vi my-clusterrole-binding.yml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-cluster-role-binding
+subjects:
+- kind: User
+  name: admin-dev
+  apiGroup: rbac.authorization.k8s.io/v1
+roleRef:
+  kind: ClusterRole
+  name: admin-cluster-role
+  apiGroup: rbac.authorization.k8s.io/v1
+
+```
+
+```
+kubectl api-resources
 ```
 
 ## CHECK Resource access
