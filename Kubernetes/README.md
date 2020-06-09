@@ -1,3 +1,7 @@
+## K8s Offical docs
+- https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
+- 
+
 ```diff
 # Pod: Smallest unit of deployment
 + Service: It is just like a viritual service inside the cluster, groups a set of related pods and provides an 
