@@ -76,6 +76,12 @@ spec:
 kubectl get csr
 kubectl certificate approve admin-dev
 kubectl get csr admin-dev -o yaml
+
+**Note: ALL certificate related operations ( csr approving & signing ) are carried-out by kubernetes-controller manager.
+example: cat /etc/kubernetes/manifests/kube-controller-manager.yml
+the below 2 entries are responsible for approving & signing
+ --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt
+ --cluster-signing-key-file=/etc/kubernetes/pki/ca.key
 ```
 
 ## Kube-Config
