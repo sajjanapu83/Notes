@@ -3,7 +3,7 @@
 - 
 | Command  | Action |
 | ------------- | ------------- |
-| kubectl run nginx-pod --image=nginx --restart=Never --dry-run=client -o yaml  | Creates Pod  |
+| kubectl run nginx-pod --image=nginx --restart=Never -l app=webapp --dry-run=client -o yaml  | Creates Pod  |
 | kubectl run nginx-job --image=nginx --restart=OnFailure --dry-run=client -o yaml  | Creates Job  |
 | kubectl run nginx-job --image=nginx --restart=OnFailure --schedule=***** --dry-run=client -o yaml  | Creates CronJob  |
 | kubectl run nginx-deployment --image=nginx --dry-run=client -o yaml  | Creates Deployment  |
