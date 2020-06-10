@@ -1,6 +1,6 @@
 ## K8s Offical docs
 - https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
-- 
+- https://cheatsheet.dennyzhang.com/
 | Command  | Action |
 | ------------- | ------------- |
 | kubectl run nginx-pod --image=nginx --restart=Never -l app=webapp --dry-run=client -o yaml  | Creates Pod  |
@@ -27,6 +27,7 @@ kubectl get pods --show-labels | grep labelname=labelvalue | wc
 kubectl get all --show-labels --no-headers | grep prod | wc -l
 kubectl describe node/node01 | grep -A5 -B5 Taint
 kubectl describe pod/mypod | grep -A100 Events
+kubectl get pods --v=8
 
 ```
 
