@@ -8,6 +8,7 @@
 | kubectl run nginx-job --image=nginx --restart=OnFailure --schedule=***** --dry-run=client -o yaml  | Creates CronJob  |
 | kubectl run nginx-deployment --image=nginx --dry-run=client -o yaml  | Creates Deployment  |
 | kubectl create deployment --image=nginx nginx-deployment --dry-run=client -o yaml  | Creates Deployment  |
+| kubectl scale deployment/nginx-deployment --replicas=3 | Scale |
 | https://kubernetes.io/docs/reference/kubectl/conventions/ | Reference Links |
 
 ```diff
