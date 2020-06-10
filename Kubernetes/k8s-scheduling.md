@@ -70,7 +70,7 @@ Example:
 +|       image: nginx
 -|     tolerations:
 -|     - key: "app"
--|       operator: "Equals"
+-|       operator: "Equal"
 -|       value: "blue"
 -|       effect: "NoSchedule"
 
