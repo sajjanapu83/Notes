@@ -1,10 +1,14 @@
 ## K8s Offical docs
 - https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
 - 
-| First Header  | Second Header |
+| Command  | Action |
 | ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| kubectl run nginx-pod --image=nginx --restart=Never --dry-run=client -o yaml  | Creates Pod  |
+| kubectl run nginx-job --image=nginx --restart=OnFailure --dry-run=client -o yaml  | Creates Job  |
+| kubectl run nginx-job --image=nginx --restart=OnFailure --schedule=***** --dry-run=client -o yaml  | Creates CronJob  |
+| kubectl run nginx-deployment --image=nginx --dry-run=client -o yaml  | Creates Deployment  |
+| kubectl create deployment --image=nginx nginx-deployment --dry-run=client -o yaml  | Creates Deployment  |
+| https://kubernetes.io/docs/reference/kubectl/conventions/ | Reference Links |
 
 ```diff
 # Pod: Smallest unit of deployment
