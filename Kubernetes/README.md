@@ -1,6 +1,7 @@
 ## K8s Offical docs
 - https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
 - https://cheatsheet.dennyzhang.com
+
 | Command  | Action |
 | ------------- | ------------- |
 | kubectl run nginx-pod --image=nginx --restart=Never -l app=webapp --dry-run=client -o yaml  | Creates Pod  |
