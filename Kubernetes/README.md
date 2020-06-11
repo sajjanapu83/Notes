@@ -36,7 +36,6 @@ kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}" >
 k get pv --sort-by=.spec.capacity.storage > temp.txt
 kubectl get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage 
 > /tmp.txt
-kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.context.user=='aws-user')].name}" > /tmp.txt
 
 kubectl drain node02 --ignore-daemonsets
 **Note: error: cannot delete Pods not managed by ReplicationController, ReplicaSet, Job, DaemonSet or StatefulSet (use --force to override):
@@ -46,6 +45,11 @@ Run the commands: apt install kubeadm=1.17.0-00 and then apt install kubelet=1.1
 
 -- renew cert 
 openssl x509 -req -in /etc/kubernetes/pki/apiserver-etcd-client.csr -CA /etc/kubernetes/pki/etcd/ca.crt -CAkey /etc/kubernetes/pki/etcd/ca.key -CAcreateserial -out /etc/kubernetes/pki/apiserver-etcd-client.crt
+
+
+$.status.containerStatuses[?(@.name=="redis-container")].restartCount
+kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.context.user=='aws-user')].name}" > /tmp.txt
+
 ```
 
 ## Pods spec
