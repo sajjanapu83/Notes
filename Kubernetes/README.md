@@ -23,6 +23,7 @@ https://kubernetes.io/docs/concepts/cluster-administration/logging/
 ```
 
 ```
+kubectl get componentstatuses
 kubeclt get pods --show-labels --selector label1=value1,label2=value2,label3=value3
 kubectl get pods --show-labels | grep labelname=labelvalue | wc
 kubectl get all --show-labels --no-headers | grep prod | wc -l
