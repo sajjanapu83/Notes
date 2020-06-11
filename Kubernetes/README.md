@@ -36,6 +36,7 @@ kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}" >
 k get pv --sort-by=.spec.capacity.storage > temp.txt
 kubectl get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage 
 > /tmp.txt
+kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.context.user=='aws-user')].name}" > /tmp.txt
 
 ```
 
