@@ -30,7 +30,9 @@ kubectl get all --show-labels --no-headers | grep prod | wc -l
 kubectl describe node/node01 | grep -A5 -B5 Taint
 kubectl describe pod/mypod | grep -A100 Events
 kubectl get pods --v=8
-kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-app-service --dry-run -o yaml > hr-web-app-service.yaml
+kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-app-service --dry-run -o yaml
+> hr-web-app-service.yaml
+kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}" > /opt/outputs/users.txt
 
 ```
 
