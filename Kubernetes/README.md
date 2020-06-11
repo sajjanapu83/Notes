@@ -33,6 +33,7 @@ kubectl get pods --v=8
 kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-app-service --dry-run -o yaml
 > hr-web-app-service.yaml
 kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}" > /opt/outputs/users.txt
+k get pv --sort-by=.spec.capacity.storage > temp.txt
 
 ```
 
