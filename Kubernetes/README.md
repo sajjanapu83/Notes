@@ -34,6 +34,8 @@ kubectl expose deployment hr-web-app --type=NodePort --port=8080 --name=hr-web-a
 > hr-web-app-service.yaml
 kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.users[*].name}" > /opt/outputs/users.txt
 k get pv --sort-by=.spec.capacity.storage > temp.txt
+kubectl get pv --sort-by=.spec.capacity.storage -o=custom-columns=NAME:.metadata.name,CAPACITY:.spec.capacity.storage 
+> /tmp.txt
 
 ```
 
