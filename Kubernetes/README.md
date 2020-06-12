@@ -70,6 +70,9 @@ f) kubectl expose pod nginx-pod --name=nginx-svc --port=80 --target-port=80 --ty
 g) systemctl status kubelet or service kubelet status
 h) kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal=TYPE=DEV --dry-run -o yaml
    kubectl create configmap app-config --from-file=app_config.properties --dry-run -o yaml
+i) kubectl create serviceaccount my-srv-account 
+j) kubectl create clusterrole developer --resource=persistentvolumes --verb=list --namespace=dev
+   kubectl create clusterrolebinding developer-binding --clusterrole=developer --serviceaccount=default:my-srv-account
 
 ```
 
