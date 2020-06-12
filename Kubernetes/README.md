@@ -88,7 +88,8 @@ m) journalctl -u kubelet -f
    kubectl can be one less or one higher or equal to api-server version
    
 a) k8s-master ( upgrade kubeadm & control plane components on all master nodes )
-   apt-get upgrade -y kubeadm-1.12.0-00
+   apt-get upgrade -y kubeadm=1.12.0-00
+   apt-get install -y kubeadm=1.12.0-00
    kubeadm upgrade apply v1.12.0
    
    apt-get upgrade -y kubelet=1.12.0-00
