@@ -65,6 +65,10 @@ d.2) kubectl certificate approve nick-csr
 d.2) kubectl create role developer --resource=pods --verb=create,update,list,get,delete --namespace=dev
 d.3) kubectl create rolebinding developer-role-binding --role=developer --user=nick --namespace=dev --dry-run -o yaml
 d.4) kubectl auth can-i update pods --namespace=dev --as=nick
+e) kubectl run --generator=run-pod/v1 nginx-pod --image=nginx
+f) kubectl expose pod nginx-pod --name=nginx-svc --port=80 --target-port=80 --type=ClusterIP
+g) systemctl status kubelet or service kubelet status
+h)
 
 ```
 
