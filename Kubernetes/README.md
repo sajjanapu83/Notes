@@ -76,6 +76,7 @@ j) kubectl create clusterrole developer --resource=persistentvolumes --verb=list
 k) kubectl run my-busybox --image=busybox:1.28 --rm -it sh 
    nc -z -v -w 2 google.com:80
 l) kubectl config set-context --current --namespace=dev /// switch between namespaces
+m) journalctl -u kubelet -f
 
 ```
 
