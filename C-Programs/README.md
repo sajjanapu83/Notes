@@ -1,5 +1,7 @@
 > #### Masters Theorem
 - [ Notes ](Code/Notes.md)
+- [ learn Algo Visually-01 ](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
+- [ learn Algo visually-02 ](https://visualgo.net/en)
 > #### One-Dimensional Array
 - :writing_hand: [ Traverse ](Code/1_program_to_traverse_elements_from_1_dimensional_array.md)
 - :writing_hand: [ Delete ](Code/2_program_to_delete_element_from_1_dimensional_array.md)
