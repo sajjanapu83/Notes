@@ -73,6 +73,9 @@ h) kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-lite
 i) kubectl create serviceaccount my-srv-account 
 j) kubectl create clusterrole developer --resource=persistentvolumes --verb=list --namespace=dev
    kubectl create clusterrolebinding developer-binding --clusterrole=developer --serviceaccount=default:my-srv-account
+k) kubectl run my-busybox --image=busybox:1.28 --rm -it sh 
+   nc -z -v -w 2 google.com:80
+l) kubectl config set-context --current --namespace=dev /// switch between namespaces
 
 ```
 
