@@ -68,7 +68,8 @@ d.4) kubectl auth can-i update pods --namespace=dev --as=nick
 e) kubectl run --generator=run-pod/v1 nginx-pod --image=nginx
 f) kubectl expose pod nginx-pod --name=nginx-svc --port=80 --target-port=80 --type=ClusterIP
 g) systemctl status kubelet or service kubelet status
-h)
+h) kubectl create configmap app-config --from-literal=APP_COLOR=blue --from-literal=TYPE=DEV --dry-run -o yaml
+   kubectl create configmap app-config --from-file=app_config.properties --dry-run -o yaml
 
 ```
 
