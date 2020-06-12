@@ -54,8 +54,18 @@ kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.cont
 
 ## k8s Commands
 ```
-- kubectl get pods -o=custom-columns='NAME:.metadata.name,IMAGE:.spec.containers[*].image' -n kube-system --no-headers
-- kubectl get pods -o=jsonpath='{range .items[*]} {.metadata.name} {"\t"} {.spec.containers[*].image} {"\n"} {end}' -n kube-system
+a) kubectl get pods -o=custom-columns='NAME:.metadata.name,IMAGE:.spec.containers[*].image' -n kube-system --no-headers
+b) kubectl get pods -o=jsonpath='{range .items[*]} {.metadata.name} {"\t"} {.spec.containers[*].image} {"\n"} {end}' 
+-n kube-system
+c) kubectl run nginx-deployment --image=nginx --record
+kubectl rollout history deployment nginx-deployment
+d) ------new user creation ---------
+d.1) create CertificateSigningRequest for new User nick
+d.2) kubectl certificate approve nick-csr
+d.2) kubectl create role developer --resource=pods --verb=create,update,list,get,delete --namespace=dev
+d.3) kubectl create rolebinding developer-role-binding --role=developer --user=nick --namespace=dev --dry-run -o yaml
+d.4) kubectl auth can-i update pods --namespace=dev --as=nick
+
 ```
 
 ## Pods spec
