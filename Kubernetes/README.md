@@ -80,6 +80,38 @@ m) journalctl -u kubelet -f
    systemctl daemon-reload
 ```
 
+## k8s-Cluster-Maintainence
+
+```
+   Controlplane components ( scheduler/controller) should one less then or equal to api-server version
+   Worker node components( kubelet/kube-proxy) can be 2 less than or equal to api-server version
+   kubectl can be one less or one higher or equal to api-server version
+   
+a) k8s-master ( upgrade kubeadm & control plane components on all master nodes )
+   apt-get upgrade -y kubeadm-1.12.0-00
+   kubeadm upgrade apply v1.12.0
+   
+   apt-get upgrade -y kubelet=1.12.0-00
+   systemctl status kubelet
+   
+b) k8s-worker ( upgrade kubelet on all worker nodes )
+
+-> kubeadm doesnt upgrade kubelet, this has to be done manually on all nodes 
+   kubectl drain node01
+   
+   kubeadm upgrade plan
+   apt-get upgrade -y kubeadm=1.12.0-00
+   apt-get upgrade -y kubelet=1.12.0-00
+   kubdeadm upgrade node config --kubelet-version v1.12.0
+   systemctl restart kubelet
+   
+   kubectl uncordon node01
+   
+   
+   
+
+```
+
 ## Pods spec
 ```diff
 #|   kubectl explain pod.spec --recursive
