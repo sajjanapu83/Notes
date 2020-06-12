@@ -53,9 +53,10 @@ kubectl config view --kubeconfig=my-kube-config -o jsonpath="{.contexts[?(@.cont
 ```
 
 ## k8s Commands
-
+```
 - kubectl get pods -o=custom-columns='NAME:.metadata.name,IMAGE:.spec.containers[*].image' -n kube-system --no-headers
 - kubectl get pods -o=jsonpath='{range .items[*]} {.metadata.name} {"\t"} {.spec.containers[*].image} {"\n"} {end}' -n kube-system
+```
 
 ## Pods spec
 ```diff
