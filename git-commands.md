@@ -18,7 +18,7 @@ git checkout branch-01
 git checkout -b branch-02 // new branch created by userB
 git branch // shows local branches
 git branch -a //shows all branches includes remote branches
-
+** Remote branches are locally immutable
 
 user-01:
 git checkout -b branch-02
@@ -29,6 +29,8 @@ User-02 is on Branch-02:
 git branch --set-upstream <<localbranch>> <<remote refspec>> 
 git branch --set-upstream branch-02 origin/branch-02  // now tracking is done bi-directional
 git pull // now it merges remote origin to local automatically
+
+
 
 git branch yesterday <<commitid>>
 
