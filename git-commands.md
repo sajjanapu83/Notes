@@ -40,6 +40,9 @@ git push
 git push origin <<branchName>>
 git push remote <<branchName>>
 
+git fetch 
+git diff branch-02 origin/branch-02
+
 
 
 
