@@ -1,4 +1,5 @@
 ```
+GIT - Directed Acylic Graph
 git 
 git add .
 git commit -m'modified'
@@ -43,6 +44,9 @@ git push remote <<branchName>>
 git fetch 
 git diff branch-02 origin/branch-02
 
+git tags are like markers
+git tag <<TAGNAME>>  // light weight
+git tag -a <<TAGNAME>> // Heavy Weight
 
 
 
