@@ -1,0 +1,11 @@
+
+Process Control Block (PCB):
+
+PCB = AddressSpace(Code,Data,Files...) + ExecutionContext(ProgramCounter,StackPointer,Register's...)
+
+Threads: ( Example: process P has 2 threads t1, t2)
+The main difference between process & threads:
+- Share Common AddressSpace : t1,t2 share same address space
+- Hide's Latency of I/O diskOperations : t1 performing disk operations, cpu is idle, during that time, we can make cpu busy by asking it to perform t2 operations..
+   t1 IdleTime > 2 * ContextSwtich
+- Virtual to Physical Address mapping is done only once & hence during context switch this step is not required again, which boosts the performance.
