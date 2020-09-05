@@ -189,4 +189,5 @@ b) k8s-worker ( upgrade kubelet on all worker nodes )
 - :point_right: [ k8s-Scheduling ](k8s-scheduling.md/)
 - :point_right: [ k8s-Networking ](k8s-Networking.md/)
 - :point_right: [ k8s-security.md ](k8s-security.md/)
+- :point_right: [ K8s-Deployment-Strategies ](https://github.com/ContainerSolutions/k8s-deployment-strategies)
 
