@@ -2,6 +2,8 @@
 - https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
 - https://cheatsheet.dennyzhang.com
 
+**Namespaces are Linux Kernel feature & they implement strict resource completion / set rescource quota limitation
+
 | Command  | Action |
 | ------------- | ------------- |
 | kubectl run nginx-pod --image=nginx --restart=Never -l app=webapp --dry-run=client -o yaml  | Creates Pod  |
