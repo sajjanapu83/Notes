@@ -1,5 +1,5 @@
 EC2 
-
+```
 - [ ] CloudWatch is all about to monitor performance, CloudTrail is all about auditing, it records all the API calls that are performed on AWS Management console e.g: who created EC2 instance/ s3 bucket… etc.
 - [ ] CloudWatch Alarms - Allows to set alarms that notify when particular thresholds are hit.
 - [ ] ENI (Network Card) vs ENA (Enhanced Network for Higher I/O performance)vs EFA (Elastic Fabric Adaptor used for ML - only for Linux)
@@ -13,3 +13,4 @@ EC2
 - [ ] Placement Groups: Way of grouping EC2 instances very very close together with in a single Availability Zone, needed for application looking for low network latency, high network throughput.  Spread individual instances go under different hardware
 - [ ] AWS DataSync - Install agent on VM (on-premise ) and push all content to EFS/S3/Amazon FSx for Windows
 - [ ] AWS WAF - It is a Web Application Firewall that lets you monitor HTTP/HTTPS request that are forwarded to Amazon CloudFront/ Application Load Balancer / API Gateway. It can go till Layer7 and see Query string parameter, where as Physical Hardware firewall can go till Layer 4.
+```
