@@ -191,7 +191,9 @@ into an unsecure browser page.
                    another router in different network or detination IP
      DLL [M+x+80+IPa+IPg+MACa+ ***ARPSignal ***]             [M+x+80+IPa+IPg+MACa+MACr1]            [M+x+80+IPa+IPg+MACa+MACg]
      PL  [M+x+80+IPa+IPg+MACa+MACr1+ PREAMBLE+SOA]   
+    ```
     
+```    
 AL  - MESSAGE
 TL  - MESSAGE + TCP HEADER => SEGMENT
 NL  - MESSAGE + TCP HEADER + IP HEADER => DATAGRAM
